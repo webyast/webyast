@@ -1,111 +1,137 @@
-# Catalan message file for YaST2 (@memory@).
-# Copyright (C) 2005 SUSE Linux Products GmbH.
-# Copyright (C) 2002 SuSE Linux AG.
-# Copyright (C) 2000, 2001 SuSE GmbH.
-# Jaume Badiella <myotis@drac.com>, 2001.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2002-02-08 15:47+0100\n"
-"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Last-Translator: Jaume Badiella <myotis@drac.com>\n"
 "Language-Team: Catalan\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  compendi_yast_11.1_11.2_e.po (YaST (@memory@))  #-#-#-#-#\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"#-#-#-#-#  isns.ca.po (YaST (@memory@))  #-#-#-#-#\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "No ha estat possible de recuperar el nom complet de l'ordinador central. Si el correu no s'ha pogut repartir, consulteu la configuració del correu i/o de la xarxa amb el vostre administrador de la xarxa."
+
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "No s'ha confirmat la prova de la configuració del correu"
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Durant la configuració del correu, s'ha enviat un correu de prova a %s. <br>Verifiqueu que el correu ha arribat i en cas afirmatiu premeu el botó. En cas que no, comproveu la configuració del correu electrònic."
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "S'ha rebut el correu de prova"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "Les contrasenyes no coincideixen."
 
-#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
 msgstr "S'han escrit els paràmetres de l'idioma."
 
-#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
 msgstr "S'ha enviat un correu electrònic de prova a %s."
 
-#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
-msgid "Error while saving mail settings: %s"
+#: app/controllers/mailsetting_controller.rb:72
+#, fuzzy
+#| msgid "Error while saving mail settings: %s"
+msgid "Error while saving mail settings."
 msgstr "S'ha produït un error en desar els paràmetres del correu: %s"
 
-#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+#: app/controllers/mailsetting_controller.rb:85
+#, fuzzy
+#| msgid ""
+#| "No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+#| "Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgid ""
-"No outgoing mail server is set, but administrator has mail forwarders "
-"defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
-"No s'ha definit cap servidor de correu de sortida, però l'administrador  del "
-"sistema té definits reenviadors de correu.\n"
-"Canvieu la configuració de l'%s<i>administrador</i>%s o del %s<i>correu</i>%"
-"s."
+"No s'ha definit cap servidor de correu de sortida, però l'administrador  del sistema té definits reenviadors de correu.\n"
+"Canvieu la configuració de l'%s<i>administrador</i>%s o del %s<i>correu</i>%s."
 
-#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+#: app/views/mailsetting/index.html.erb:32
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Espereu, si us plau..."
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
 msgstr "Les contrasenyes no coincideixen."
 
-#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
 msgstr "Introduïu una adreça de correu electrònic vàlida."
 
-#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
 msgstr "Introduïu un nom de domini o una adreça IP vàlids."
 
-#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
-#: shortcuts.yml:6
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
 msgstr "Paràmetres del correu electrònic"
 
-#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+#: app/views/mailsetting/index.html.erb:81
+#, fuzzy
+#| msgid "Outgoing mail server"
+msgid "Outgoing mail server settings"
+msgstr "Servidor de correu de sortida"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr "Servidor de correu de sortida"
 
-#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
 msgstr "Usa una connexió segura (TLS)"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Mai"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
 msgstr "Si es troba disponible"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr "Sempre"
 
-#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
 msgstr "Nom d'usuari"
 
-#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Contrasenya"
 
-#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
 msgstr "Confirmeu la contrasenya"
 
-#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr ""
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
 msgstr "Envia un correu electrònic de prova a"
 
 # SM
-#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
 msgstr "Envia el correu"
 
-#: shortcuts.yml:7
 #, fuzzy
-msgid "Manage outgoing mail settings"
-msgstr "Servidor de correu de sortida"
+#~| msgid "Manual settings"
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Configuració manual"

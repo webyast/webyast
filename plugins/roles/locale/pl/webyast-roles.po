@@ -6,64 +6,93 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-05-13 21:56+0100\n"
-"Last-Translator: Mirek Rogozinski <miroslaw.rogozinski@opensuse.biz>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-12-31 11:45+0100\n"
+"Last-Translator: Piotr Krakowiak <piotr.krakowiak@opensuse.biz>\n"
 "Language-Team:  <pl@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
-msgstr ""
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Nazwa roli jest nieprawidłowa. Dozwolone są kombinacje zawierające jedynie litery a-z, A-Z, cyfry, odstępy, myślniki oraz znaki podkreślenia."
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "Nazwa roli jest już używana."
 
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "Rola '%s' została pomyślnie usunięta."
 
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
-#, fuzzy
-msgid "Available Users"
-msgstr "Dostępne uprawnienia"
-
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr "Role"
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "Aby przypiasć użytkownika do ról,"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Przeciągnij i upuść etykiety użytkowników do kontenerów ról"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Nie pokazuj ponownie"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr ""
+msgstr "Utwórz rolę"
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Przypisz użytkowników"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Użytkownik jest już przypisany"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "Dostępne uprawnienia"
+msgstr "Przypisz uprawnienia"
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
-msgstr ""
+msgstr "zwiń wszystkie"
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr ""
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "To pole jest wymagane"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Dozwolone są kombinacje zawierające jedynie litery a-z, A-Z, cyfry, odstępy, myślniki oraz znaki podkreślenia."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Proszę czekać"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Błąd: Nie można usunąć roli <i>%s</i>."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Nie można znaleźć roli"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Ustaw uprawnienia w rolach i przypisz użytkowników do ról"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Nieprawidłowa nazwa roli"
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Uprawnienia zawarte w roli"
 
 #~ msgid "Permissions granted by role"
 #~ msgstr "Uprawnienia udzielone przez rolę"
@@ -73,6 +102,9 @@ msgstr ""
 
 #~ msgid ")}-description"
 #~ msgstr ")}-opis"
+
+#~ msgid "Remaining users"
+#~ msgstr "Pozostali użytkownicy"
 
 #~ msgid "Save"
 #~ msgstr "Zapisz"

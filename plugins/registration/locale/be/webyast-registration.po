@@ -4,267 +4,231 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-registration-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"Project-Id-Version: YaST (@memory@)\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2006-01-04 08:58+0100\n"
 "Last-Translator: Alexander Nyakhaychyk <nyakhaychyk@gmail.com>\n"
 "Language-Team: Belarusian <i18n@suse.de>\n"
+"Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%"
-"10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: app/controllers/registration_controller.rb:32
-#: app/controllers/registration_controller.rb:32
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
+msgstr ""
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr ""
+
+#: app/models/registration_state.rb:30
+msgid "register"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:29
 msgid "Email"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:33
-#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:30
 msgid "System name"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:34
-#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:31
 msgid "SLES registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:35
-#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:32
 msgid "SLED registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:36
-#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:33
+msgid "SLMS registration code"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:34
 msgid "Appliance registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:37
-#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:35
 msgid "WebYaST registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:38
-#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:36
 msgid "Registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:39
-#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:37
 #, fuzzy
+#| msgid "&Hostname"
 msgid "Hostname"
 msgstr "Імя хоста"
 
-#: app/controllers/registration_controller.rb:40
-#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:38
 #, fuzzy
+#| msgid "Device"
 msgid "Device name"
 msgstr "Прыстасаванне"
 
-#: app/controllers/registration_controller.rb:41
-#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:39
 msgid "Appliance name"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:42
-#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:40
 msgid "registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:52
-#: app/controllers/registration_controller.rb:52
-msgid "Invalid session, please login again."
-msgstr ""
-
-#: app/controllers/registration_controller.rb:62
-#: app/controllers/registration_controller.rb:62
-msgid "No permissions for registration"
-msgstr ""
-
-#: app/controllers/registration_controller.rb:111
-#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:81
 msgid "Please try to register again later."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:115
-#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:85
 msgid "Registration did not succeed."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:119
-#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:89
 msgid "Registration was skipped."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:93
 msgid "This may be a temporary issue."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:127
-#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:97
 msgid "The system might not receive necessary updates."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:143
-#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:113
 msgid "The registration server returned invalid or incomplete data."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
+#, fuzzy
+#| msgid "Creating automatic configuration..."
 msgid "Could not read the registration configuration."
-msgstr ""
+msgstr "Стварэнне аўтаматычнай канфігурацыі..."
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "The registration backend is not installed correctly"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:152
-#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:122
 msgid "Please refer to your support contact."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:181
-#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:213
-#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:183
 #, fuzzy
+#| msgid "Service Start"
 msgid "Service added:"
 msgstr "Запусціць сервіс"
 
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:189
 #, fuzzy
+#| msgid "Catalonia"
 msgid "Catalog enabled:"
 msgstr "Каталонія"
 
-#: app/controllers/registration_controller.rb:250
-#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:215
 #, fuzzy
+#| msgid "Repository"
 msgid "Repository added:"
 msgstr "Сховішча"
 
-#: app/controllers/registration_controller.rb:326
-#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:357
 #, fuzzy
+#| msgid "<p>Your system is ready for use.</p>"
 msgid "This system is already registered."
 msgstr "<p>Сістэма поўнасцю ўсталявана.</p>"
 
-#: app/controllers/registration_controller.rb:355
-#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:382
 msgid "Registration finished successfully."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:365
-#: app/controllers/registration_controller.rb:365
-msgid ""
-"<p><b>Repositories were not modified during the registration process.</b></"
-"p><p>It is likely that an incorrect registration code was used. If this is "
-"the case, please attempt the registration process again to get an update "
-"repository.</p><p>Please make sure that this system has an update repository "
-"configured, otherwise it will not receive updates.</p>"
-msgstr ""
-
-#: app/controllers/registration_controller.rb:399
-#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:396
 msgid "A connection to the registration server could not be established."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:403
-#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:400
 msgid "The supplied registration data was invalid."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:407
-#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:404
 msgid "The registration code you entered was invalid."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:413
-#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:410
 msgid "The transmitted registration data created a conflict."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:421
-#: app/controllers/registration_controller.rb:421
-msgid ""
-"Registration can not be performed. There is no product installed that can be "
-"registered."
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:436
-#: app/controllers/registration_controller.rb:436
-msgid ""
-"A connection to the registration server could not be established or it did "
-"not reply."
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:453
-#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:454
 msgid "The registration server returned invalid data."
 msgstr ""
 
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Пачакайце..."
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
 msgid "Please enter a valid Email address."
 msgstr ""
 
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-msgid "register plugin"
-msgstr ""
-
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-#: shortcuts.yml:6
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
 msgstr ""
 
-#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+#: app/views/registration/index.html.erb:93
 #, fuzzy
+#| msgid "No additional information"
 msgid "Registration Information"
 msgstr "Няма дадатковай інфармацыі"
 
-#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
 msgstr ""
 
-#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+#: app/views/registration/index.html.erb:102
 msgid "System number (GUID)"
 msgstr ""
 
-#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+#: app/views/registration/index.html.erb:105
 msgid "Register again"
 msgstr ""
 
-#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+#: app/views/registration/index.html.erb:118
 #, fuzzy
+#| msgid "&Next"
 msgid "Next"
 msgstr "Далей"
 
-#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+#: app/views/registration/index.html.erb:131
 #, fuzzy
+#| msgid "No additional information"
 msgid "Mandatory Information"
 msgstr "Няма дадатковай інфармацыі"
 
-#: app/views/registration/index.rhtml:104
-#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.html.erb:151
 msgid "Details"
 msgstr ""
 
-#: app/views/registration/index.rhtml:128
-#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.html.erb:179
 msgid "Postpone"
-msgstr ""
-
-#: shortcuts.yml:7
-msgid "System Registration"
 msgstr ""
 
 #~ msgid "Skip"

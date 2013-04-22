@@ -1,45 +1,48 @@
+# Ys, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-12 12:06+0100\n"
-"PO-Revision-Date: 2004-08-09 10:24+0200\n"
-"Last-Translator: xxx <yyy@example.org>\n"
-"Language-Team: Hebrew <i18n@suse.de>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2013-01-12 21:12+0200\n"
+"Last-Translator: Ys\n"
+"Language-Team: Hebrew <os-israel-main@lists.sourceforge.net>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.4\n"
 
-#: app/controllers/eulas_controller.rb:78
-msgid "You cannot reject a license once it has been accepted!"
-msgstr ""
-
-#: app/controllers/eulas_controller.rb:81
+#: app/controllers/eulas_controller.rb:122
 msgid "You must accept all licences before using this product!"
-msgstr ""
+msgstr "עליך להסכים לכל הרישונות לפני שתשתמש במוצר!"
 
-#: app/views/eulas/show.html.erb:1 app/views/eulas/all_accepted.erb:1
-#: app/views/eulas/no_licenses.erb:1
-msgid "Accept End User License Agreement"
-msgstr ""
+#: app/views/eulas/all_accepted.erb:26 app/views/eulas/no_licenses.erb:26
+msgid "Accept End User Licence Agreement"
+msgstr "הסכם להסכם רישיון משתמש קצה"
 
-#: app/views/eulas/show.html.erb:4
-msgid "Available translations:"
-msgstr ""
-
-#: app/views/eulas/show.html.erb:22
-msgid "Yes, I agree to the license agreement."
-msgstr ""
-
-#: app/views/eulas/show.html.erb:28
-msgid "No, I do not agree."
-msgstr ""
-
-#: app/views/eulas/all_accepted.erb:2
+#: app/views/eulas/all_accepted.erb:37
 msgid "All licenses have already been accepted"
-msgstr ""
+msgstr "כל הרישיונות כבר הוסכמו."
 
-#: app/views/eulas/no_licenses.erb:2
+#: app/views/eulas/show.html.erb:30
+msgid "Licence Agreement"
+msgstr "הסכם רשיון"
+
+#: app/views/eulas/show.html.erb:50
+msgid "Yes, I agree to the license agreement."
+msgstr "כן, אני מסכים/ה עם הסכם הרישיון."
+
+#: app/views/eulas/show.html.erb:54
+msgid "No, I do not agree."
+msgstr "לא, אני לא מסכים/ה."
+
+#: app/views/eulas/show.html.erb:71
+msgid "Back"
+msgstr "אחורה"
+
+#: app/views/eulas/no_licenses.erb:36
 msgid "There are no licenses to accept."
-msgstr ""
+msgstr "אין רשיונות להסכים ל."
+

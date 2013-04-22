@@ -1,110 +1,130 @@
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
-#
+# Michał Newiak <manveru1986@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-05-13 21:53+0100\n"
-"Last-Translator: Mirek Rogozinski <miroslaw.rogozinski@opensuse.biz>\n"
-"Language-Team:  <pl@li.org>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-12-28 13:38+0200\n"
+"Last-Translator: Michał Newiak <manveru1986@gmail.com>\n"
+"Language-Team: Polish openSUSE translation TEAM\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Virtaal 0.7.1\n"
 
-#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Nie można było uzyskać pełną nazwę hosta. Jeśli wiadomość nie została dostarczona, skonsultuj konfigurację sieci lub poczty z administratorem sieci."
+
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "Test konfiguracji poczty nie został potwierdzony."
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "W czasie konfiguracji poczty została wysłana wiadomość testowa na adres %s. Czy wiadomość została dostarczona?<br> Jeśli tak należy potwierdzić wciskając przycisk. W innym wypadku należy sprawdzić ponownie konfigurację poczty."
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "Wiadomość testowa odebrana"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "Hasła nie zgadzają się."
 
-#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
 msgstr "Ustawienia poczty zostały zapisane."
 
-#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
 msgstr "Wiadomość testowa została wysłana do %s."
 
-#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
-msgid "Error while saving mail settings: %s"
-msgstr "Wystąpił błąd podczas zapisywania ustawień poczty: %s"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "Wystąpił błąd podczas zapisywania ustawień poczty."
 
-#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
-#, fuzzy
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
-"No outgoing mail server is set, but administrator has mail forwarders "
-"defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
-"Nie skofigurowano żadnego serwera poczty wychodzącej, ale administrator ma "
-"skonfigurowane przekazywanie poczty.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"Nie skonfigurowano żadnego serwera poczty wychodzącej, ale administrator ma skonfigurowane przekazywanie poczty.\n"
+"Należy zmienić konfigurację %s<i>administratora</i>%s lub %s<i>poczty</i>%s."
 
-#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "Proszę czekać"
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
 msgstr "Hasła nie zgadzają się."
 
-#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
 msgstr "Proszę podać poprawny adres e-mail."
 
-#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
 msgstr "Proszę podać poprawną nazwę domeny lub adres IP."
 
-#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
-#: shortcuts.yml:6
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
 msgstr "Ustawienia poczty"
 
-#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "Ustawienia serwera poczty wychodzącej"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr "Serwer poczty wychodzącej"
 
-#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
 msgstr "Używaj bezpiecznego połączenia (TLS)"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Nigdy"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
 msgstr "Jeśli dostępny"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr "Zawsze"
 
-#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
 msgstr "Nazwa użytkownika"
 
 # password dialog title
-#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Hasło"
 
-#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
 msgstr "Potwierdzenie hasła"
 
-#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "Sprawdź ustawienia serwera poczty"
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
 msgstr "Wyślij wiadomość testową do"
 
-#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
 msgstr "Wyślij wiadomość"
 
-#: shortcuts.yml:7
-#, fuzzy
-msgid "Manage outgoing mail settings"
-msgstr "Serwer poczty wychodzącej"
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Zarządzaj ustawieniami poczty wychodzącej"

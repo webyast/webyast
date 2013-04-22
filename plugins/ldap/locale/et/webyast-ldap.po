@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: autoinst.fi\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2003-09-22 13:26+0200\n"
+"Last-Translator: Ain Vagula <avagula@gmail.com>\n"
+"Language-Team: Estonian <et@li.org>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Base fonts and font configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "Põhifondid ja fontide häälestamine."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:65
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving LDAP client configuration."
+msgstr "Viga sertifikaadi parsimisel."
+
+#: app/views/ldap/index.html.erb:33
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "Faili nimi on vajalik."
+
+#: app/views/ldap/index.html.erb:34
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "Sisesta oma IP-aadress."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:88
+#, fuzzy
+#| msgid "LDAP client service"
+msgid "LDAP client"
+msgstr "LDAP kliendi teenus"
+
+#: app/views/ldap/index.html.erb:101
+#, fuzzy
+#| msgid "Select WEP authentication mode:"
+msgid "Enable LDAP Authentication"
+msgstr "Vali WEP autentimisrežiim:"
+
+#: app/views/ldap/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "LDAP Server Address"
+msgstr "Nimeserveri aadress"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:127
+#, fuzzy
+#| msgid "Current Connection"
+msgid "Secure Connection"
+msgstr "Praegune ühendus"
+
+#, fuzzy
+#~| msgid "Configure Applet..."
+#~ msgid "Configure LDAP client"
+#~ msgstr "Apleti häälestamine..."

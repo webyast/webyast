@@ -3,331 +3,281 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-software-ui 1.0.0\n"
+"Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: i18n@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2008-01-04 08:58+0100\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Thai <i18n@suse.de>\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/helpers/repositories_helper.rb:25 app/helpers/repositories_helper.rb:25
+#: app/models/patch.rb:150
+msgid "Please reboot your system."
+msgstr ""
+
+#: app/models/patches_state.rb:30
+msgid "EULA accept required"
+msgstr ""
+
+#: app/models/patches_state.rb:31
+msgid "Package require accept specific EULA before its installation. Please follow the link."
+msgstr ""
+
+#: app/models/patches_state.rb:34
+msgid "decide"
+msgstr ""
+
+#: app/models/patches_state.rb:43
+#, fuzzy
+#| msgid "Patch installation finished."
+msgid "Patch installation messages not confirmed"
+msgstr "การติดตั้งแพตช์เสร็จสิ้นแล้ว"
+
+#: app/models/patches_state.rb:47
+msgid "OK"
+msgstr "ตกลง"
+
+#: app/helpers/repositories_helper.rb:25
 msgid "Highest"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:26 app/helpers/repositories_helper.rb:26
+#: app/helpers/repositories_helper.rb:26
 msgid "Higher"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:27 app/helpers/repositories_helper.rb:27
+#: app/helpers/repositories_helper.rb:27
 msgid "Default"
 msgstr "ค่าปริยาย"
 
-#: app/helpers/repositories_helper.rb:28 app/helpers/repositories_helper.rb:28
+#: app/helpers/repositories_helper.rb:28
 msgid "Low"
 msgstr "ต่ำ"
 
-#: app/helpers/repositories_helper.rb:29 app/helpers/repositories_helper.rb:29
+#: app/helpers/repositories_helper.rb:29
 msgid "Lowest"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:35 app/helpers/repositories_helper.rb:35
+#: app/helpers/repositories_helper.rb:35
 #, fuzzy
+#| msgid "Set &Priority"
 msgid "Highest priority"
 msgstr "ตั้งระดับความสำคัญ"
 
-#: app/helpers/repositories_helper.rb:36 app/helpers/repositories_helper.rb:36
+#: app/helpers/repositories_helper.rb:36
 #, fuzzy
+#| msgid "Set &Priority"
 msgid "Higher priority"
 msgstr "ตั้งระดับความสำคัญ"
 
-#: app/helpers/repositories_helper.rb:38 app/helpers/repositories_helper.rb:38
+#: app/helpers/repositories_helper.rb:38
 #, fuzzy
+#| msgid "Priority"
 msgid "Low priority"
 msgstr "ระดับความสำคัญ"
 
-#: app/helpers/repositories_helper.rb:39 app/helpers/repositories_helper.rb:39
+#: app/helpers/repositories_helper.rb:39
 #, fuzzy
+#| msgid "Set &Priority"
 msgid "Lowest priority"
 msgstr "ตั้งระดับความสำคัญ"
 
-#: app/helpers/repositories_helper.rb:44 app/helpers/repositories_helper.rb:44
+#: app/helpers/repositories_helper.rb:44
 #, fuzzy
+#| msgid "Custom Repair"
 msgid "Custom priority"
 msgstr "กำหนดการซ่อมแซมเอง"
 
-#: app/helpers/repositories_helper.rb:49 app/helpers/repositories_helper.rb:49
+#: app/helpers/repositories_helper.rb:49
 msgid "Custom"
 msgstr "กำหนดเอง"
 
 #: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:143
-#: app/views/repositories/add.html.erb:85
-#: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:143
-#: app/views/repositories/add.html.erb:85
+#: app/views/repositories/new.html.erb:67
+#: app/views/repositories/index.html.erb:264
 #, fuzzy
+#| msgid "enabled"
 msgid "enable"
 msgstr "เปิดใช้"
 
 #: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:148
-#: app/views/repositories/add.html.erb:92
-#: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:148
-#: app/views/repositories/add.html.erb:92
+#: app/views/repositories/new.html.erb:74
+#: app/views/repositories/index.html.erb:267
 #, fuzzy
+#| msgid "disabled"
 msgid "disable"
 msgstr "ปิดการใช้"
 
-#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
+#: app/helpers/repositories_helper.rb:66
 msgid "enabled"
 msgstr "เปิดใช้"
 
-#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
+#: app/helpers/repositories_helper.rb:66
 msgid "disabled"
 msgstr "ปิดการใช้"
 
-#: app/controllers/repositories_controller.rb:35
-#: app/controllers/repositories_controller.rb:35
+#: app/helpers/repositories_helper.rb:83
 #, fuzzy
-msgid "Alias"
-msgstr "ชื่อแฝง"
+#| msgid "Repository Details"
+msgid "Repository is currently %senabled%s."
+msgstr "รายละเอียดของคลังแพกเกจ"
 
-#: app/controllers/repositories_controller.rb:36
-#: app/views/repositories/index.html.erb:199
-#: app/controllers/repositories_controller.rb:36
-#: app/views/repositories/index.html.erb:199
-msgid "Enabled"
-msgstr "เปิดใช้งาน"
-
-#: app/controllers/repositories_controller.rb:37
-#: app/controllers/repositories_controller.rb:37
+#: app/helpers/repositories_helper.rb:85
 #, fuzzy
-msgid "Autorefresh"
-msgstr "ข้ามการปรับปรุงอัตโนมัติ"
+#| msgid "Repository Details"
+msgid "Repository is currently %sdisabled%s."
+msgstr "รายละเอียดของคลังแพกเกจ"
 
-#: app/controllers/repositories_controller.rb:38
-#: app/views/patch_updates/_patches.html.erb:21
-#: app/controllers/repositories_controller.rb:38
-#: app/views/patch_updates/_patches.html.erb:21
-msgid "Name"
-msgstr "ชื่อ"
+#: app/helpers/repositories_helper.rb:90
+msgid "Autorefresh is currently %senabled%s."
+msgstr ""
 
-#: app/controllers/repositories_controller.rb:39
-#: app/controllers/repositories_controller.rb:39
-msgid "URL"
-msgstr "ที่อยู่ URL"
+#: app/helpers/repositories_helper.rb:92
+msgid "Autorefresh is currently %sdisabled %s."
+msgstr ""
 
-#: app/controllers/repositories_controller.rb:40
-#: app/controllers/repositories_controller.rb:40
-msgid "Priority"
-msgstr "ระดับความสำคัญ"
-
-#: app/controllers/repositories_controller.rb:41
-#: app/controllers/repositories_controller.rb:41
+#: app/helpers/repositories_helper.rb:97
 #, fuzzy
-msgid "Keep downloaded packages"
+#| msgid "Recommended packages"
+msgid "Keeping downloaded packages is currently %senabled%s."
 msgstr "แพกเกจที่แนะนำ"
 
-#: app/controllers/repositories_controller.rb:51
-#: app/controllers/repositories_controller.rb:51
+#: app/helpers/repositories_helper.rb:99
 #, fuzzy
+#| msgid "Recommended packages"
+msgid "Keeping downloaded packages is currently %sdisabled%s."
+msgstr "แพกเกจที่แนะนำ"
+
+#: app/helpers/repositories_helper.rb:103
+#, fuzzy
+#| msgid "Repository Details"
+msgid "Repository will be enabled."
+msgstr "รายละเอียดของคลังแพกเกจ"
+
+#: app/helpers/repositories_helper.rb:103
+#, fuzzy
+#| msgid "Repository Details"
+msgid "Repository will be disabled."
+msgstr "รายละเอียดของคลังแพกเกจ"
+
+#: app/helpers/repositories_helper.rb:107
+#, fuzzy
+#| msgid "These services will be enabled"
+msgid "Autorefresh will be enabled."
+msgstr "บริการเหล่านี้จะถูกเปิดใช้งาน"
+
+#: app/helpers/repositories_helper.rb:107
+#, fuzzy
+#| msgid "Selected packages will be installed."
+msgid "Autorefresh will be disabled."
+msgstr "แพกเกจที่เลือกไว้จะถูกติดตั้ง"
+
+#: app/helpers/repositories_helper.rb:111
+#, fuzzy
+#| msgid "Selected packages will be installed."
+msgid "Keep packages option will be enabled."
+msgstr "แพกเกจที่เลือกไว้จะถูกติดตั้ง"
+
+#: app/helpers/repositories_helper.rb:111
+#, fuzzy
+#| msgid "Selected packages will be installed."
+msgid "Keep packages option will be disabled."
+msgstr "แพกเกจที่เลือกไว้จะถูกติดตั้ง"
+
+#: app/controllers/patches_controller.rb:101
+#, fuzzy
+#| msgid "There are no partitionable disks available."
+msgid "There are patch installation messages available"
+msgstr "ไม่มีดิสก์ที่สามารถแบ่งพาร์ทิชันได้"
+
+#: app/controllers/patches_controller.rb:119
+msgid "Cannot obtain patches, installation in progress. Remain %d packages."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:129
+#: app/controllers/patches_controller.rb:182
+msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:170
+msgid "Cannot obtain patches, installation in progress. Remain %d patches."
+msgstr ""
+
+#: app/controllers/repositories_controller.rb:50
+#, fuzzy
+#| msgid "Cannot read repositories."
 msgid "Cannot read repository list."
 msgstr "ไม่สามารถอ่านคลังแพกเกจได้"
 
-#: app/controllers/repositories_controller.rb:68
-#: app/controllers/repositories_controller.rb:95
-#: app/controllers/repositories_controller.rb:68
-#: app/controllers/repositories_controller.rb:95
+#: app/controllers/repositories_controller.rb:117
+#: app/controllers/repositories_controller.rb:126
 #, fuzzy
-msgid "Missing repository parameter"
-msgstr "ขาดพารามิเตอร์ '%1'"
+#| msgid "Cannot read repositories."
+msgid "Cannot update repository '%s': missing parameters."
+msgstr "ไม่สามารถอ่านคลังแพกเกจได้"
 
-#: app/controllers/repositories_controller.rb:123
-#: app/controllers/repositories_controller.rb:204
-#: app/controllers/repositories_controller.rb:123
-#: app/controllers/repositories_controller.rb:204
-#, fuzzy
-msgid "Invalid priority"
-msgstr "ชื่อของคลังแพกเกจใช้งานไม่ได้"
-
-#: app/controllers/repositories_controller.rb:192
-#: app/controllers/repositories_controller.rb:192
-#, fuzzy
-msgid "Missing repository parameters"
-msgstr "ขาดพารามิเตอร์ '%1'"
-
-#: app/controllers/repositories_controller.rb:230
-#: app/controllers/repositories_controller.rb:230
-#, fuzzy
-msgid "Unknown backend error"
-msgstr "ไม่ทราบผู้ผลิต"
-
-#: app/controllers/patch_updates_controller.rb:42
-#: app/controllers/patch_updates_controller.rb:42
-msgid "<p>Please reboot your system after all patches have been installed.</p>"
+#: app/controllers/repositories_controller.rb:134
+msgid "Repository '%s' has been updated."
 msgstr ""
 
-#: app/controllers/patch_updates_controller.rb:44
-#: app/controllers/patch_updates_controller.rb:44
-msgid ""
-"<p>Please logout and login again after all patches have been installed.</p>"
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:64
-#: app/views/patch_updates/_patch_summary.html.erb:30
-#: app/controllers/patch_updates_controller.rb:64
-#: app/views/patch_updates/_patch_summary.html.erb:30
-msgid ""
-"Cannot read patch updates: GPG key for repository %s is not trusted."
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:97
-#: app/controllers/patch_updates_controller.rb:100
-#: app/views/patch_updates/_patch_progress.html.erb:2
-#: app/controllers/patch_updates_controller.rb:97
-#: app/controllers/patch_updates_controller.rb:100
-#: app/views/patch_updates/_patch_progress.html.erb:2
+#: app/controllers/repositories_controller.rb:172
 #, fuzzy
-msgid "A problem occured when loading patch information."
-msgstr "เกิดข้อผิดพลาดขึ้นระหว่างทำการอ่านบันทึกการทำงาน"
+#| msgid "Section %1 not found."
+msgid "Repository '%s' was not found."
+msgstr "ไม่พบรายการบูตระบบ %1"
 
-#: app/views/repositories/index.html.erb:43
-#: app/views/repositories/add.html.erb:56
-#: app/views/repositories/index.html.erb:43
-#: app/views/repositories/add.html.erb:56
+#: app/controllers/repositories_controller.rb:189
+#: app/controllers/repositories_controller.rb:196
 #, fuzzy
+#| msgid "Cannot read repositories."
+msgid "Cannot remove repository '%s'"
+msgstr "ไม่สามารถอ่านคลังแพกเกจได้"
+
+#: app/controllers/repositories_controller.rb:203
+#, fuzzy
+#| msgid "Repository probing details."
+msgid "Repository '%s' has been deleted."
+msgstr "รายละเอียดการตรวจสอบคลังแพกเกจ"
+
+#: app/views/repositories/new.html.erb:32
+#: app/views/repositories/index.html.erb:167
+#, fuzzy
+#| msgid "Invalid repository name."
 msgid "Enter a valid repository URL."
 msgstr "ชื่อของคลังแพกเกจใช้งานไม่ได้"
 
-#: app/views/repositories/index.html.erb:51
-#: app/views/repositories/add.html.erb:64
-#: app/views/repositories/index.html.erb:51
-#: app/views/repositories/add.html.erb:64
+#: app/views/repositories/new.html.erb:40
+#: app/views/repositories/index.html.erb:175
 msgid "Symbols <b>%s</b> are not allowed in repository alias."
 msgstr ""
 
-#: app/views/repositories/index.html.erb:55
-#: app/views/repositories/add.html.erb:74
-#: app/views/repositories/index.html.erb:55
-#: app/views/repositories/add.html.erb:74
+#: app/views/repositories/new.html.erb:47
+#: app/views/repositories/index.html.erb:78
+#: app/views/repositories/index.html.erb:222
+#: app/views/repositories/index.html.erb:240
+#: app/views/patches/license.html.erb:32 app/views/patches/license.html.erb:41
+#: app/views/patches/index.html.erb:37 app/views/patches/index.html.erb:141
+#: app/views/patches/index.html.erb:150
 #, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "โปรดรอ..."
+
+#: app/views/repositories/new.html.erb:56
+#: app/views/repositories/index.html.erb:179
+#, fuzzy
+#| msgid "The hostname cannot be empty."
 msgid "This value cannot be empty."
 msgstr "ไม่สามารถปล่อยชื่อเครื่องให้ว่างไว้ได้"
 
-#: app/views/repositories/index.html.erb:164
-#: app/views/repositories/add.html.erb:148
-#: app/views/repositories/index.html.erb:164
-#: app/views/repositories/add.html.erb:148 shortcuts.yml:15
+#: app/views/repositories/new.html.erb:102
 #, fuzzy
-msgid "Software Repositories"
-msgstr "บันทึกคลังแพกเกจ"
-
-#: app/views/repositories/index.html.erb:169
-#: app/views/repositories/index.html.erb:169
-#, fuzzy
-msgid "Configured software repositories"
-msgstr "คลังแพกเกจซอฟต์แวร์ที่ปรับแต่งแล้ว"
-
-#: app/views/repositories/index.html.erb:180
-#: app/views/repositories/index.html.erb:180
-#, fuzzy
-msgid "Quick Search"
-msgstr "ค้นหา"
-
-#: app/views/repositories/index.html.erb:188
-#: app/views/repositories/index.html.erb:188
-#, fuzzy
-msgid "Add New Repository"
-msgstr "กำลังทำการเพิ่มคลังแพกเกจ..."
-
-#: app/views/repositories/index.html.erb:194
-#: app/views/repositories/index.html.erb:194
-#, fuzzy
-msgid "Filter repositories"
-msgstr "คลังแพกเกจที่ลงทะเบียนไว้แล้ว"
-
-#: app/views/repositories/index.html.erb:198
-#: app/views/repositories/index.html.erb:198
-msgid "All"
-msgstr "ทั้งหมด"
-
-#: app/views/repositories/index.html.erb:200
-#: app/views/repositories/index.html.erb:200
-msgid "Disabled"
-msgstr "ปิดการใช้"
-
-#: app/views/repositories/index.html.erb:245
-#: app/views/repositories/index.html.erb:245
-#, fuzzy
-msgid "Repository is currently"
-msgstr "รายละเอียดของคลังแพกเกจ"
-
-#: app/views/repositories/index.html.erb:248
-#: app/views/repositories/add.html.erb:171
-#: app/views/repositories/add.html.erb:172
-#: app/views/repositories/index.html.erb:248
-#: app/views/repositories/add.html.erb:171
-#: app/views/repositories/add.html.erb:172
-#, fuzzy
-msgid "Repository will be %s."
-msgstr "รายละเอียดของคลังแพกเกจ"
-
-#: app/views/repositories/index.html.erb:252
-#: app/views/repositories/index.html.erb:252
-msgid "Autorefresh is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:255
-#: app/views/repositories/add.html.erb:176
-#: app/views/repositories/add.html.erb:177
-#: app/views/repositories/index.html.erb:255
-#: app/views/repositories/add.html.erb:176
-#: app/views/repositories/add.html.erb:177
-msgid "Autorefresh will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:259
-#: app/views/repositories/index.html.erb:259
-msgid "Keeping downloaded packages is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:262
-#: app/views/repositories/add.html.erb:181
-#: app/views/repositories/add.html.erb:182
-#: app/views/repositories/index.html.erb:262
-#: app/views/repositories/add.html.erb:181
-#: app/views/repositories/add.html.erb:182
-#, fuzzy
-msgid "Keep packages option will be %s."
-msgstr "แพกเกจที่เลือกไว้จะถูกติดตั้ง"
-
-#: app/views/repositories/index.html.erb:269
-#: app/views/repositories/add.html.erb:190
-#: app/views/repositories/index.html.erb:269
-#: app/views/repositories/add.html.erb:190
-#, fuzzy
-msgid "Save"
-msgstr "จัดเก็บ"
-
-#: app/views/repositories/index.html.erb:270
-#: app/views/repositories/index.html.erb:270
-msgid "Delete"
-msgstr "ลบ"
-
-#: app/views/repositories/index.html.erb:272
-#: app/views/repositories/index.html.erb:272
-#, fuzzy
-msgid "Really delete repository '%s'?"
-msgstr "จะลบเครื่องพิมพ์ %1 นี้จริงหรือไม่ ?"
-
-#: app/views/repositories/add.html.erb:120
-#: app/views/repositories/add.html.erb:120
-#, fuzzy
+#| msgid ""
+#| "A file with this name already exists.\n"
+#| "Choose a different one."
 msgid ""
 "A repository with this URL already exists.\n"
 "Create a duplicate?"
@@ -335,219 +285,377 @@ msgstr ""
 "มีแฟ้มที่มีชื่อนี้อยู่แล้ว\n"
 "โปรดเลือกชื่ออื่น"
 
-#: app/views/repositories/add.html.erb:150
-#: app/views/repositories/add.html.erb:150
+#: app/views/repositories/new.html.erb:136
+#: app/views/repositories/index.html.erb:30
 #, fuzzy
+#| msgid "Save Repositories"
+msgid "Software Repositories"
+msgstr "บันทึกคลังแพกเกจ"
+
+#: app/views/repositories/new.html.erb:138
+#: app/views/repositories/new.html.erb:152
+#, fuzzy
+#| msgid "Add a new record"
 msgid "Add a new repository"
 msgstr "เพิ่มระเบียนใหม่"
 
-#: app/views/repositories/add.html.erb:159
-#: app/views/repositories/add.html.erb:159
+#: app/views/repositories/new.html.erb:158
 #, fuzzy
+#| msgid "&Alias"
+msgid "Alias"
+msgstr "ชื่อแฝง"
+
+#: app/views/repositories/new.html.erb:162
+#: app/views/patches/_patches.html.erb:22
+msgid "Name"
+msgstr "ชื่อ"
+
+#: app/views/repositories/new.html.erb:166
+msgid "URL"
+msgstr "ที่อยู่ URL"
+
+#: app/views/repositories/new.html.erb:174
+#, fuzzy
+#| msgid "Repository Details"
+msgid "Repository will be %s."
+msgstr "รายละเอียดของคลังแพกเกจ"
+
+#: app/views/repositories/new.html.erb:179
+msgid "Autorefresh will be %s."
+msgstr ""
+
+#: app/views/repositories/new.html.erb:184
+#, fuzzy
+#| msgid "Selected packages will be installed."
+msgid "Keep packages option will be %s."
+msgstr "แพกเกจที่เลือกไว้จะถูกติดตั้ง"
+
+#: app/views/repositories/index.html.erb:44
+#, fuzzy
+#| msgid "Search"
+msgid "Quick Search"
+msgstr "ค้นหา"
+
+#: app/views/repositories/index.html.erb:49
+#, fuzzy
+#| msgid "Registered Repositories"
+msgid "Filter repositories"
+msgstr "คลังแพกเกจที่ลงทะเบียนไว้แล้ว"
+
+#: app/views/repositories/index.html.erb:52
+msgid "All"
+msgstr "ทั้งหมด"
+
+#: app/views/repositories/index.html.erb:52
+msgid "Enabled"
+msgstr "เปิดใช้งาน"
+
+#: app/views/repositories/index.html.erb:52
+msgid "Disabled"
+msgstr "ปิดการใช้"
+
+#: app/views/repositories/index.html.erb:56
+#, fuzzy
+#| msgid "Repository"
 msgid "New Repository"
 msgstr "คลังแพกเกจ"
 
-#: app/views/patch_updates/_patch_installation.html.erb:8
-#: app/views/patch_updates/_patch_installation.html.erb:8
+#: app/views/repositories/index.html.erb:131
 #, fuzzy
-msgid "An error occured while installing patches."
-msgstr "เกิดความผิดพลาขึ้น ระหว่างทำการติดตั้ง %1"
+#| msgid "&Save"
+msgid "Save"
+msgstr "จัดเก็บ"
 
-#: app/views/patch_updates/_patch_installation.html.erb:35
-#: app/views/patch_updates/_patch_installation.html.erb:35
+#: app/views/repositories/index.html.erb:132
+msgid "Delete"
+msgstr "ลบ"
+
+#: app/views/repositories/index.html.erb:134
 #, fuzzy
-msgid "Patch Installation"
-msgstr "โหมดการติดตั้ง"
+#| msgid "Really delete printer %1?"
+msgid "Really delete repository '%s'?"
+msgstr "จะลบเครื่องพิมพ์ %1 นี้จริงหรือไม่ ?"
 
-#: app/views/patch_updates/_patch_installation.html.erb:45
-#: app/views/patch_updates/_patch_installation.html.erb:45
+#: app/views/patches/_patch_summary.html.erb:17
 #, fuzzy
-msgid "Stop"
-msgstr "หยุด"
+#| msgid "No information about battery and AC status available"
+msgid "No information about patches available"
+msgstr "ไม่มีรายละเอียดข้อมูลเกี่ยวกับแบตเตอรีและการเสียบปลั๊กไฟ"
 
-#: app/views/patch_updates/_patch_installation.html.erb:45
-#: app/views/patch_updates/_patch_installation.html.erb:45
-msgid "Are you sure?"
+#: app/views/patches/_patch_summary.html.erb:24
+msgid "Update needs EULA license confirmation. Please follow to patch module to decide about license."
 msgstr ""
 
-#: app/views/patch_updates/index.html.erb:36
-#: app/views/patch_updates/index.html.erb:36
+#: app/views/patches/_patch_summary.html.erb:56
 #, fuzzy
-msgid "Updates"
-msgstr "ปรับให้ทันสมัย"
+#| msgid "Security Settings:"
+msgid "Security Updates: %d"
+msgstr "ตั้งค่าความปลอดภัย:"
 
-#: app/views/patch_updates/index.html.erb:41
-#: app/views/patch_updates/_patch_summary.html.erb:55
-#: app/views/patch_updates/index.html.erb:41
-#: app/views/patch_updates/_patch_summary.html.erb:55
+#: app/views/patches/_patch_summary.html.erb:66
 #, fuzzy
+#| msgid "Abort Update"
+msgid "Important Updates: %d"
+msgstr "ยกเลิกการอัปเดต"
+
+#: app/views/patches/_patch_summary.html.erb:76
+#, fuzzy
+#| msgid "Online Update"
+msgid "Optional Updates: %d"
+msgstr "อัปเดตแบบออนไลน์"
+
+#: app/views/patches/_patch_summary.html.erb:84
+#: app/views/patches/index.html.erb:180
+#, fuzzy
+#| msgid "<p>Your system is ready for use.</p>"
 msgid "Your system is up to date."
 msgstr "<p>ระบบของคุณพร้อมที่จะใช้งานได้แล้ว</p>"
 
-#: app/views/patch_updates/index.html.erb:60
-#: app/views/patch_updates/index.html.erb:60
-msgid "Please wait ..."
+#: app/views/patches/_patch_summary.html.erb:91
+#, fuzzy
+#| msgid "Install"
+msgid "Install all"
+msgstr "ติดตั้ง"
+
+#: app/views/patches/_patch_summary.html.erb:100
+#, fuzzy
+#| msgid "No additional information"
+msgid "Loading patch information"
+msgstr "ไม่มีข้อมูลเพิ่มเติม"
+
+#: app/views/patches/_patch_summary.html.erb:108
+#: app/views/patches/_patch_installation.html.erb:13
+#: app/views/patches/index.html.erb:56 app/views/patches/index.html.erb:75
+#: app/views/patches/index.html.erb:94 app/views/patches/index.html.erb:113
+#: app/views/patches/index.html.erb:132
+#, fuzzy
+#| msgid "No additional information"
+msgid "Error: Cannot get information."
+msgstr "ไม่มีข้อมูลเพิ่มเติม"
+
+#: app/views/patches/_patch_installation.html.erb:22
+#, fuzzy
+#| msgid "Error occurred while installing %1."
+msgid "An error occured while installing patches."
+msgstr "เกิดความผิดพลาขึ้น ระหว่างทำการติดตั้ง %1"
+
+#: app/views/patches/_patch_installation.html.erb:49
+#, fuzzy
+#| msgid "Package Installation"
+msgid "Patch Installation"
+msgstr "การติดตั้งแพกเกจ"
+
+#: app/views/patches/_patch_installation.html.erb:59
+#, fuzzy
+#| msgid "&Stop"
+msgid "Stop"
+msgstr "หยุด"
+
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Are you sure?"
 msgstr ""
 
-#: app/views/patch_updates/index.html.erb:64
-#: app/views/patch_updates/index.html.erb:64
-#, fuzzy
-msgid "Updates available"
-msgstr "ไม่มีแพตช์ที่ใช้ได้"
-
-#: app/views/patch_updates/index.html.erb:69
-#: app/views/patch_updates/index.html.erb:69
-#, fuzzy
-msgid "All updates"
-msgstr "ปรับให้ทันสมัย"
-
-#: app/views/patch_updates/index.html.erb:74
-#: app/views/patch_updates/index.html.erb:74
-msgid "Security"
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:78
-#: app/views/patch_updates/index.html.erb:78
-#, fuzzy
-msgid "Important"
-msgstr "ยกเลิกการอัปเดต"
-
-#: app/views/patch_updates/index.html.erb:83
-#: app/views/patch_updates/index.html.erb:83
-msgid "Recommended"
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:88
-#: app/views/patch_updates/index.html.erb:88
-msgid "Optional"
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:99
-#: app/views/patch_updates/index.html.erb:99
-msgid "Update"
-msgstr "ปรับให้ทันสมัย"
-
-#: app/views/patch_updates/_patch_progress.html.erb:6
-#: app/views/patch_updates/_patch_progress.html.erb:6
-#, fuzzy
-msgid "Refreshing package cache"
-msgstr "กำลังสร้างแฟ้มสำรองข้อมูลของแพกเกจ..."
-
-#: app/views/patch_updates/_patch_progress.html.erb:7
-#: app/views/patch_updates/_patch_progress.html.erb:7
-#, fuzzy
-msgid "Starting package manager"
-msgstr "กำลังเรียกใช้ตัวจัดการแพกเกจ"
-
-#: app/views/patch_updates/_patch_progress.html.erb:8
-#: app/views/patch_updates/_patch_progress.html.erb:8
-#, fuzzy
-msgid "Waiting for the package manager lock"
-msgstr "กำลังเรียกใช้ตัวจัดการแพกเกจ"
-
-#: app/views/patch_updates/_patch_progress.html.erb:9
-#: app/views/patch_updates/_patch_progress.html.erb:19
-#: app/views/patch_updates/_patch_progress.html.erb:9
-#: app/views/patch_updates/_patch_progress.html.erb:19
-#, fuzzy
-msgid "Evaluating available patches"
-msgstr "กำลังตรวจสอบรายการอัปเดตที่มี..."
-
-#: app/views/patch_updates/_patch_progress.html.erb:10
-#: app/views/patch_updates/_patch_progress.html.erb:10
-msgid "Finished reading patches"
-msgstr ""
-
-#: app/views/patch_updates/_patches.html.erb:10
-#: app/views/patch_updates/_patches.html.erb:10
+#: app/views/patches/_patches.html.erb:10
 msgid ""
 "One of the patches seems to update WebYaST itself.\n"
 "You may need to reload the page after applying the patch."
 msgstr ""
 
-#: app/views/patch_updates/_patches.html.erb:18
-#: app/views/patch_updates/_patches.html.erb:18
+#: app/views/patches/_patches.html.erb:16
 #, fuzzy
-msgid "Check"
-msgstr "ตรวจสอบ"
+#| msgid "No patches available."
+msgid "No patches available"
+msgstr "ไม่มีแพตช์ที่ใช้ได้"
 
-#: app/views/patch_updates/_patches.html.erb:20
-#: app/views/patch_updates/_patches.html.erb:20
+#: app/views/patches/_patches.html.erb:21
 msgid "Kind"
 msgstr ""
 
-#: app/views/patch_updates/_patches.html.erb:22
-#: app/views/patch_updates/_patches.html.erb:22
-msgid "Summary"
-msgstr "สรุป"
-
-#: app/views/patch_updates/_patches.html.erb:24
-#: app/views/patch_updates/_patches.html.erb:27
-#: app/views/patch_updates/_patches.html.erb:24
-#: app/views/patch_updates/_patches.html.erb:27
+#: app/views/patches/_patches.html.erb:24
+#: app/views/patches/_patches.html.erb:27
 msgid "Source"
 msgstr "ต้นฉบับ"
 
-#: app/views/patch_updates/_patches.html.erb:25
-#: app/views/patch_updates/_patches.html.erb:25
+#: app/views/patches/_patches.html.erb:25
 msgid "Install"
 msgstr "ติดตั้ง"
 
-#: app/views/patch_updates/_patch_summary.html.erb:25
-#: app/views/patch_updates/_patch_summary.html.erb:25
-msgid "Cannot read patch updates - you have been logged out."
+#: app/views/patches/license.html.erb:63
+msgid "Accept"
 msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:28
-#: app/views/patch_updates/_patch_summary.html.erb:28
-#, fuzzy
-msgid "No information about patches available"
-msgstr "ไม่มีรายละเอียดข้อมูลเกี่ยวกับแบตเตอรีและการเสียบปลั๊กไฟ"
+#: app/views/patches/license.html.erb:64
+msgid "Reject"
+msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:46
-#: app/views/patch_updates/_patch_summary.html.erb:46
+#: app/views/patches/index.html.erb:166 app/views/patches/index.html.erb:226
 #, fuzzy
-msgid "Security Updates: %d"
-msgstr "ตั้งค่าความปลอดภัย:"
-
-#: app/views/patch_updates/_patch_summary.html.erb:49
-#: app/views/patch_updates/_patch_summary.html.erb:49
-#, fuzzy
-msgid "Important Updates: %d"
-msgstr "ยกเลิกการอัปเดต"
-
-#: app/views/patch_updates/_patch_summary.html.erb:52
-#: app/views/patch_updates/_patch_summary.html.erb:52
-#, fuzzy
-msgid "Optional Updates: %d"
-msgstr "อัปเดตแบบออนไลน์"
-
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#, fuzzy
-msgid "Update All"
+#| msgid "Update"
+msgid "Updates"
 msgstr "ปรับให้ทันสมัย"
 
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#: app/views/patch_updates/_patch_summary.html.erb:60
-msgid "Updating all. Are you sure?"
-msgstr ""
-
-#: app/views/patch_updates/_patch_summary.html.erb:67
-#: app/views/patch_updates/_patch_summary.html.erb:67
+#: app/views/patches/index.html.erb:240
 #, fuzzy
-msgid "Loading patch information"
-msgstr "ไม่มีข้อมูลเพิ่มเติม"
+#| msgid "Update"
+msgid "All updates"
+msgstr "ปรับให้ทันสมัย"
 
-#: shortcuts.yml:16
+#: app/views/patches/index.html.erb:243
+msgid "Security"
+msgstr "ความปลอดภัย"
+
+#: app/views/patches/index.html.erb:245
 #, fuzzy
-msgid "See and manage configured software repositories"
-msgstr "คลังแพกเกจซอฟต์แวร์ที่ปรับแต่งแล้ว"
+#| msgid "Import"
+msgid "Important"
+msgstr "นำเข้า"
+
+#: app/views/patches/index.html.erb:248
+#, fuzzy
+#| msgid "recommended"
+msgid "Recommended"
+msgstr "ที่แนะนำ"
+
+#: app/views/patches/index.html.erb:251
+#, fuzzy
+#| msgid "optional"
+msgid "Optional"
+msgstr "ตัวเลือก"
+
+#: app/views/patches/index.html.erb:269
+msgid "Update"
+msgstr "ปรับให้ทันสมัย"
+
+#, fuzzy
+#~| msgid "Skip Autorefresh"
+#~ msgid "Autorefresh"
+#~ msgstr "ข้ามการปรับปรุงอัตโนมัติ"
+
+#~ msgid "Priority"
+#~ msgstr "ระดับความสำคัญ"
+
+#, fuzzy
+#~| msgid "Recommended packages"
+#~ msgid "Keep downloaded packages"
+#~ msgstr "แพกเกจที่แนะนำ"
+
+#, fuzzy
+#~| msgid "Missing parameter '%1'."
+#~ msgid "Missing repository parameter"
+#~ msgstr "ขาดพารามิเตอร์ '%1'"
+
+#, fuzzy
+#~| msgid "Invalid repository name."
+#~ msgid "Invalid priority"
+#~ msgstr "ชื่อของคลังแพกเกจใช้งานไม่ได้"
+
+#, fuzzy
+#~| msgid "Cannot read repositories."
+#~ msgid "Cannot update repository '%s'"
+#~ msgstr "ไม่สามารถอ่านคลังแพกเกจได้"
+
+#, fuzzy
+#~| msgid "unknown vendor"
+#~ msgid "Unknown backend error: %s"
+#~ msgstr "ไม่ทราบผู้ผลิต"
+
+#, fuzzy
+#~| msgid "Missing parameter '%1'."
+#~ msgid "Missing repository parameters"
+#~ msgstr "ขาดพารามิเตอร์ '%1'"
+
+#, fuzzy
+#~| msgid "Repositories to be added:"
+#~ msgid "Repository '%s' has been added."
+#~ msgstr "คลังแพกเกจที่จะเพิ่ม:"
+
+#, fuzzy
+#~| msgid "Cannot create directory '%1'."
+#~ msgid "Cannot create repository '%s': Unknown error"
+#~ msgstr "ไม่สามารถสร้างไดเรกทอรี '%1' ได้"
+
+#, fuzzy
+#~| msgid "Cannot create directory '%1'."
+#~ msgid "Cannot create repository '%s'"
+#~ msgstr "ไม่สามารถสร้างไดเรกทอรี '%1' ได้"
+
+#, fuzzy
+#~| msgid "unknown vendor"
+#~ msgid "Unknown backend error"
+#~ msgstr "ไม่ทราบผู้ผลิต"
+
+#, fuzzy
+#~| msgid "Error occurred while reading the log."
+#~ msgid "A problem occured when loading patch information."
+#~ msgstr "เกิดข้อผิดพลาดขึ้นระหว่างทำการอ่านบันทึกการทำงาน"
+
+#, fuzzy
+#~| msgid "Creating package archives..."
+#~ msgid "Refreshing package cache"
+#~ msgstr "กำลังสร้างแฟ้มสำรองข้อมูลของแพกเกจ..."
+
+#, fuzzy
+#~| msgid "Starting the Package Manager"
+#~ msgid "Starting package manager"
+#~ msgstr "กำลังเรียกใช้ตัวจัดการแพกเกจ"
+
+#, fuzzy
+#~| msgid "Starting the Package Manager"
+#~ msgid "Waiting for the package manager lock"
+#~ msgstr "กำลังเรียกใช้ตัวจัดการแพกเกจ"
+
+#, fuzzy
+#~| msgid "Checking for available updates..."
+#~ msgid "Evaluating available patches"
+#~ msgstr "กำลังตรวจสอบรายการอัปเดตที่มี..."
+
+#, fuzzy
+#~| msgid "Please wait..."
+#~ msgid "Please wait ..."
+#~ msgstr "โปรดรอ..."
+
+#, fuzzy
+#~| msgid "Configured Software Repositories"
+#~ msgid "See and manage configured software repositories"
+#~ msgstr "คลังแพกเกจซอฟต์แวร์ที่ปรับแต่งแล้ว"
+
+#, fuzzy
+#~| msgid "Configured Software Repositories"
+#~ msgid "Configured software repositories"
+#~ msgstr "คลังแพกเกจซอฟต์แวร์ที่ปรับแต่งแล้ว"
+
+#, fuzzy
+#~| msgid "Adding the Repository..."
+#~ msgid "Add New Repository"
+#~ msgstr "กำลังทำการเพิ่มคลังแพกเกจ..."
+
+#, fuzzy
+#~| msgid "No patches available."
+#~ msgid "Updates available"
+#~ msgstr "ไม่มีแพตช์ที่ใช้ได้"
+
+#, fuzzy
+#~| msgid "Checks"
+#~ msgid "Check"
+#~ msgstr "ตรวจสอบ"
+
+#~ msgid "Summary"
+#~ msgstr "สรุป"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgid "Update All"
+#~ msgstr "ปรับให้ทันสมัย"
 
 #, fuzzy
 #~| msgid "Installing packages..."
 #~ msgid "Installing all patches..."
 #~ msgstr "กำลังติดตั้งแพกเกจ..."
+
+#, fuzzy
+#~| msgid "Installation Mode"
+#~ msgid "Installation stopped"
+#~ msgstr "โหมดการติดตั้ง"
 
 #, fuzzy
 #~| msgid "Installation finished.\n"
@@ -556,7 +664,12 @@ msgstr "คลังแพกเกจซอฟต์แวร์ที่ปร
 
 #, fuzzy
 #~| msgid "Wait while this software is being installed."
-#~ msgid "Patch has been installed."
+#~ msgid "Patch has been installed. "
+#~ msgstr "โปรดรอระหว่างกำลังทำการติดตั้งซอฟต์แวร์นี้"
+
+#, fuzzy
+#~| msgid "Wait while this software is being installed."
+#~ msgid "All Patches have been installed. "
 #~ msgstr "โปรดรอระหว่างกำลังทำการติดตั้งซอฟต์แวร์นี้"
 
 #, fuzzy

@@ -1,0 +1,69 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-09-25 14:33+0100\n"
+"Last-Translator: Jakub Derda <j.derda@tjgroup.eu>\n"
+"Language-Team:  <pl@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+msgid "Account settings"
+msgstr "Ustawienia konta"
+
+msgid "Active Directory"
+msgstr "Active Directory"
+
+msgid "Active Directory Domain"
+msgstr "Domena Active Directory"
+
+msgid "Active Directory client configuraton successfully written."
+msgstr "Konfiguracja klienta Active Directory została poprawnie zapisana."
+
+msgid "Administrator User Name"
+msgstr "Nazwa użytkownika administratora"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Nie można odczytać konfiguracji klienta Active Directory."
+
+msgid "Enable Authentication of AD users"
+msgstr "Włącz uwierzytelnianie użytkownikó AD"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Wystąpił błąd podczas przyłaczania do domeny Active Directory: %s"
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Wystąpił błąd podczas opuszczania domeny ActiveDirectory: %s"
+
+msgid "Error while saving Active Directory client configuration."
+msgstr "Wystąpił błąd podczas zapisywania konfiguracji klienta Active Directory."
+
+msgid "Machine Account"
+msgstr "Konto urządzenia"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "Urządzenie nie jest członkiem zadanej domeny. Proszę wpisać informacje potrzebne do przyłączenia."
+
+# password dialog title
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Please wait"
+msgstr "Proszę czekać"
+
+msgid "This field is required."
+msgstr "To pole jest wymagane."
+
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "Konfiguruj połączenie z Active Directory."

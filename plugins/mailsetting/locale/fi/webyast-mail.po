@@ -1,110 +1,129 @@
-# Jyri Palokangas <jmp@opensuse.org>, 2010.
+# Katariina Kemppainen <katariina@opensuse.fi>, 2010, 2011.
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-05-04 15:14+0300\n"
-"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
-"Language-Team: TRANSLATIONS <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-24 19:55+0300\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/mail_controller.rb:29
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Koneen täydellisen konenimen hakeminen ei onnistunut. Jos sähköpostia ei voitu toimittaa, tarkista verkon ja/tai sähköpostin määritys verkonvalvojalta."
+
+# %s is either BOOTP or DHCP
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "Sähköpostin määritystestiä ei ole vahvistettu."
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Määritettäessä sähköpostia, testisähköposti lähetettiin osoitteeseen %s . Toimitettiinko sähköposti tähän osoitteeseen?<br>Jos kyllä, vahvista se painamalla painiketta. Muussa tapauksessa tarkista sähköpostin määritys uudestaan."
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "Testisähköposti vastaanotettiin"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "Salasanat eivät täsmää."
 
-#: app/controllers/mail_controller.rb:36
-#| msgid "All services have been refreshed."
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
 msgstr "Sähköpostiasetukset tallennettiin."
 
-#: app/controllers/mail_controller.rb:38
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
-msgstr "Testi sähköposti lähetettiin osoitteeseen %s."
+msgstr "Testisähköposti lähetettiin osoitteeseen %s."
 
-#: app/controllers/mail_controller.rb:50
-#| msgid "Error while closing old opasswd file: %s"
-msgid "Error while saving mail settings: %s"
-msgstr "Virhe tallennettaessa sähköpostiasetuksia: %s"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "Virhe tallennettaessa sähköpostiasetuksia."
 
-#: app/controllers/mail_controller.rb:67
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
 "No outgoing mail server is set, but administrator has mail forwarders defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
-"Lähtevän postin palvelinta ei ole asetettu, mutta järjestelmävalvojan "
-"sähköpostin ohjaus on määritetty.\n"
-"Muuta %s<i>administrator</i>%s tai %s<i>mail</i>%s määritystä."
+"Lähtevän postin palvelinta ei ole asetettu, mutta järjestelmävalvojan sähköpostin ohjaus on määritetty.\n"
+"        Muuta %s<i>administrator</i>%s tai %s<i>mail</i>%s määritystä."
 
-#: app/views/mail/index.html.erb:16
-#| msgid "Passwords do not match."
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "Odota hetki..."
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
 msgstr "Salasanat eivät täsmää."
 
-#: app/views/mail/index.html.erb:17
-#| msgid "`%s' is not a valid ip address."
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
 msgstr "Anna toimiva sähköpostiosoite."
 
-#: app/views/mail/index.html.erb:18
-#| msgid "Enter your IP address."
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
 msgstr "Anna toimiva toimialue tai IP-osoite."
 
-#: app/views/mail/index.html.erb:35
-#| msgid "Manual Settings"
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
-msgstr "Sähköposti asetukset"
+msgstr "Sähköpostin asetukset"
 
-#: app/views/mail/index.html.erb:47
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "Lähtevän postin palvelimen asetukset"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr "Lähtevän postin palvelin"
 
-#: app/views/mail/index.html.erb:50
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
 msgstr "Käytä salattua yhteyttä (TLS)"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Ei koskaan"
 
-#: app/views/mail/index.html.erb:51
-#| msgid "(%1 available)"
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
 msgstr "Jos saatavilla"
 
-#: app/views/mail/index.html.erb:51
-#| msgid "Alwa&ys"
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr "Aina"
 
-#: app/views/mail/index.html.erb:53
-#| msgid "Username: "
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
-msgstr "Käyttäjänimi"
+msgstr "Käyttäjätunnus"
 
 # password dialog title
-#: app/views/mail/index.html.erb:56
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Salasana"
 
-#: app/views/mail/index.html.erb:59
-#| msgid "_Confirm Password:"
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
 msgstr "Vahvista salasana"
 
-#: app/views/mail/index.html.erb:67
-#| msgid "Send Email to %1"
-msgid "Send test mail to"
-msgstr "Lähetä testi sähköposti osoitteeseen"
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "Tarkista sähköpostipalvelimen asetukset"
 
-#: app/views/mail/index.html.erb:69
-#| msgid "Send Data"
+#: app/views/mailsetting/index.html.erb:118
+msgid "Send test mail to"
+msgstr "Lähetä testisähköposti osoitteeseen"
+
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
 msgstr "Lähetä sähköposti"
 
-
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Hallitse uloslähtevän postin asetuksia"

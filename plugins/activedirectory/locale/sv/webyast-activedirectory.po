@@ -1,0 +1,83 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Account settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Directory\n"
+msgid "Active Directory"
+msgstr "Katalog\n"
+
+msgid "Active Directory Domain"
+msgstr ""
+
+msgid "Active Directory client configuraton successfully written."
+msgstr ""
+
+msgid "Administrator User Name"
+msgstr ""
+
+#, fuzzy
+#| msgid "Could not load the requested scheme configuration."
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Det gick inte att läsa in de begärda schemainställningarna."
+
+msgid "Enable Authentication of AD users"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error while modifying the repository:"
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Ett fel uppstod när arkivet skulle ändras:"
+
+#, fuzzy
+#| msgid "Error while closing temporary opasswd file: %s"
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Ett fel uppstod när den temporära opasswd-filen skulle stängas: %s"
+
+#, fuzzy
+#| msgid "Try loading the default configuration."
+msgid "Error while saving Active Directory client configuration."
+msgstr "Försök läsa in standardinställningarna."
+
+msgid "Machine Account"
+msgstr ""
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr ""
+
+# password dialog title
+msgid "Password"
+msgstr "Lösenord"
+
+msgid "Please wait"
+msgstr ""
+
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "Filnamnet krävs."
+
+#, fuzzy
+#~| msgid "Configure the current scheme."
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "Ställ in aktuellt schema."

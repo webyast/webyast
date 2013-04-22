@@ -1,0 +1,84 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2006-03-22 23:18-0700\n"
+"Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
+"Language-Team: Ukrainian <translation@linux.org.ua>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: app/controllers/kerberos_controller.rb:30
+#, fuzzy
+#| msgid "Cannot write repository configuration"
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Не вдалося записати налаштування сховища"
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/kerberos_controller.rb:47
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving Kerberos client configuration."
+msgstr "Помилка аналізу сертифіката."
+
+#: app/views/kerberos/index.html.erb:32
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "Назва файла - потрібна."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "Введіть чинну назву домену або адресу IP."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:78
+#, fuzzy
+#| msgid "Kerberos Ticket List"
+msgid "Kerberos client"
+msgstr "Список квитків Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+#, fuzzy
+#| msgid "Inner &authentication"
+msgid "Enable Kerberos Authentication"
+msgstr "Внутрішнє &розпізнавання"
+
+#: app/views/kerberos/index.html.erb:98
+#, fuzzy
+#| msgid "Default Hat"
+msgid "Default Domain"
+msgstr "Типова шапка"
+
+#: app/views/kerberos/index.html.erb:103
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Realm"
+msgstr "Типовий маршрут"
+
+#: app/views/kerberos/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "KDC Server Address"
+msgstr "Адреса сервера назв"
+
+#, fuzzy
+#~| msgid "Configure Interface"
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Налаштувати інтерфейс"

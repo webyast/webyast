@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-08-18 21:16+0300\n"
+"Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/kerberos_controller.rb:30
+#, fuzzy
+#| msgid "Could not load the requested scheme configuration."
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Не могат да се заредят настройките на желаната схемата."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/kerberos_controller.rb:47
+#, fuzzy
+#| msgid "Try loading the default configuration."
+msgid "Error while saving Kerberos client configuration."
+msgstr "Опитайте да заредите стандартните настройки."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:33
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "Въведете Вашия IP адрес."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:91
+#, fuzzy
+#| msgid "Authentication"
+msgid "Enable Kerberos Authentication"
+msgstr "Автентификация"
+
+#: app/views/kerberos/index.html.erb:98
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Domain"
+msgstr "Маршрутизиране по подразбиране"
+
+#: app/views/kerberos/index.html.erb:103
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Realm"
+msgstr "Маршрутизиране по подразбиране"
+
+#: app/views/kerberos/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "KDC Server Address"
+msgstr "Адрес на сървъра за имена"
+
+#, fuzzy
+#~| msgid "Configure KPowersave..."
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Настройка на KPowersave"

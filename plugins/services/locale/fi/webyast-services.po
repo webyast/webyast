@@ -1,190 +1,198 @@
 # translation of yast_webclient_services.fi.po to suomi
 # Jyri Palokangas <jyri.palokangas@opensuse.org>, 2009.
-# Jyri Palokangas <jmp@opensuse.org>, 2010.
+# Jyri Palokangas <jmp@opensuse.org>, 2010, 2011, 2012.
+# Harri Miettinen <harri.miettinen@opensuse.fi>, 2010.
+# Katariina Kemppainen <katariina@opensuse.fi>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: yast_webclient_services.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-13 13:37+0200\n"
-"PO-Revision-Date: 2010-05-20 15:25+0300\n"
-"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
-"Language-Team: Finnish <opensuse-fi@opensuse.fi>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-24 19:56+0300\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/services_controller.rb:23
-msgid "(cannot read status)"
-msgstr "(tilaa ei voi lukea)"
-
-#: app/controllers/services_controller.rb:70
+#: app/controllers/services_controller.rb:88
 msgid "success"
 msgstr "onnistui"
 
-#: app/controllers/services_controller.rb:71
+#: app/controllers/services_controller.rb:89
 msgid "unspecified error"
 msgstr "määrittämätön virhe"
 
-#: app/controllers/services_controller.rb:72
-#| msgid "invalid argument syntax"
+#: app/controllers/services_controller.rb:90
 msgid "invalid or excess argument(s)"
 msgstr "virheellinen tai ylimääräinen argumentti"
 
-#: app/controllers/services_controller.rb:73
-#| msgid "not yet implemented"
+#: app/controllers/services_controller.rb:91
 msgid "unimplemented feature"
 msgstr "toteuttamaton toiminto"
 
-#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:92
 msgid "user had insufficient privilege"
 msgstr "käyttäjällä on riittämättömät oikeudet"
 
-#: app/controllers/services_controller.rb:75
-#| msgid "'%s' is not installed."
+#: app/controllers/services_controller.rb:93
 msgid "program is not installed"
 msgstr "ohjelmaa ei ole asennettuna."
 
-#: app/controllers/services_controller.rb:76
-#| msgid "Not configured"
+#: app/controllers/services_controller.rb:94
 msgid "program is not configured"
 msgstr "ohjelmaa ei ole määritetty"
 
-#: app/controllers/services_controller.rb:77
-#| msgid "The hypervisor is not running."
-msgid "program is not runnning"
+#: app/controllers/services_controller.rb:95
+msgid "program is not running"
 msgstr "ohjelma ei ole käynnissä"
 
-#: app/views/services/_result.rhtml:6
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
 msgstr "Palvelukutsun tulos"
 
-#: app/views/services/_result.rhtml:9
+#: app/views/services/_result.html.erb:12
 msgid "Result"
 msgstr "Tulos"
 
-#: app/views/services/_result.rhtml:14
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Kuvaus"
 
-#: app/views/services/index.rhtml:141
-msgid "System Services"
-msgstr "Järjestelmäpalvelut"
-
-#: app/views/services/index.rhtml:147
-#| msgid "You do not have permission to execute the services. The links are disabled."
-msgid "You do not have permission to execute the services."
-msgstr "Sinulla ei ole oikeuksia suorittaa palvelua."
-
-#: app/views/services/index.rhtml:151
-#| msgid "inetd service"
-msgid "Filter services"
-msgstr "Suodata palvelut"
-
-#: app/views/services/index.rhtml:153
-#| msgid "Alt"
-msgid "All"
-msgstr "Kaikki"
-
-#: app/views/services/index.rhtml:154
-#| msgid "running"
-msgid "Running"
-msgstr "Suorituksessa"
-
-#: app/views/services/index.rhtml:155
-#| msgid "not running"
-msgid "Not Running"
-msgstr "Ei suorituksessa"
-
-#: app/views/services/index.rhtml:156
-#| msgid "(dead)"
-msgid "Dead"
-msgstr "Kuollut"
-
-#: app/views/services/index.rhtml:157
-msgid "Started on Boot"
-msgstr "Käynnistetty käynnistyksen yhteydessä"
-
-#: app/views/services/index.rhtml:158
-msgid "Not Started on Boot"
-msgstr "Ei käynnistetä käynnistyksen yhteydessä"
-
-#: app/views/services/index.rhtml:165
-#| msgid "Search"
-msgid "Quick Search"
-msgstr "Nopea etsintä"
-
-#: app/views/services/index.rhtml:180
-#| msgid "The action for service '%1' may not be empty."
-msgid "Description for service is not available"
-msgstr "Palvelun kuvaus ei ole saatavilla."
-
-#: app/views/services/index.rhtml:203
-#| msgid "Refresh"
-msgid "(refresh)"
-msgstr "(virkistä)"
-
-#: app/views/services/index.rhtml:234
-#| msgid "Start-Up"
-msgid "Start"
-msgstr "Käynnistä"
-
-#: app/views/services/index.rhtml:235
-msgid "Stop"
-msgstr "Pysäytä"
-
-#: app/views/services/index.rhtml:236
-msgid "Restart"
-msgstr "Käynnistä uudelleen"
-
-#: app/views/services/index.rhtml:237
-#| msgid "Start Konqueror"
-msgid "Start on Boot"
-msgstr "Käynnistä käynnistyksen yhteydessä"
-
-#: app/views/services/index.rhtml:238
-#| msgid "Do Not Start"
-msgid "Do Not Start on Boot"
-msgstr "Älä käynnistä käynnistyksen yhteydessä"
-
-#: app/views/services/_status.rhtml:6
+#: app/views/services/_status.html.erb:7
 msgid "Service will be started on boot."
 msgstr "Palvelu käynnistetään käynnistyksen yhteydessä."
 
-#: app/views/services/_status.rhtml:8
+#: app/views/services/_status.html.erb:9
 msgid "Service will not be started on boot."
 msgstr "Palvelua ei käynnistetä käynnistyksen yhteydessä."
 
-#: app/views/services/_status.rhtml:31
-#| msgctxt "sc/source/ui/miscdlgs/retypepassdlg.src#RID_SCDLG_RETYPEPASS.FT_DOCSTATUS.fixedtext.text"
-#| msgid "Status unknown"
+#: app/views/services/_status.html.erb:32
 msgid "status unknown"
 msgstr "tila tuntematon"
 
-#: app/views/services/_status.rhtml:33
+#: app/views/services/_status.html.erb:34
 msgid "running"
 msgstr "käytössä"
 
-#: app/views/services/_status.rhtml:37
-#| msgid "(dead)"
+#: app/views/services/_status.html.erb:38
 msgid "dead"
 msgstr "kuollut"
 
-#: app/views/services/_status.rhtml:41
+#: app/views/services/_status.html.erb:42
 msgid "not running"
 msgstr "ei käytössä"
 
-#: app/views/services/_status.rhtml:45
-#| msgctxt "sc/source/ui/miscdlgs/retypepassdlg.src#RID_SCDLG_RETYPEPASS.FT_DOCSTATUS.fixedtext.text"
-#| msgid "Status unknown"
+#: app/views/services/_status.html.erb:46
 msgid "status unknown: %d"
 msgstr "tila tuntematon: %d"
 
-#: app/views/services/_status.rhtml:48
-#| msgid "lock-down status for the search area"
+#: app/views/services/_status.html.erb:49
 msgid "Current status of the service:"
 msgstr "Palvelun nykyinen tila:"
+
+#: app/views/services/index.html.erb:48
+msgid "System Services"
+msgstr "Järjestelmäpalvelut"
+
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
+msgstr "Sinulla ei ole oikeuksia suorittaa palvelua."
+
+#: app/views/services/index.html.erb:66
+msgid "Quick Search"
+msgstr "Nopea etsintä"
+
+#: app/views/services/index.html.erb:71
+msgid "Filter services"
+msgstr "Suodata palvelut"
+
+#: app/views/services/index.html.erb:76
+msgid "All"
+msgstr "Kaikki"
+
+#: app/views/services/index.html.erb:77
+msgid "Running"
+msgstr "Suorituksessa"
+
+#: app/views/services/index.html.erb:78
+msgid "Not Running"
+msgstr "Ei suorituksessa"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr "Kuollut"
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr "Käynnistetty käynnistyksen yhteydessä"
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr "Ei käynnistetä käynnistyksen yhteydessä"
+
+#: app/views/services/index.html.erb:97
+msgid "Description for service is not available"
+msgstr "Palvelun kuvaus ei ole saatavilla."
+
+#: app/views/services/index.html.erb:121
+msgid "(refresh)"
+msgstr "(virkistä)"
+
+#: app/views/services/index.html.erb:151
+msgid "Start"
+msgstr "Käynnistä"
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: app/views/services/index.html.erb:153
+msgid "Restart"
+msgstr "Käynnistä uudelleen"
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr "Käynnistä käynnistyksen yhteydessä"
+
+#: app/views/services/index.html.erb:155
+msgid "Do Not Start on Boot"
+msgstr "Älä käynnistä käynnistyksen yhteydessä"
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+msgid "Error: Refresh failed"
+msgstr "Virhe: Virkistys epäonnistui"
+
+#~ msgid "(cannot read status)"
+#~ msgstr "(tilaa ei voi lukea)"
+
+#~ msgid "List of services could not be read"
+#~ msgstr "Luetteloa palveluista ei voitu lukea"
+
+#~ msgid "List of custom services could not be read"
+#~ msgstr "Luetteloa omista palveluista ei voitu lukea"
+
+#~ msgid "Unknown error on server side"
+#~ msgstr "Tuntematon virhe palvelinpuolella"
+
+#~ msgid "Manage the LSB init scripts"
+#~ msgstr "Hallitse käynnistyksen aikasijan komentojonoja"
+
+#~ msgid "Add New Repository"
+#~ msgstr "Lisää uusi asennuslähde"
+
+#~ msgid "Filter repositories"
+#~ msgstr "Suodata asennuslähteet"
+
+#~ msgid "Enabled"
+#~ msgstr "Käytössä"
+
+#~ msgid "Disabled"
+#~ msgstr "Poistettu käytöstä"
 
 #~ msgid "Invalid session, please login again."
 #~ msgstr "Virheellinen istunto, kirjaudu uudelleen."

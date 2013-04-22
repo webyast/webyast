@@ -1,0 +1,72 @@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# This file is distributed under the same license as PACKAGE package.
+#
+# Freek de Kruijf <freek@opensuse.org>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-17 13:14+0200\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#:
+msgid "Account settings"
+msgstr "Accountinstellingen"
+
+msgid "Active Directory"
+msgstr "Active Directory"
+
+msgid "Active Directory Domain"
+msgstr "Active Directory domein"
+
+msgid "Active Directory client configuraton successfully written."
+msgstr ""
+"De configuratie van de Active Directory client is met succes weggeschreven."
+
+msgid "Administrator User Name"
+msgstr "Gebruikersnaam van de systeembeheerder"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Kan de configuratie van de Active Directory client niet lezen"
+
+msgid "Enable Authentication of AD users"
+msgstr "Authenticatie van AD-gebruikers inschakelen"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Fout bij het meedoen aan het Active Directory domein: %s"
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Fout bij het verlaten van het Active Directory domein: %s"
+
+msgid "Error while saving Active Directory client configuration."
+msgstr ""
+"Fout bij het opslaan van de configuratie van de Active Directory client."
+
+msgid "Machine Account"
+msgstr "Machineaccount"
+
+msgid ""
+"Machine is not member of given domain. Enter the credentials needed for join."
+msgstr ""
+"De machine is geen lid van het opgegeven domein. Geef de credentials die "
+"nodig zijn om mee te doen."
+
+msgid "Password"
+msgstr "Wachtwoord"
+
+msgid "Please wait"
+msgstr "Een ogenblik geduld"
+
+msgid "This field is required."
+msgstr "Dit veld is vereist."
+
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "De verbinding naar de Active Directory instellen"

@@ -1,0 +1,71 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Kalman Kemenczy <kkemenczy@opensuse.org>, 2011, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-ldap-ui 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2013-02-25 09:28+0100\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@opensuse.org>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
+
+#: app/controllers/ldap_controller.rb:38
+msgid "Cannot read LDAP client configuraton."
+msgstr "Nem olvashatók be az LDAP kliens beállításai."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr "Az LDAP kliens beállításai sikeresen elmentve."
+
+#: app/controllers/ldap_controller.rb:65
+msgid "Error while saving LDAP client configuration."
+msgstr "Hiba történt az LDAP kliens beállítások mentésekor."
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "A mező megadása kötelező."
+
+#: app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Adjon meg egy érvényes tartománynevet vagy IP-címet."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Kérem, várjon…"
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr "LDAP-kliens"
+
+#: app/views/ldap/index.html.erb:101
+msgid "Enable LDAP Authentication"
+msgstr "LDAP-hitelesítés engedélyezése"
+
+#: app/views/ldap/index.html.erb:108
+msgid "LDAP Server Address"
+msgstr "LDAP-kiszolgáló címe"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr "Alap DN"
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr "DN lekérése"
+
+#: app/views/ldap/index.html.erb:127
+msgid "Secure Connection"
+msgstr "Biztonságos kapcsolat"
+
+#~ msgid "LDAP"
+#~ msgstr "LDAP"
+
+#~ msgid "Configure LDAP client"
+#~ msgstr "LDAP-kliens beállítása"

@@ -1,39 +1,123 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of yast_webclient_roles.nl.po to Dutch
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 #
+# Freek de Kruijf <freek@opensuse.org>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_roles\n"
-"POT-Creation-Date: 2010-03-11 15:45+0100\n"
-"PO-Revision-Date: 2010-03-25 08:04\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_roles.nl\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-15 10:08+0200\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/views/roles/_role_edit.erb:31
-msgid "Permissions granted by role"
-msgstr "Machtiging toegestaan per rol"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Naam van rol is ongeldig. Toegestane combinaties zijn alleen a-z, A-Z, cijfers, spatie, streepje en underscore."
 
-#: app/views/roles/_role_edit.erb:44
-msgid "Available permissions"
-msgstr "Beschikbare machtigingen"
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "Naam van rol wordt al gebruikt."
 
-#: app/views/roles/_role_edit.erb:56
-msgid "Description of permissions"
-msgstr "Beschrijving van machtigingen"
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "Rol '%s' is met succes verwijderd."
 
-#: app/views/roles/_role_edit.erb:58
-msgid ")}-description"
-msgstr ")}-beschrijving"
-
-#: app/views/roles/_role_edit.erb:64
-msgid "Save"
-msgstr "Opslaan"
-
-#: app/views/roles/index.rhtml:12
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr "Rollen"
 
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "Om aan de gebruiker rollen toe te kennen"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "De gebruikerslabels verslepen en laten vallen in containers voor rollen"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Dit niet meer tonen"
+
+#: app/views/roles/index.html.erb:38
+msgid "Create Role"
+msgstr "Rol aanmaken"
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Gebruikers toewijzen"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Gebruiker is al toegekend"
+
+#: app/views/roles/index.html.erb:104
+msgid "Assign Permissions"
+msgstr "Rechten toekennen"
+
+#: app/views/roles/index.html.erb:107
+msgid "collapse all"
+msgstr "alles inklappen"
+
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "Dit veld is vereist"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Toegestane combinaties zijn alleen a-z, A-Z, cijfers, spatie, streepje en underscore."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Een ogenblik geduld"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Fout: kon rol <i>%s</i> niet verwijderen."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Kan geen rollen vinden"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Geeft toegangsrechten aan rollen en hang gebruikers aan rollen"
+
+#~| msgid "Selected Members"
+#~ msgid "Selected Users"
+#~ msgstr "Geselecteerde gebruikers"
+
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Beschikbare gebruikers"
+
+#~| msgid "Click user names to select/unselect members"
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Klik op gebruikersnamen om gebruikers toe te wijzen/te verwijderen"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Ongeldige naam van een rol"
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Rechten die aan een rol vastzitten"
+
+#~ msgid "Permissions granted by role"
+#~ msgstr "Rechten toegekend door rol"
+
+#~ msgid "Available permissions"
+#~ msgstr "Beschikbare rechten"
+
+#~ msgid "Description of permissions"
+#~ msgstr "Beschrijving van rechten"
+
+#~ msgid ")}-description"
+#~ msgstr ")}-beschrijving"
+
+#~ msgid "Remaining users"
+#~ msgstr "Overige gebruikers"
+
+#~ msgid "Save"
+#~ msgstr "Opslaan"

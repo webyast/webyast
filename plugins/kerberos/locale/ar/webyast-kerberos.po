@@ -1,0 +1,65 @@
+# Mohammad Alhargan <malham1@hotmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-02-01 07:23+0300\n"
+"Last-Translator: Mohammad Alhargan <malham1@hotmail.com>\n"
+"Language-Team: http://www.vertaal.com.ar/files/opensuse-11-4/ar/list/\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.0\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "لا يمكن قراءة إعدادات العميل Kerberos."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "تمت كتابة إعدادات العميل Kerberos بنجاح."
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "حدث خطأ أثناء حفظ إعدادات العميل Kerberos."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "هذا الحقل مطلوب."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "أدخل اسم مجال صالح أو عنوان IP."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "الرجاء الانتظار"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "العميل Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "تمكين مصادقة Kerberos"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "المجال الافتراضي"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "المجال الافتراضي"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "عنوان خادم KDC"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#~ msgid "Configure Kerberos client"
+#~ msgstr "إعداد العميل Kerberos"

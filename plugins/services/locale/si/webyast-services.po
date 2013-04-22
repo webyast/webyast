@@ -5,80 +5,161 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: i18n@suse.de\n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2005-07-29 15:37+0530\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Sinhala <i18n@suse.de>\n"
+"Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: app/controllers/services_controller.rb:11
-msgid "Invalid session, please login again."
-msgstr ""
-
-#: app/controllers/services_controller.rb:34
-msgid "(cannot read status)"
-msgstr ""
-
-#: app/controllers/services_controller.rb:80
+#: app/controllers/services_controller.rb:88
 msgid "success"
 msgstr ""
 
-#: app/views/services/_status.rhtml:14
-msgid "(unknown)"
+#: app/controllers/services_controller.rb:89
+msgid "unspecified error"
 msgstr ""
 
-#: app/views/services/_status.rhtml:16
-msgid "(running)"
+#: app/controllers/services_controller.rb:90
+msgid "invalid or excess argument(s)"
 msgstr ""
 
-#: app/views/services/_status.rhtml:18
-msgid "(dead)"
+#: app/controllers/services_controller.rb:91
+msgid "unimplemented feature"
 msgstr ""
 
-#: app/views/services/_status.rhtml:20
-msgid "(not running)"
+#: app/controllers/services_controller.rb:92
+msgid "user had insufficient privilege"
 msgstr ""
 
-#: app/views/services/_status.rhtml:22
-msgid "(unknown: %d)"
+#: app/controllers/services_controller.rb:93
+msgid "program is not installed"
 msgstr ""
 
-#: app/views/services/_result.rhtml:5
+#: app/controllers/services_controller.rb:94
+msgid "program is not configured"
+msgstr ""
+
+#: app/controllers/services_controller.rb:95
+msgid "program is not running"
+msgstr ""
+
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
 msgstr ""
 
-#: app/views/services/_result.rhtml:8
+#: app/views/services/_result.html.erb:12
 msgid "Result"
 msgstr ""
 
-#: app/views/services/_result.rhtml:12
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr ""
 
-#: app/views/services/_result.rhtml:18 app/views/services/_result.rhtml:20
-#: app/views/services/index.rhtml:102
-msgid "Back"
+#: app/views/services/_status.html.erb:7
+msgid "Service will be started on boot."
 msgstr ""
 
-#: app/views/services/index.rhtml:11
-msgid "Custom Services"
+#: app/views/services/_status.html.erb:9
+msgid "Service will not be started on boot."
 msgstr ""
 
-#: app/views/services/index.rhtml:13
+#: app/views/services/_status.html.erb:32
+msgid "status unknown"
+msgstr ""
+
+#: app/views/services/_status.html.erb:34
+msgid "running"
+msgstr ""
+
+#: app/views/services/_status.html.erb:38
+msgid "dead"
+msgstr ""
+
+#: app/views/services/_status.html.erb:42
+msgid "not running"
+msgstr ""
+
+#: app/views/services/_status.html.erb:46
+msgid "status unknown: %d"
+msgstr ""
+
+#: app/views/services/_status.html.erb:49
+msgid "Current status of the service:"
+msgstr ""
+
+#: app/views/services/index.html.erb:48
 msgid "System Services"
 msgstr ""
 
-#: app/views/services/index.rhtml:20
-msgid "No custom service is defined on target machine."
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
 msgstr ""
 
-#: app/views/services/index.rhtml:22
-msgid "You do not have permission to execute the services. The links are disabled."
+#: app/views/services/index.html.erb:66
+msgid "Quick Search"
 msgstr ""
 
-#: app/views/services/index.rhtml:94
-msgid "status"
+#: app/views/services/index.html.erb:71
+msgid "Filter services"
+msgstr ""
+
+#: app/views/services/index.html.erb:76
+msgid "All"
+msgstr ""
+
+#: app/views/services/index.html.erb:77
+msgid "Running"
+msgstr ""
+
+#: app/views/services/index.html.erb:78
+msgid "Not Running"
+msgstr ""
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr ""
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:97
+msgid "Description for service is not available"
+msgstr ""
+
+#: app/views/services/index.html.erb:121
+msgid "(refresh)"
+msgstr ""
+
+#: app/views/services/index.html.erb:151
+msgid "Start"
+msgstr ""
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr ""
+
+#: app/views/services/index.html.erb:153
+msgid "Restart"
+msgstr ""
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:155
+msgid "Do Not Start on Boot"
+msgstr ""
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+msgid "Error: Refresh failed"
 msgstr ""

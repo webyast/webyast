@@ -1,123 +1,203 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# Mohammad Alhargan <malham1@hotmail.com>, 2012.
+# mohammad <malham1@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_network\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-22 11:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-08-08 15:20+0300\n"
+"Last-Translator: mohammad <malham1@gmail.com>\n"
+"Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.1\n"
 
-#: app/controllers/network_controller.rb:64
-msgid "Not configured"
-msgstr "غير مكوَّن"
-
-#: app/controllers/network_controller.rb:64
-msgid "Manual"
-msgstr "يدوي"
-
-#: app/controllers/network_controller.rb:64
-msgid "Automatic"
-msgstr "تلقائي"
-
-#: app/controllers/network_controller.rb:134
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
-msgstr "تمت كتابة إعدادات الشبكة."
+msgstr "تمت كتابة إعدادات شبكة الاتصال."
 
-#: app/views/network/index.html.erb:118
-msgid "whitespace - invalid character."
-msgstr "المسافة الفاصلة - حرف غير صالح."
-
-#: app/views/network/index.html.erb:120
-msgid " - can not start with a digit."
-msgstr " - لا يمكن أن يبدأ برقم."
-
-#: app/views/network/index.html.erb:122
-msgid "periodic '-' is not allowed."
-msgstr "دوري '-' غير مسموح به."
-
-#: app/views/network/index.html.erb:124
-msgid "can not end with (-) hyphen."
-msgstr "لا يمكن أن ينتهي بواصلة (-)."
-
-#: app/views/network/index.html.erb:127
-msgid "can not start with (-) hyphen."
-msgstr "لا يمكن أن يبدأ بواصلة (-)."
-
-#: app/views/network/index.html.erb:129
-msgid " - is invalid character for hostname."
-msgstr " - هي حرف غير صالح لاسم المضيف."
-
-#: app/views/network/index.html.erb:154
-msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
-msgstr "تنسيق عنوان IP غير صالح. والتنسيق الصحيح هو nnn.nnn.nnn.nnn لـ nnn بين 0 و255."
-
-#: app/views/network/index.html.erb:163
-msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
-msgstr "تنسيق البادئة غير صالح. والتنسيق الصحيح هو /nn حيث تقع nn بين 0-32 (تنسيق CIDR)."
-
-#: app/views/network/index.html.erb:169
-msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
-msgstr "تنسيق التوجيه الافتراضي غير صالح. والتنسيق الصحيح هو nnn.nnn.nnn.nnn لـ nnn بين 0 و255."
-
-#: app/views/network/index.html.erb:175
-msgid "Name servers are required. There must be at least one specified."
-msgstr "خوادم الأسماء مطلوبة. يجب أن يكون هناك اسم واحد محدد على الأقل."
-
-#: app/views/network/index.html.erb:181
-msgid "Hostname is required. It must be specified."
-msgstr "اسم المضيف مطلوب. يجب تحديده."
-
-#: app/views/network/index.html.erb:187
-msgid "Domain is required. An empty domain is not supported."
-msgstr "المجال مطلوب. لا يتم دعم مجال فارغ."
-
-#: app/views/network/index.html.erb:210
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "الشبكة"
 
-#: app/views/network/index.html.erb:221
-msgid "Interface"
-msgstr "الواجهة"
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+msgid "Interface name"
+msgstr "اسم الواجهة"
 
-#: app/views/network/index.html.erb:226
-msgid "Select"
-msgstr "تحديد"
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
+msgstr "واجهة فعلية"
 
-#: app/views/network/index.html.erb:243
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr "معرف VLAN"
+
+#: app/views/network/_form.html.erb:56
+msgid "Bridge devices:"
+msgstr "جسر الأجهزة:"
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr "خيارات سواقة الربط"
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
+msgstr "ربط التابعون"
+
+#: app/views/network/_form.html.erb:132
 msgid "Configuration mode"
-msgstr "وضع التكوين"
+msgstr "نمط الإعدادات"
 
-#: app/views/network/index.html.erb:252
-msgid "IP address"
-msgstr "عنوان IP"
+#: app/views/network/_form.html.erb:162
+msgid "DNS configuration"
+msgstr "إعداد DNS"
 
-#: app/views/network/index.html.erb:256
-msgid "Subnet mask / Prefixlen"
-msgstr "قناع الشبكة الفرعية / Prefixlen"
-
-#: app/views/network/index.html.erb:260
-msgid "Default route"
-msgstr "التوجيه الافتراضي"
-
-#: app/views/network/index.html.erb:269
+#: app/views/network/_form.html.erb:168
 msgid "Hostname"
 msgstr "اسم المضيف"
 
-#: app/views/network/index.html.erb:274
+#: app/views/network/_form.html.erb:172
 msgid "Domain"
 msgstr "المجال"
 
-#: app/views/network/index.html.erb:278
+#: app/views/network/_form.html.erb:177
 msgid "Name servers"
-msgstr "خوادم الأسماء"
+msgstr "سم الخوادم"
 
-#: app/views/network/index.html.erb:282
+#: app/views/network/_form.html.erb:182
 msgid "Search domains"
-msgstr "نطاقات البحث"
+msgstr "مجالات البحث"
 
+#: app/views/network/_form.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr "تغيير اسم المضيف من قبل DHCP"
+
+#: app/views/network/_form.html.erb:202
+msgid "IP configuration"
+msgstr "إعداد IP"
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
+msgid "IP address"
+msgstr "عنوان IP"
+
+#: app/views/network/_form.html.erb:213
+msgid "Subnet mask/Prefixlen"
+msgstr "قناع الشبكة الفرعية/Prefixlen"
+
+#: app/views/network/_form.html.erb:217
+msgid "Default route"
+msgstr "التوجيه الافتراضي"
+
+#: app/views/network/_form.html.erb:227
+msgid "Save"
+msgstr "حفظ"
+
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr "رجوع"
+
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+msgid "Enter a valid IP address"
+msgstr "أدخل عنوان IP صالح"
+
+#: app/views/network/_validation.html.erb:59
+msgid "Enter a valid subnet mask or prefix"
+msgstr "إدخال قناع شبكة فرعية صالح أو سابقة"
+
+#: app/views/network/_validation.html.erb:67
+msgid "Enter a valid hostname"
+msgstr "إدخال مضيف صالح"
+
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+msgid "Enter a valid domain name"
+msgstr "أدخل اسم مجال صالح"
+
+#: app/views/network/_validation.html.erb:83
+msgid "Please wait"
+msgstr "الرجاء الانتظار"
+
+#: app/views/network/index.html.erb:36
+msgid "Physical Interfaces"
+msgstr "واجهة فعلية"
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
+msgid "Interface"
+msgstr "الواجهة"
+
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr "النمط"
+
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+msgid "configure"
+msgstr "إعداد"
+
+#: app/views/network/index.html.erb:64
+msgid "Virtual Interfaces"
+msgstr "واجهات ظاهرية"
+
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr "معرف Vlan"
+
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr "منافذ الجسر"
+
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr "خيارات الربط"
+
+#: app/views/network/index.html.erb:98
+msgid "delete"
+msgstr "حذف"
+
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr "واجهة ظاهرية جديدة"
+
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr "الرجاء تحديد إحدى الواجهات الظاهرية"
+
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr "جسر"
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr "ربط"
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr "التّالي"
+
+#~ msgid "Manual"
+#~ msgstr "دليل"
+
+#~ msgid "Automatic"
+#~ msgstr "تلقائي"
+
+#~ msgid "Current IP address (DHCP)"
+#~ msgstr "عنوان IP الحالي (DHCP)"
+
+#~ msgid "Manage network devices"
+#~ msgstr "إدارة أجهزة شبكة الاتصال"

@@ -1,76 +1,132 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# hillwood <hillwoodroc@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui\n"
-"POT-Creation-Date: 2010-08-23 14:39+0200\n"
-"PO-Revision-Date: 2010-08-26 09:33\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-07-05 16:36+0800\n"
+"Last-Translator: Marguerite Su\n"
+"Language-Team: Chinese Simplified <kde-i18n-doc@kde.org>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: app/controllers/roles_controller.rb:85 ./app/controllers/roles_controller.rb:85
-msgid "Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
-msgstr "角色名称已在使用或无效。只允许使用 a-z、A-Z、数字、空格、破折号和下划线。"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "角色名称无效，允许使用的字符只能是大小写字母、数字、空格、破折号和下划线。"
 
-#: app/controllers/roles_controller.rb:103 ./app/controllers/roles_controller.rb:103
-msgid "Role <i>%s</i> was successfully removed."
-msgstr "角色 <i>%s</i> 已成功删除。"
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "角色名称已占用。"
 
-#: app/controllers/roles_controller.rb:105 ./app/controllers/roles_controller.rb:105
-msgid "Error: Could not remove role <i>%s</i>."
-msgstr "错误：无法删除角色 <i>%s</i>。"
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "角色 %s 已被成功移除。"
 
-#: app/controllers/roles_controller.rb:118 ./app/controllers/roles_controller.rb:118
-msgid "Cannot find roles"
-msgstr "找不到角色"
-
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:217 app/views/roles/index.rhtml:223
-#: ./app/views/roles/index.rhtml:61 ./app/views/roles/index.rhtml:217 ./app/views/roles/index.rhtml:223
-msgid "Assign Users"
-msgstr "指派用户"
-
-#: app/views/roles/index.rhtml:62 ./app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr "选定用户"
-
-#: app/views/roles/index.rhtml:63 ./app/views/roles/index.rhtml:63
-msgid "Available Users"
-msgstr "可用用户"
-
-#: app/views/roles/index.rhtml:64 ./app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr "单击用户名以指派/删除用户"
-
-#: app/views/roles/index.rhtml:121 ./app/views/roles/index.rhtml:121
-msgid "Please wait"
-msgstr "请稍候"
-
-#: app/views/roles/index.rhtml:159 ./app/views/roles/index.rhtml:159 ./shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr "角色"
 
-#: app/views/roles/index.rhtml:163 ./app/views/roles/index.rhtml:163
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "为该用户分配角色，"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "拖放用户标签到角色框中"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "不再显示"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr "创建角色"
+msgstr "创建新角色"
 
-#: app/views/roles/index.rhtml:175 ./app/views/roles/index.rhtml:175
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "分配用户"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "用户已分配"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "指派权限"
+msgstr "分配权限"
 
-#: app/views/roles/index.rhtml:178 ./app/views/roles/index.rhtml:178
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
 msgstr "全部折叠"
 
-#: app/views/roles/index.rhtml:224 ./app/views/roles/index.rhtml:224
-msgid "Delete"
-msgstr "删除"
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "该字段是必须的"
 
-#: ./shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr "设置角色的许可权限并向角色指派用户"
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "允许使用的字符只能是大小写字母、数字、空格、破折号和下划线。"
 
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "请稍候"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "错误：无法移除角色 <i>%s</i> 。"
+
+#~ msgid "Cannot find roles"
+#~ msgstr "找不到角色"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "设置角色的权限并分配用户角色"
+
+#, fuzzy
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "已选定的资源"
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "可用更新"
+
+#, fuzzy
+#~| msgid "Invalid device name."
+#~ msgid "Invalid role name"
+#~ msgstr "设备名无效。"
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "拒绝许可权限"
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions granted by role"
+#~ msgstr "拒绝许可权限"
+
+#, fuzzy
+#~| msgid "Description: "
+#~ msgid "Description of permissions"
+#~ msgstr "描述："
+
+#, fuzzy
+#~| msgid "description"
+#~ msgid ")}-description"
+#~ msgstr "描述"
+
+#, fuzzy
+#~| msgid "Remaining time: %s"
+#~ msgid "Remaining users"
+#~ msgstr "剩余时间：%s"
+
+#~ msgid "Save"
+#~ msgstr "保存"

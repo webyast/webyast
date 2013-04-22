@@ -3,180 +3,201 @@
 # Vojtěch Zeisek <vojta.sc@seznam.cz>, 2009.
 # Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>, 2010.
 # Jiri Srain <jsrain@suse.cz>, 2011.
+# Jan Papez <honyczek@centrum.cz>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-30 16:16+0200\n"
-"PO-Revision-Date: 2011-06-02 16:09+0200\n"
-"Last-Translator: Jiri Srain <jsrain@suse.cz>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-07-13 22:27+0200\n"
+"Last-Translator: Jan Papez <honyczek@centrum.cz>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: app/controllers/status_controller.rb:149
-#: app/controllers/status_controller.rb:149
-msgid "No data found for showing system status."
-msgstr "Nebyla nalezena žádná data k zobrazení výchozího stavu."
+#: app/models/graph.rb:109
+msgid "GByte"
+msgstr "GBajtů"
 
-#: app/controllers/status_controller.rb:157
-#: app/controllers/status_controller.rb:157
+#: app/models/graph.rb:110
+msgid "Disk"
+msgstr "Disk"
+
+#: app/models/graph.rb:133
+msgid "MByte/s"
+msgstr "MBajtů/s"
+
+#: app/models/graph.rb:134
+msgid "Network"
+msgstr "Síť"
+
+#: app/models/graph.rb:157
+msgid "MByte"
+msgstr "MBajtů"
+
+#: app/models/graph.rb:158
+msgid "Memory"
+msgstr "Paměť"
+
+#: app/models/graph.rb:179
+msgid "Percent"
+msgstr "Procento"
+
+#: app/models/graph.rb:180
+msgid "CPU"
+msgstr "CPU"
+
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+msgid "Error: Cannot get information."
+msgstr "Chyba: Není možné získat informace."
+
+#: app/controllers/status_controller.rb:119
+msgid "No data found for showing system status."
+msgstr "Nebyla nalezena žádná data k zobrazení stavu systému."
+
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
 msgid "Status not available."
 msgstr "Stav není dostupný."
 
-#: app/controllers/status_controller.rb:176
-#: app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
-msgstr "Nelze se připojit k hostiteli"
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
+msgstr "Collectd není synchronizován."
 
-#: app/controllers/status_controller.rb:178
-#: app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr "Nelze se připojit k hostiteli %s."
-
-#: app/controllers/status_controller.rb:217
-#: app/controllers/status_controller.rb:217
-msgid "Limits exceeded for "
-msgstr "Byly překročeny limity pro "
-
-#: app/controllers/status_controller.rb:242
-#: app/controllers/status_controller.rb:242
-msgid "Status not available"
-msgstr "Stav není dostupný"
-
-#: app/controllers/status_controller.rb:266
-#: app/controllers/status_controller.rb:266
-#| msgid "Status not available"
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
 msgid "Status not available (no permissions)"
 msgstr "Stav není dostupný (nemáte přístupová práva)"
 
-#: app/controllers/status_controller.rb:328
-#: app/controllers/status_controller.rb:328
+#: app/controllers/status_controller.rb:150
+msgid "Limits exceeded for "
+msgstr "Byly překročeny limity pro "
+
+#: app/controllers/status_controller.rb:263
 msgid "exceeded"
 msgstr "překročeno"
 
-#: app/controllers/status_controller.rb:342
-#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:277
 msgid "undercut"
 msgstr "podseknutí"
 
-#: app/controllers/status_controller.rb:445
-#: app/controllers/status_controller.rb:445
+#: app/controllers/status_controller.rb:376
 msgid "Limits have been written."
-msgstr "Limity byly zapsány"
+msgstr "Limity byly zapsány."
 
-#: app/views/status/_status_summary.html.erb:5
-#: app/views/status/_status_summary.html.erb:5
+#: app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr "Objevila se chyba během načítání stavových informací."
+
+#: app/views/status/_status_graph.html.erb:11
+msgid "No data available"
+msgstr "Nejsou dostupná žádná data"
+
+#: app/views/status/_status_graph.html.erb:100
+msgid "Show last"
+msgstr "Zobrazit poslední"
+
+# 49593 AttribValues/label
+#: app/views/status/_status_graph.html.erb:102
+msgid "5 Minutes"
+msgstr "5 minut"
+
+# 49593 AttribValues/label
+#: app/views/status/_status_graph.html.erb:103
+msgid "15 Minutes"
+msgstr "15 minut"
+
+# 49593 AttribValues/label
+#: app/views/status/_status_graph.html.erb:104
+msgid "30 Minutes"
+msgstr "30 minut"
+
+#: app/views/status/_status_graph.html.erb:105
+msgid "1 Hour"
+msgstr "1 hodina"
+
+#: app/views/status/_status_graph.html.erb:106
+msgid "6 Hours"
+msgstr "6 hodin"
+
+#: app/views/status/_status_graph.html.erb:107
+msgid "12 Hours"
+msgstr "12 hodin"
+
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr "Platná jsou pouze čísla!"
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "Stav"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "Nastavení"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr "podseknutí"
+
+#: app/views/status/edit.html.erb:102
+msgid "exceeds"
+msgstr "překračuje"
+
+#: app/views/status/_status_summary.html.erb:4
 msgid "An problem occured when loading status information."
 msgstr "Objevila se chyba během načítání stavových informací."
 
-#: app/views/status/_status_summary.html.erb:27
-#: app/views/status/_status_summary.html.erb:27
-msgid "Cannot read system status - you have been logged out."
-msgstr "Nelze číst stav systém - byl(a) jste odhlášen(a)."
-
-#: app/views/status/_status_summary.html.erb:38
 #: app/views/status/_status_summary.html.erb:38
 msgid "Your system is healthy."
 msgstr "Vás systém je zdravý."
 
 #: app/views/status/_status_summary.html.erb:49
-#: app/views/status/_status_summary.html.erb:49
 msgid "Loading system information"
-msgstr "Načítání informací o stavu"
+msgstr "Načítají se informace o stavu"
 
-#: app/views/status/_status_graph.html.erb:2
-#: app/views/status/_status_graph.html.erb:2
-msgid "A problem occured when loading status information."
-msgstr "Objevila se chyba během načítání stavových informací."
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
+msgstr "Chyba: Nelze zkontrolovat současný stav."
 
-#: app/views/status/_status_graph.html.erb:90
-#: app/views/status/_status_graph.html.erb:90
-msgid "Show last"
-msgstr "Zobrazit poslední"
-
-# 49593 AttribValues/label
-#: app/views/status/_status_graph.html.erb:91
-#: app/views/status/_status_graph.html.erb:91
-msgid "5 Minutes"
-msgstr "5 minut"
-
-# 49593 AttribValues/label
-#: app/views/status/_status_graph.html.erb:92
-#: app/views/status/_status_graph.html.erb:92
-msgid "15 Minutes"
-msgstr "15 minut"
-
-# 49593 AttribValues/label
-#: app/views/status/_status_graph.html.erb:93
-#: app/views/status/_status_graph.html.erb:93
-msgid "30 Minutes"
-msgstr "30 minut"
-
-#: app/views/status/_status_graph.html.erb:94
-#: app/views/status/_status_graph.html.erb:94
-msgid "1 Hour"
-msgstr "1 hodina"
-
-#: app/views/status/_status_graph.html.erb:95
-#: app/views/status/_status_graph.html.erb:95
-msgid "6 Hours"
-msgstr "6 hodin"
-
-#: app/views/status/_status_graph.html.erb:96
-#: app/views/status/_status_graph.html.erb:96
-msgid "12 Hours"
-msgstr "12 hodin"
-
-#: app/views/status/edit.html.erb:49 app/views/status/edit.html.erb:49
-msgid "Only numbers are valid !"
-msgstr "Platná jsou pouze čísla !"
-
-#: app/views/status/edit.html.erb:76 app/views/status/edit.html.erb:85
-#: app/views/status/index.html.erb:59 app/views/status/index.html.erb:68
-#: app/views/status/edit.html.erb:76 app/views/status/edit.html.erb:85
-#: app/views/status/index.html.erb:59 app/views/status/index.html.erb:68
-#: shortcuts.yml:7
-msgid "Status"
-msgstr "Stav"
-
-#: app/views/status/edit.html.erb:76 app/views/status/edit.html.erb:85
-#: app/views/status/edit.html.erb:76 app/views/status/edit.html.erb:85
-msgid "Settings"
-msgstr "Nastavení"
-
-#: app/views/status/edit.html.erb:106 app/views/status/edit.html.erb:106
-msgid "undercuts"
-msgstr "podseknutí"
-
-#: app/views/status/edit.html.erb:106 app/views/status/edit.html.erb:106
-msgid "exceeds"
-msgstr "překračuje"
-
-#: app/views/status/_status_progress.html.erb:8
-#: app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
-msgstr "Kontroluje stav"
-
-#: app/views/status/index.html.erb:125 app/views/status/index.html.erb:125
+#: app/views/status/index.html.erb:157
 msgid "details"
 msgstr "podrobnosti"
 
-#: app/views/status/index.html.erb:141 app/views/status/index.html.erb:141
+#: app/views/status/index.html.erb:173
 msgid "Details"
 msgstr "Podrobnosti"
 
-#: app/views/status/index.html.erb:213 app/views/status/index.html.erb:213
+#: app/views/status/index.html.erb:218
 msgid "Edit Limits"
 msgstr "Editace limitů"
 
-#: shortcuts.yml:8
-msgid "Show system status"
-msgstr "Zobrazit stav systému"
+#~ msgid "Can't connect to host"
+#~ msgstr "Nelze se připojit k hostiteli"
+
+#~ msgid "Can't connect to host %s."
+#~ msgstr "Nelze se připojit k hostiteli %s."
+
+#~ msgid "Status not available"
+#~ msgstr "Stav není dostupný"
+
+#~ msgid "Cannot read system status - you have been logged out."
+#~ msgstr "Nelze číst stav systém - byl(a) jste odhlášen(a)."
+
+#~ msgid "Checking system status"
+#~ msgstr "Kontroluje stav"
+
+#~ msgid "Show system status"
+#~ msgstr "Zobrazit stav systému"
 
 #~ msgid "Registration is missing"
 #~ msgstr "Chybí registrace"
@@ -254,42 +275,3 @@ msgstr "Zobrazit stav systému"
 
 #~ msgid "Show details..."
 #~ msgstr "Zobrazit podrobnosti..."
-
-#: app/models/graph.rb:116 app/models/graph.rb:116
-msgid "GByte"
-msgstr "Gbytů"
-
-#: app/models/graph.rb:117 app/models/graph.rb:117
-msgid "Disk"
-msgstr "Disk"
-
-#: app/models/graph.rb:140 config/status_configuration.yaml:6
-#: app/models/graph.rb:140 config/status_configuration.yaml:6
-msgid "MByte/s"
-msgstr "Mbytů/s"
-
-#: app/models/graph.rb:141 config/status_configuration.yaml:4
-#: app/models/graph.rb:141 config/status_configuration.yaml:4
-msgid "Network"
-msgstr "Síť"
-
-#: app/models/graph.rb:163 config/status_configuration.yaml:64
-#: app/models/graph.rb:163 config/status_configuration.yaml:64
-msgid "MByte"
-msgstr "Mbytů"
-
-#: app/models/graph.rb:164 config/status_configuration.yaml:62
-#: app/models/graph.rb:164 config/status_configuration.yaml:62
-msgid "Memory"
-msgstr "Paměť"
-
-#: app/models/graph.rb:185 config/status_configuration.yaml:29
-#: app/models/graph.rb:185 config/status_configuration.yaml:29
-msgid "Percent"
-msgstr "Procento"
-
-#: app/models/graph.rb:186 config/status_configuration.yaml:27
-#: app/models/graph.rb:186 config/status_configuration.yaml:27
-msgid "CPU"
-msgstr "CPU"
-

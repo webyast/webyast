@@ -1,84 +1,86 @@
+# Translator(s):
+#
+# strainu <narro@strainu.ro>
+# titus0818 <https://www.google.com/accounts/o8/id?id=AItOawnf9Zm3ejVfK7qHc-TpT2ZYnpjRtqHpxXw>
+# Alexandru Szasz <alexxed@gmail.com>
+# Lucian Oprea <oprea.luci@gmail.com>
+# xdaiana <xdaiana@yahoo.com>
+# Laudatti <Laudatti@gmail.com>
+#
+# Reviewer(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+#
+# Lucian Oprea <oprea.luci@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-time-ui 1.0.0\n"
-"Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-04-30 16:32+0300\n"
-"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
-"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
-"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
-"MIME-Version: 1.0\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+"Project-Id-Version: OpenSUSE\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Romanian <LL@li.org>\n"
+"PO-Revision-Date: 2012-11-19 15:00+0200\n"
+"MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
 
-#: app/controllers/time_controller.rb:99
-#: app/controllers/time_controller.rb:103
-#: app/controllers/time_controller.rb:99
-#: app/controllers/time_controller.rb:103
+#: app/controllers/time_controller.rb:117
 msgid "Time settings have been written."
 msgstr "Setările de dată au fost scrise."
 
-#: app/models/systemtime.rb:29 app/models/systemtime.rb:29
-msgid "Unknown timezone %s on host"
-msgstr "Fus orar necunoscut %s pe gazdă"
+#: app/views/time/index.html.erb:54
+#| msgid "Loading patch information"
+msgid "Error: Cannot get information."
+msgstr "Eroare: Nu se poate obține informația."
 
-#: app/views/time/index.rhtml:73 app/views/time/index.rhtml:77
-#: app/views/time/index.rhtml:102 app/views/time/index.rhtml:73
-#: app/views/time/index.rhtml:77 app/views/time/index.rhtml:102
+#: app/views/time/index.html.erb:79
+msgid "Please wait"
+msgstr "Vă rugăm să așteptați"
+
+#: app/views/time/index.html.erb:86 app/views/time/index.html.erb:90
+#: app/views/time/index.html.erb:111
 msgid "This field is required"
-msgstr ""
+msgstr "Acest câmp este obligatoriu"
 
-#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
-#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+#: app/views/time/index.html.erb:87 app/views/time/index.html.erb:112
 msgid "Enter a valid domain name or an IP address"
-msgstr ""
+msgstr "Introduceți un nume de domeniu valid sau o adresă IP"
 
-#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:78
+#: app/views/time/index.html.erb:91
 msgid "Invalid time format. Correct one is hh:mm:ss"
 msgstr "Format de oră invalid. Cel corect e hh:mm:ss"
 
-#: app/views/time/index.rhtml:137 app/views/time/index.rhtml:171
-#: app/views/time/index.rhtml:185 app/views/time/index.rhtml:137
-#: app/views/time/index.rhtml:171 app/views/time/index.rhtml:185
-#: shortcuts.yml:6
+#: app/views/time/index.html.erb:154 app/views/time/index.html.erb:198
+#: app/views/time/index.html.erb:216
 msgid "Time"
-msgstr "Oră"
+msgstr "Timp"
 
-#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
-#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+#: app/views/time/index.html.erb:167 app/views/time/index.html.erb:177
 msgid "Timezone"
 msgstr "Fus orar"
 
-#: app/views/time/index.rhtml:147 app/views/time/index.rhtml:147
+#: app/views/time/index.html.erb:172
 msgid "Region"
 msgstr "Regiune"
 
-#: app/views/time/index.rhtml:162 app/views/time/index.rhtml:162
+#: app/views/time/index.html.erb:186
 msgid "Hardware clock is set to UTC"
-msgstr "Ceasul hardware e setat la UTC"
+msgstr "Ceasul hardware este setat pe UTC"
 
-#: app/views/time/index.rhtml:176 app/views/time/index.rhtml:176
+#: app/views/time/index.html.erb:207
 msgid "Manually configure time"
 msgstr "Configurare manuală a orei"
 
-#: app/views/time/index.rhtml:181 app/views/time/index.rhtml:181
+#: app/views/time/index.html.erb:211
 msgid "Date"
 msgstr "Dată"
 
-#: app/views/time/index.rhtml:192 app/views/time/index.rhtml:192
+#: app/views/time/index.html.erb:226
 msgid "Synchronize via Network Time Protocol (NTP)"
-msgstr "Sincronizează via Network Time Protocol (NTP)"
+msgstr "Sincronizează via Protocolul de Timp pentru Rețea (NTP)"
 
-#: app/views/time/index.rhtml:196 app/views/time/index.rhtml:196
+#: app/views/time/index.html.erb:231
 msgid "NTP server"
 msgstr "Server NTP"
-
-#: shortcuts.yml:7
-msgid "Set the clock"
-msgstr ""
-
-#~ msgid "Invalid date format. Correct one is dd/mm/yyyy"
-#~ msgstr "Format de dată invalid. Cel corect e zz/ll/aaaa"

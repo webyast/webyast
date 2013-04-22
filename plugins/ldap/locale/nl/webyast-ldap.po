@@ -1,0 +1,75 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Freek de Kruijf <freek@opensuse.org>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-05-31 13:10+0200\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+msgid "Cannot read LDAP client configuraton."
+msgstr "Kan de configuratie van de LDAP-client niet lezen."
+
+# %s is either BOOTP or DHCP
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr "Configuratie van de LDAP-client met succes weggeschreven."
+
+#: app/controllers/ldap_controller.rb:65
+msgid "Error while saving LDAP client configuration."
+msgstr "Fout bij het opslaan van de configuratie van de LDAP-client."
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "Dit veld is vereist."
+
+#: app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Voer een geldige domeinnaam in of een IP-adres."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Een ogenblik geduld"
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr "LDAP-client"
+
+#: app/views/ldap/index.html.erb:101
+msgid "Enable LDAP Authentication"
+msgstr "LDAP-authenticatie inschakelen"
+
+#: app/views/ldap/index.html.erb:108
+msgid "LDAP Server Address"
+msgstr "LDAP-serveradres"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr "Basis DN"
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr "DN ophalen"
+
+#: app/views/ldap/index.html.erb:127
+msgid "Secure Connection"
+msgstr "Verbinding beveiligen"
+
+#~ msgid "LDAP"
+#~ msgstr "LDAP"
+
+#~ msgid "Configure LDAP client"
+#~ msgstr "LDAP-client instellen"

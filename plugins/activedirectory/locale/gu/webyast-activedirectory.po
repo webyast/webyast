@@ -1,0 +1,78 @@
+# Marathi message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Gujarati <i18n@suse.de>\n"
+"Language: gu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "Account settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Directory\n"
+msgid "Active Directory"
+msgstr "ડિરેક્ટરી\n"
+
+msgid "Active Directory Domain"
+msgstr ""
+
+msgid "Active Directory client configuraton successfully written."
+msgstr ""
+
+msgid "Administrator User Name"
+msgstr ""
+
+#, fuzzy
+#| msgid "Could not load the requested scheme configuration."
+msgid "Cannot read Active Directory client configuraton."
+msgstr "વિનંતી કરેલ યોજના કન્ફિગ્યુરેશન લોડ કરી શકાઇ નથી."
+
+msgid "Enable Authentication of AD users"
+msgstr ""
+
+#, fuzzy
+#| msgid "Error while closing temporary opasswd file: %s"
+msgid "Error while joining Active Directory domain: %s"
+msgstr "કામચલાઉ opasswd ફાઈલ બંધ કરતી વખતે ભૂલ : %s "
+
+#, fuzzy
+#| msgid "Error while closing temporary opasswd file: %s"
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "કામચલાઉ opasswd ફાઈલ બંધ કરતી વખતે ભૂલ : %s "
+
+#, fuzzy
+#| msgid "Try loading the default configuration."
+msgid "Error while saving Active Directory client configuration."
+msgstr "પ્રાથમિક કન્ફિગ્યુરેશન લોડ કરવાનો પ્રયત્ન કરી જુઓ."
+
+msgid "Machine Account"
+msgstr ""
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr ""
+
+msgid "Password"
+msgstr "પાસવર્ડ"
+
+msgid "Please wait"
+msgstr ""
+
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "ફાઈલનું નામ જરૂરી છે."
+
+#, fuzzy
+#~| msgid "Configure the current scheme."
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "અત્યારની યોજના કન્ફિગર કરો."

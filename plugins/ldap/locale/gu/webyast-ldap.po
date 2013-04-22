@@ -1,0 +1,85 @@
+# Marathi message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Gujarati <i18n@suse.de>\n"
+"Language: gu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Could not load the global configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "વૈશ્વિક કન્ફિગ્યુરેશન લોડ કરી શકાયું નથી."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:65
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving LDAP client configuration."
+msgstr "સર્ટિફીકેટ પાર્સ નથી કરવામાં ભૂલ."
+
+#: app/views/ldap/index.html.erb:33
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "ફાઈલનું નામ જરૂરી છે."
+
+#: app/views/ldap/index.html.erb:34
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "તમારું આઇપી સરનામું દાખલ કરો."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:88
+#, fuzzy
+#| msgid "LDAP client service"
+msgid "LDAP client"
+msgstr "LDAP ક્લાયન્ટ સેવા"
+
+#: app/views/ldap/index.html.erb:101
+#, fuzzy
+#| msgid "Select WEP authentication mode:"
+msgid "Enable LDAP Authentication"
+msgstr "વેપ પ્રમાણીકરણ ઢબ પસંદ કરો:"
+
+#: app/views/ldap/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "LDAP Server Address"
+msgstr "નામ સર્વર સરનામું"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:127
+#, fuzzy
+#| msgid "Current Connection"
+msgid "Secure Connection"
+msgstr "અત્યારનું જોડાણ"
+
+#, fuzzy
+#~| msgid "Configure scanner?"
+#~ msgid "Configure LDAP client"
+#~ msgstr "સ્કેનર કન્ફિગર કરવું છે?"

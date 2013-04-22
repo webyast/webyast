@@ -1,0 +1,65 @@
+# Chan Sambathratanak <ratanak@khmeros.info>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-03 08:44+0700\n"
+"Last-Translator: Chan Sambathratanak <ratanak@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 RC1\n"
+"X-Language: km-KH\n"
+
+msgid "Account settings"
+msgstr "ការ​កំណត់​គណនី"
+
+msgid "Active Directory"
+msgstr "ថត​សកម្ម​"
+
+msgid "Active Directory Domain"
+msgstr "ដែន​ថត​សកម្ម​"
+
+msgid "Active Directory client configuraton successfully written."
+msgstr "បាន​សរសេរ​ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​ភ្ញៀវ​ថត​សកម្ម​ដោយ​ជោគជ័យ​ ។​"
+
+msgid "Administrator User Name"
+msgstr "ឈ្មោះ​អ្នក​គ្រប់គ្រង"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr "មិន​​អាច​អាន​​ការ​កំណត់​​រចនា​សម្ព័ន្ធ​​ម៉ាស៊ីន​ភ្ញៀវ​ថត​សកម្ម​​បាន​ឡើយ ។"
+
+msgid "Enable Authentication of AD users"
+msgstr "បើក​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​នៃ​អ្នក​ប្រើ AD ​"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr "កំហុស​ខណៈ​ដែល​ត​ភ្ជាប់​ដែន​ថត​សកម្ម ៖ %s"
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "កំហុស​ខណៈ​ចាកចេញ​ពី​ដែន​ថត​សកម្ម ៖ %s"
+
+msgid "Error while saving Active Directory client configuration."
+msgstr "កំហុស​ខណៈ​ពេល​ដែល​កំពុង​រក្សាទុក​ការ​កំណត់​រចនា​សម្ព័ន្ធ​​ម៉ាស៊ីន​ភ្ញៀវ​ថត​សកម្ម ។"
+
+msgid "Machine Account"
+msgstr "គណនី​ម៉ាស៊ីន​"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "ម៉ាស៊ីន​មិន​មែន​ជា​សមាជិក​ដែន​ដែល​បាន​ផ្ដល់​ទេ ។ ​បញ្ចូល​លិខិត​សម្គាល់​ដែល​ត្រូវ​ការ​​សម្រាប់​តភ្ជាប់ ។​"
+
+# password dialog title
+msgid "Password"
+msgstr "ពាក្យសម្ងាត់"
+
+msgid "Please wait"
+msgstr "សូម​រង់ចាំ"
+
+msgid "This field is required."
+msgstr "វាល​នេះ​ត្រូវ​បាន​ទាមទារ ។"
+
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "កំណត់​រចនា​សម្ព័ន្ធ​ការ​តភ្ជាប់​ទៅកាន់​ថត​សកម្ម"

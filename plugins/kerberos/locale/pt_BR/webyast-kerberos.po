@@ -1,63 +1,71 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2011.
+# Isis Binder <isis.binder@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-kerberos-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:31\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-10-01 12:05-0300\n"
+"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: app/controllers/kerberos_controller.rb:39 ./app/controllers/kerberos_controller.rb:39
+#: app/controllers/kerberos_controller.rb:30
 msgid "Cannot read Kerberos client configuraton."
-msgstr "Impossível ler configuração do cliente Kerberos."
+msgstr "Não foi possível ler a configuração do cliente Kerberos."
 
-#: app/controllers/kerberos_controller.rb:55 ./app/controllers/kerberos_controller.rb:55
+#: app/controllers/kerberos_controller.rb:45
 msgid "Kerberos client configuraton successfully written."
-msgstr "Configuração do cliente Kerberos gravada com êxito."
+msgstr "A configuração do cliente Kerberos foi salva com sucesso."
 
-#: app/controllers/kerberos_controller.rb:60 ./app/controllers/kerberos_controller.rb:60
+#: app/controllers/kerberos_controller.rb:47
 msgid "Error while saving Kerberos client configuration."
-msgstr "Erro ao gravar configuração do cliente Kerberos."
+msgstr "Erro ao salvar a configuração do cliente Kerberos."
 
-#: app/views/kerberos/index.html.erb:33 ./app/views/kerberos/index.html.erb:33
+#: app/views/kerberos/index.html.erb:32
 msgid "This field is required."
-msgstr "Este campo é obrigatório."
+msgstr "É necessário preencher este campo."
 
-#: app/views/kerberos/index.html.erb:34 ./app/views/kerberos/index.html.erb:34
+#: app/views/kerberos/index.html.erb:33
 msgid "Enter a valid domain name or an IP address."
-msgstr "Digite um nome de domínio ou um endereço IP válido."
+msgstr "Digite um nome de domínio válido ou um endereço IP."
 
-#: app/views/kerberos/index.html.erb:64 ./app/views/kerberos/index.html.erb:64
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "Por favor, aguarde"
+
+#: app/views/kerberos/index.html.erb:78
 msgid "Kerberos client"
 msgstr "Cliente Kerberos"
 
-#: app/views/kerberos/index.html.erb:76 ./app/views/kerberos/index.html.erb:76
+#: app/views/kerberos/index.html.erb:91
 msgid "Enable Kerberos Authentication"
-msgstr "Habilitar Autenticação Kerberos"
+msgstr "Habilitar a autenticação Kerberos"
 
-#: app/views/kerberos/index.html.erb:79 ./app/views/kerberos/index.html.erb:79
+#: app/views/kerberos/index.html.erb:98
 msgid "Default Domain"
 msgstr "Domínio padrão"
 
-#: app/views/kerberos/index.html.erb:83 ./app/views/kerberos/index.html.erb:83
+#: app/views/kerberos/index.html.erb:103
 msgid "Default Realm"
-msgstr "Realm Padrão"
+msgstr "Domínio (realm) padrão"
 
-#: app/views/kerberos/index.html.erb:87 ./app/views/kerberos/index.html.erb:87
+#: app/views/kerberos/index.html.erb:108
 msgid "KDC Server Address"
-msgstr "Endereço do Servidor KDC"
+msgstr "Endereço do servidor KDC"
 
-#: ./shortcuts.yml:6
-msgid "Kerberos"
-msgstr "Kerberos"
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
 
-#: ./shortcuts.yml:7
-msgid "Configure Kerberos client"
-msgstr "Configurar cliente Kerberos"
-
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Configurar o cliente Kerberos"

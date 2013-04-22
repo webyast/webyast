@@ -1,39 +1,38 @@
+# Translator(s):
+#
+# strainu <narro@strainu.ro>
+#
+# Reviewer(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+#
+# Lucian Oprea <oprea.luci@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
-"Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-04-30 16:32+0300\n"
-"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
-"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
-"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
-"MIME-Version: 1.0\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+"Project-Id-Version: OpenSUSE\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Romanian <LL@li.org>\n"
+"PO-Revision-Date: 2012-11-19 15:00+0200\n"
+"MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
 
-#: app/controllers/system_controller.rb:36
-#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:77
 msgid "Rebooting the machine..."
-msgstr "Repornesc calculatorul..."
+msgstr "Se repornește calculatorul..."
 
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:81
 msgid "Cannot reboot the machine!"
 msgstr "Nu pot reporni calculatorul!"
 
-#: app/controllers/system_controller.rb:57
-#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
-msgstr "Se opreşte calculatorul..."
+msgstr "Se oprește calculatorul..."
 
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
 msgstr "Nu pot opri calculatorul!"

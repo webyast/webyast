@@ -1,0 +1,71 @@
+# Lithuanian message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+#
+# Jonas Gocentas <jonasgocentas@florida.usa.com>, 2001.
+# Linas Spraunius <lsprauni@radio.lt>, 2000.
+# Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2009, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-24 16:12+0300\n"
+"Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
+"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
+"X-Generator: Lokalize 1.2\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Nepavyksta perskaityti Kerberos kliento konfigūracijos."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "Kerberos kliento konfigūracija įrašyta."
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "Klaida įrašant Kerberos kliento konfigūraciją."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "Šis laukelis yra privalomas."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "Įveskite galiojantį srities vardą arba IP adresą."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "Palaukite"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "Kerberos klientas"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "Įgalinti arba uždrausti Kerberos tapatumo nustatymą"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "Numatyta sritis"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "Įprastas Realm"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "KDC serverio adresas"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Konfigūruoti Kerberos klientą"

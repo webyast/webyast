@@ -8,70 +8,84 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2001-10-18 10:13+0200\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: turkish <i18n@suse.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/administrator_controller.rb:35
-#: app/views/administrator/index.html.erb:28
-#, fuzzy
-#| msgid "`%s' is not a valid ip address."
-msgid "Enter a valid e-mail address."
-msgstr "`%s' geçerli bir ip adresi değil."
-
-#: app/controllers/administrator_controller.rb:43
-msgid "Passwords do not match."
+msgid "A password is required."
 msgstr ""
 
-#: app/controllers/administrator_controller.rb:60
-#, fuzzy
-#| msgid "Installation--Safe Settings"
-msgid "Administrator settings have been written."
-msgstr "Kurulum--Güvenli ayarlar"
-
-#: app/controllers/administrator_controller.rb:70
-msgid "Error while saving administrator settings: %s"
-msgstr ""
-
-#: app/views/administrator/index.html.erb:1
 #, fuzzy
 #| msgid "Installation--Safe Settings"
 msgid "Administrator Settings"
 msgstr "Kurulum--Güvenli ayarlar"
 
-#: app/views/administrator/index.html.erb:36
+#, fuzzy
+#| msgid "Installation--Safe Settings"
+msgid "Administrator settings have been written."
+msgstr "Kurulum--Güvenli ayarlar"
+
+#, fuzzy
+#| msgid "Password"
+msgid "Confirm Password"
+msgstr "Parola"
+
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
+msgid "Enter a valid e-mail address."
+msgstr "`%s' geçerli bir ip adresi değil."
+
+#, fuzzy
+#| msgid "Error while saving administrator settings: %s"
+msgid "Error while saving administrator settings."
+msgstr "Yönetici ayarları kaydedilirken hata oluştu: %s"
+
+msgid "Forward system mail to"
+msgstr ""
+
+msgid "Mail Setup for User 'root'"
+msgstr ""
+
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Password"
+msgid "New Password"
+msgstr "Parola"
+
+msgid "Password Setup for User 'root'"
+msgstr ""
+
+msgid "Passwords do not match."
+msgstr ""
+
+msgid "Please wait"
+msgstr "Lütfen bekleyin"
+
+msgid "Save Mail Only"
+msgstr ""
+
 msgid "The passwords do not match."
-msgstr ""
+msgstr "Şifreler eşleşmiyor"
 
-#: app/views/administrator/index.html.erb:51
-msgid "Here, configure the settings for system administrator ('root')."
-msgstr ""
-
-#: app/views/administrator/index.html.erb:58
-msgid "Password"
-msgstr "Parola"
-
-#: app/views/administrator/index.html.erb:63
 #, fuzzy
-#| msgid "Password"
-msgid "Confirm password"
-msgstr "Parola"
+#~| msgid "Password:"
+#~ msgid "Password Strength:"
+#~ msgstr "Şifre:"
 
-#: app/views/administrator/index.html.erb:65
 #, fuzzy
-#| msgid "Password"
-msgid "Save Password"
-msgstr "Parola"
+#~| msgid "Standby disabled by administrator."
+#~ msgid "Manage system administrator"
+#~ msgstr "Bekleme modu sistem yöneticisi tarafından kapatılmış."
 
-#: app/views/administrator/index.html.erb:70
-msgid "Forward mail to"
-msgstr ""
-
-#: app/views/administrator/index.html.erb:72
-msgid "Save Mail"
-msgstr ""
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "Save Password"
+#~ msgstr "Parola"

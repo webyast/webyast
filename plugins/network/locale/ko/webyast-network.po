@@ -1,136 +1,289 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-network-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:28\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_network.ko\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2010-03-10 16:50+0900\n"
+"Last-Translator: Yunseok Choi <xein@naver.com>\n"
+"Language-Team: Korean <xein@naver.com>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Korean\n"
+"X-Poedit-Country: KOREA, REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: app/controllers/network_controller.rb:89 ./app/controllers/network_controller.rb:89
-msgid "Manual"
-msgstr "수동"
-
-#: app/controllers/network_controller.rb:89 ./app/controllers/network_controller.rb:89
-msgid "Automatic"
-msgstr "자동"
-
-#: app/controllers/network_controller.rb:163 ./app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
 msgstr "네트워크 설정이 기록되었습니다."
 
-#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
-#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
-#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
-#: app/views/network/index.html.erb:166 ./app/views/network/index.html.erb:143
-#: ./app/views/network/index.html.erb:147 ./app/views/network/index.html.erb:151
-#: ./app/views/network/index.html.erb:155 ./app/views/network/index.html.erb:158
-#: ./app/views/network/index.html.erb:162 ./app/views/network/index.html.erb:166
-msgid "This field is required"
-msgstr "이 필드는 필수입니다."
-
-#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
-#: app/views/network/index.html.erb:163 ./app/views/network/index.html.erb:144
-#: ./app/views/network/index.html.erb:152 ./app/views/network/index.html.erb:163
-msgid "Enter a valid IP address"
-msgstr "유효한 IP 주소를 입력하십시오."
-
-#: app/views/network/index.html.erb:148 ./app/views/network/index.html.erb:148
-msgid "Enter a valid subnet mask or prefix"
-msgstr "유효한 서브넷 마스크 또는 접두사를 입력하십시오."
-
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-#: ./app/views/network/index.html.erb:159 ./app/views/network/index.html.erb:167
-msgid "Enter a valid domain name"
-msgstr "유효한 도메인 이름을 입력하십시오."
-
-#: app/views/network/index.html.erb:171 ./app/views/network/index.html.erb:171
-msgid "Please wait"
-msgstr "잠시 기다리십시오"
-
-#: app/views/network/index.html.erb:234 ./app/views/network/index.html.erb:234
-msgid "whitespace - invalid character."
-msgstr "공백 - 잘못된 문자입니다."
-
-#: app/views/network/index.html.erb:236 ./app/views/network/index.html.erb:236
-msgid " - can not start with a digit."
-msgstr " - 숫자로 시작할 수 없습니다."
-
-#: app/views/network/index.html.erb:238 ./app/views/network/index.html.erb:238
-msgid "periodic '-' is not allowed."
-msgstr "정기적인 '-'은 허용되지 않습니다."
-
-#: app/views/network/index.html.erb:240 ./app/views/network/index.html.erb:240
-msgid "can not end with (-) hyphen."
-msgstr "(-) 하이픈으로 끝날 수 없습니다."
-
-#: app/views/network/index.html.erb:243 ./app/views/network/index.html.erb:243
-msgid "can not start with (-) hyphen."
-msgstr "(-) 하이픈으로 시작할 수 없습니다."
-
-#: app/views/network/index.html.erb:245 ./app/views/network/index.html.erb:245
-msgid " - is invalid character for hostname."
-msgstr " - 호스트 이름에 대한 잘못된 문자입니다."
-
-#: app/views/network/index.html.erb:288 ./app/views/network/index.html.erb:288 ./shortcuts.yml:6
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "네트워크"
 
-#: app/views/network/index.html.erb:298 ./app/views/network/index.html.erb:298
-msgid "General settings"
-msgstr "일반 설정"
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+#, fuzzy
+#| msgid "Interface"
+msgid "Interface name"
+msgstr "인터페이스"
 
-#: app/views/network/index.html.erb:300 ./app/views/network/index.html.erb:300
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
+msgstr ""
+
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr ""
+
+#: app/views/network/_form.html.erb:56
+#, fuzzy
+#| msgid "inetd service"
+msgid "Bridge devices:"
+msgstr "inetd 서비스"
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr ""
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
+msgstr ""
+
+#: app/views/network/_form.html.erb:132
+#, fuzzy
+#| msgid "Configuration"
 msgid "Configuration mode"
+msgstr "구성"
+
+#: app/views/network/_form.html.erb:162
+#, fuzzy
+#| msgid "Configuration mode"
+msgid "DNS configuration"
 msgstr "구성 모드"
 
-#: app/views/network/index.html.erb:306 ./app/views/network/index.html.erb:306
-msgid "IP Address"
-msgstr "IP 주소"
-
-#: app/views/network/index.html.erb:309 ./app/views/network/index.html.erb:309
-msgid "IP address"
-msgstr "IP 주소"
-
-#: app/views/network/index.html.erb:314 ./app/views/network/index.html.erb:314
-msgid "Subnet mask/Prefixlen"
-msgstr "서브넷 마스크/Prefixlen"
-
-#: app/views/network/index.html.erb:319 ./app/views/network/index.html.erb:319
-msgid "Default route"
-msgstr "기본 라우트"
-
-#: app/views/network/index.html.erb:326 ./app/views/network/index.html.erb:326
-msgid "DNS"
-msgstr "DNS"
-
-#: app/views/network/index.html.erb:329 ./app/views/network/index.html.erb:329
+#: app/views/network/_form.html.erb:168
 msgid "Hostname"
-msgstr "호스트 이름"
+msgstr "호스트네임"
 
-#: app/views/network/index.html.erb:336 ./app/views/network/index.html.erb:336
+# as in Windows Authentication Domain
+#: app/views/network/_form.html.erb:172
 msgid "Domain"
 msgstr "도메인"
 
-#: app/views/network/index.html.erb:341 ./app/views/network/index.html.erb:341
-msgid "Change hostname by DHCP"
-msgstr "DHCP를 통해 호스트 이름 변경"
-
-#: app/views/network/index.html.erb:346 ./app/views/network/index.html.erb:346
+#: app/views/network/_form.html.erb:177
 msgid "Name servers"
-msgstr "이름 서버"
+msgstr "네임 서버"
 
-#: app/views/network/index.html.erb:351 ./app/views/network/index.html.erb:351
+#: app/views/network/_form.html.erb:182
 msgid "Search domains"
 msgstr "도메인 검색"
 
-#: ./shortcuts.yml:7
-msgid "Manage network devices"
-msgstr "네트워크 장치 관리"
+#: app/views/network/_form.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr ""
 
+#: app/views/network/_form.html.erb:202
+#, fuzzy
+#| msgid "Configuration mode"
+msgid "IP configuration"
+msgstr "구성 모드"
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
+msgid "IP address"
+msgstr "IP 주소"
+
+#: app/views/network/_form.html.erb:213
+#, fuzzy
+#| msgid "Subnet mask / Prefixlen"
+msgid "Subnet mask/Prefixlen"
+msgstr "서브넷 마스크 / Prefixlen"
+
+#: app/views/network/_form.html.erb:217
+msgid "Default route"
+msgstr "기본 라우트"
+
+#: app/views/network/_form.html.erb:227
+msgid "Save"
+msgstr "저장"
+
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required"
+msgstr "파일이름이 필요합니다."
+
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+#, fuzzy
+#| msgid "Enter a valid e-mail address."
+msgid "Enter a valid IP address"
+msgstr "올바른 메일 주소를 입력하세요."
+
+#: app/views/network/_validation.html.erb:59
+#, fuzzy
+#| msgid "Enter a valid e-mail address."
+msgid "Enter a valid subnet mask or prefix"
+msgstr "올바른 메일 주소를 입력하세요."
+
+#: app/views/network/_validation.html.erb:67
+#, fuzzy
+#| msgid "Enter a valid e-mail address."
+msgid "Enter a valid hostname"
+msgstr "올바른 메일 주소를 입력하세요."
+
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+#, fuzzy
+#| msgid "Enter a valid e-mail address."
+msgid "Enter a valid domain name"
+msgstr "올바른 메일 주소를 입력하세요."
+
+#: app/views/network/_validation.html.erb:83
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "잠시 기다려주세요..."
+
+#: app/views/network/index.html.erb:36
+#, fuzzy
+#| msgid "Interface"
+msgid "Physical Interfaces"
+msgstr "인터페이스"
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
+msgid "Interface"
+msgstr "인터페이스"
+
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr ""
+
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+#, fuzzy
+#| msgid "Not configured"
+msgid "configure"
+msgstr "설정되지 않음"
+
+#: app/views/network/index.html.erb:64
+#, fuzzy
+#| msgid "Interface"
+msgid "Virtual Interfaces"
+msgstr "인터페이스"
+
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr ""
+
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr ""
+
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr ""
+
+#: app/views/network/index.html.erb:98
+#, fuzzy
+#| msgid "Delete"
+msgid "delete"
+msgstr "삭제"
+
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr ""
+
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr ""
+
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr ""
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr ""
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr ""
+
+#~ msgid "Manual"
+#~ msgstr "수동"
+
+#~ msgid "Automatic"
+#~ msgstr "자동"
+
+#, fuzzy
+#~| msgid "Computer - network devices"
+#~ msgid "Manage network devices"
+#~ msgstr "컴퓨터 - 네트워크 장치"
+
+#, fuzzy
+#~| msgid "The search text contains invalid characters"
+#~ msgid "whitespace - invalid character."
+#~ msgstr "검색어에 잘못된 문자가 포함되어 있음"
+
+#, fuzzy
+#~| msgid "The VM's name cannot start with a digit."
+#~ msgid " - can not start with a digit."
+#~ msgstr "가상머신 이름은 첫문자로 숫자를 지정 할 수 없습니다."
+
+#, fuzzy
+#~| msgid "The option 'flush' is not allowed"
+#~ msgid "periodic '-' is not allowed."
+#~ msgstr "'flush' 옵션은 허용되지 않음"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "General settings"
+#~ msgstr "일반 설정"
+
+#~ msgid "IP Address"
+#~ msgstr "IP 주소"
+
+#, fuzzy
+#~| msgid "NFS"
+#~ msgid "DNS"
+#~ msgstr "NFS"
+
+#~ msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+#~ msgstr "잘못된 IP 주소 양식입니다. 0 에서 255 사이의 숫자로 된 nnn,nnn,nnn,nnn 이 올바릅니다."
+
+#~ msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+#~ msgstr "잘못된 머릿말 양식입니다. /nn 이 올바르며 nn 에는 0-32 (CIDR 포맷)가 되어야 합니다."
+
+#~ msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+#~ msgstr "잘못된 기본 라우트 양식입니다. 0 에서 255 사이의 숫자로 된 nnn,nnn,nnn,nnn 이 올바릅니다."
+
+#~ msgid "Name servers are required. There must be at least one specified."
+#~ msgstr "네임 서버가 필요합니다. 최소 한개 이상 지정되어야 합니다."
+
+#~ msgid "Hostname is required. It must be specified."
+#~ msgstr "호스트네임이 필요합니다. 필수로 입력되어야 합니다."
+
+#, fuzzy
+#~| msgid "Domain is required. It is not supported empty domain."
+#~ msgid "Domain is required. An empty domain is not supported."
+#~ msgstr "도메인이 필요합니다. 비어있는 도메인을 지원하지 않습니다."
+
+#~ msgid "Select"
+#~ msgstr "선택"
+
+#~ msgid "No permissions for network module"
+#~ msgstr "네트워크 모듈에 대한 권한이 없음"

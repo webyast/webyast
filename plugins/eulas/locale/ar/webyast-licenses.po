@@ -1,55 +1,49 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# Mohammad Alhargan <malham1@hotmail.com>, 2012.
+# محمد الحرقان <malham1@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_eulas\n"
-"POT-Creation-Date: 2010-03-30 10:01+0200\n"
-"PO-Revision-Date: 2010-04-08 11:19\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-10-16 14:26+0300\n"
+"Last-Translator: محمد الحرقان <malham1@gmail.com>\n"
+"Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.1\n"
 
-#: app/controllers/eulas_controller.rb:72
-msgid "You cannot reject a license once it has been accepted!"
-msgstr "لا يمكنك رفض ترخيص بعد قبوله!"
-
-#: app/controllers/eulas_controller.rb:75
+#: app/controllers/eulas_controller.rb:122
 msgid "You must accept all licences before using this product!"
-msgstr "يجب عليك قبول كافة التراخيص قبل استخدام هذا المنتج!"
+msgstr "يجب عليك قبول جميع التراخيص قبل استخدام هذا المنتج!"
 
-#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User License Agreement"
+#: app/views/eulas/all_accepted.erb:26 app/views/eulas/no_licenses.erb:26
+msgid "Accept End User Licence Agreement"
 msgstr "قبول اتفاقية ترخيص المستخدم النهائي"
 
-#: app/views/eulas/no_licenses.erb:2
-msgid "There are no licenses to accept."
-msgstr "لا توجد أية تراخيص يمكن قبولها."
+#: app/views/eulas/all_accepted.erb:37
+msgid "All licenses have already been accepted"
+msgstr "تم بالفعل قبول كافة التراخيص"
 
-#: app/views/eulas/show.html.erb:2
-msgid "License Agreement"
-msgstr "اتفاقية الترخيص"
+#: app/views/eulas/show.html.erb:30
+msgid "Licence Agreement"
+msgstr "اتفاق ترخيص"
 
-#: app/views/eulas/show.html.erb:8
-msgid "Available translations:"
-msgstr "الترجمات المتوفرة:"
-
-#: app/views/eulas/show.html.erb:26
+#: app/views/eulas/show.html.erb:50
 msgid "Yes, I agree to the license agreement."
 msgstr "نعم، أوافق على اتفاقية الترخيص."
 
-#: app/views/eulas/show.html.erb:32
+#: app/views/eulas/show.html.erb:54
 msgid "No, I do not agree."
 msgstr "لا، لا أوافق."
 
-#: app/views/eulas/show.html.erb:43
+#: app/views/eulas/show.html.erb:71
 msgid "Back"
-msgstr "الخلف"
+msgstr "رجوع"
 
-#: app/views/eulas/all_accepted.erb:2
-msgid "All licenses have already been accepted"
-msgstr "تم قبول كافة التراخيص بالفعل"
-
+#: app/views/eulas/no_licenses.erb:36
+msgid "There are no licenses to accept."
+msgstr "هناك عدم قبول منح أية تراخيص."

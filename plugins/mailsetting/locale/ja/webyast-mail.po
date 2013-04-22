@@ -1,107 +1,125 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# translation of webyast-mail.po to Japanese
+# Yasuhiko Kamata <belphegor@belbel.or.jp>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-27 09:29\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-mail\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-14 20:52+0900\n"
+"Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
+"Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/mail_controller.rb:50 ./app/controllers/mail_controller.rb:50
-msgid "Passwords do not match."
-msgstr "パスワードが一致しません。"
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "お使いのマシンの完全修飾ホスト名を取得することができません。メールが配信できなかった場合、ご利用のネットワークの管理者に対して、ネットワークやメールの設定を確認してください。"
 
-#: app/controllers/mail_controller.rb:57 ./app/controllers/mail_controller.rb:57
-msgid "Mail settings have been written."
-msgstr "メール設定はすでに保存されています。"
-
-#: app/controllers/mail_controller.rb:59 ./app/controllers/mail_controller.rb:59
-msgid "Test mail was sent to %s."
-msgstr "テストメールが %s に送信されました。"
-
-#: app/controllers/mail_controller.rb:71 ./app/controllers/mail_controller.rb:71
-msgid "Error while saving mail settings: %s"
-msgstr "メール設定の保存中にエラーが発生しました: %s"
-
-#: app/controllers/mail_controller.rb:88 ./app/controllers/mail_controller.rb:88
-msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
-msgstr "送信メールサーバが設定されていませんが、管理者がメールフォワーダを定義しています。\n%s<i>administrator</i>%s または %s<i>mail</i>%s の構成を変更してください。"
-
-#: app/views/mail/index.html.erb:42 ./app/views/mail/index.html.erb:42
-msgid "Please wait"
-msgstr "しばらくお待ちください"
-
-#: app/views/mail/index.html.erb:49 ./app/views/mail/index.html.erb:49
-msgid "The passwords do not match."
-msgstr "パスワードが一致しません。"
-
-#: app/views/mail/index.html.erb:50 ./app/views/mail/index.html.erb:50
-msgid "Enter a valid e-mail address."
-msgstr "有効なE-メールアドレスを入力してください。"
-
-#: app/views/mail/index.html.erb:51 ./app/views/mail/index.html.erb:51
-msgid "Enter a valid domain name or an IP address."
-msgstr "正しいドメイン名かIPアドレスを入力してください。"
-
-#: app/views/mail/index.html.erb:68 ./app/views/mail/index.html.erb:68 ./shortcuts.yml:6
-msgid "Mail Settings"
-msgstr "メール設定"
-
-#: app/views/mail/index.html.erb:80 ./app/views/mail/index.html.erb:80
-msgid "Outgoing mail server"
-msgstr "送信用メールサーバ"
-
-#: app/views/mail/index.html.erb:85 ./app/views/mail/index.html.erb:85
-msgid "Use secure connection (TLS)"
-msgstr "セキュアな接続を利用する(TLS)"
-
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
-msgid "Never"
-msgstr "実行しない"
-
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
-msgid "If available"
-msgstr "利用可能な場合"
-
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
-msgid "Always"
-msgstr "常に"
-
-#: app/views/mail/index.html.erb:89 ./app/views/mail/index.html.erb:89
-msgid "User name"
-msgstr "ユーザ名"
-
-#: app/views/mail/index.html.erb:93 ./app/views/mail/index.html.erb:93
-msgid "Password"
-msgstr "パスワード"
-
-#: app/views/mail/index.html.erb:97 ./app/views/mail/index.html.erb:97
-msgid "Confirm password"
-msgstr "パスワードの確認"
-
-#: app/views/mail/index.html.erb:105 ./app/views/mail/index.html.erb:105
-msgid "Send test mail to"
-msgstr "テストメールを次の宛先に送信します"
-
-#: app/views/mail/index.html.erb:107 ./app/views/mail/index.html.erb:107
-msgid "Send Mail"
-msgstr "メールの送信"
-
-#: ./shortcuts.yml:7
-msgid "Manage outgoing mail settings"
-msgstr "送信用メール設定を管理する"
-
-#: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
+#: app/models/mail_state.rb:42
 msgid "Mail configuration test not confirmed"
-msgstr "メール設定テストの確認が行われていません。"
+msgstr "メール設定のテストは確認していません"
 
-#: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "メールを設定する際に、テストメールを %s 宛に送信しました。このアドレスにメールが届きましたか？<br>届いている場合は、確認ボタンを押してください。そうでない場合は、メールの設定を確認してください。"
+
+#: app/models/mail_state.rb:46
 msgid "Test mail received"
 msgstr "テストメールを受信しました"
 
+#: app/controllers/mailsetting_controller.rb:58
+msgid "Passwords do not match."
+msgstr "パスワードが一致しません。"
+
+#: app/controllers/mailsetting_controller.rb:65
+msgid "Mail settings have been written."
+msgstr "メール設定を書き込みました。"
+
+#: app/controllers/mailsetting_controller.rb:67
+msgid "Test mail was sent to %s."
+msgstr "テストメールを %s に送信しました。"
+
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "メール設定の保存時にエラーが発生しました。"
+
+#: app/controllers/mailsetting_controller.rb:85
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"外部向けのメールサーバが設定されていませんが、管理者側でメールの転送先を指定しています。\n"
+"        %s<i>管理者</i>%s または %s<i>メール</i>%s の設定を変更してください。"
+
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "しばらくお待ちください"
+
+#: app/views/mailsetting/index.html.erb:40
+msgid "The passwords do not match."
+msgstr "パスワードが一致しません。"
+
+#: app/views/mailsetting/index.html.erb:41
+msgid "Enter a valid e-mail address."
+msgstr "正しい電子メールアドレスを入力してください。"
+
+#: app/views/mailsetting/index.html.erb:42
+msgid "Enter a valid domain name or an IP address."
+msgstr "正しいドメイン名または IP アドレスを入力してください。"
+
+#: app/views/mailsetting/index.html.erb:68
+msgid "Mail Settings"
+msgstr "メール設定"
+
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "外部向けのメールサーバ設定"
+
+#: app/views/mailsetting/index.html.erb:86
+msgid "Outgoing mail server"
+msgstr "外部向けのメールサーバ"
+
+#: app/views/mailsetting/index.html.erb:91
+msgid "Use secure connection (TLS)"
+msgstr "機密接続 (TLS) を使用する"
+
+#: app/views/mailsetting/index.html.erb:92
+msgid "Never"
+msgstr "使用しない"
+
+#: app/views/mailsetting/index.html.erb:92
+msgid "If available"
+msgstr "利用可能であれば使用する"
+
+#: app/views/mailsetting/index.html.erb:92
+msgid "Always"
+msgstr "常に使用する"
+
+#: app/views/mailsetting/index.html.erb:96
+msgid "User name"
+msgstr "ユーザ名"
+
+# password dialog title
+#: app/views/mailsetting/index.html.erb:101
+msgid "Password"
+msgstr "パスワード"
+
+#: app/views/mailsetting/index.html.erb:106
+msgid "Confirm password"
+msgstr "パスワードの確認"
+
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "メールサーバ設定の確認"
+
+#: app/views/mailsetting/index.html.erb:118
+msgid "Send test mail to"
+msgstr "テストメールの送信先"
+
+#: app/views/mailsetting/index.html.erb:120
+msgid "Send Mail"
+msgstr "メール送信"

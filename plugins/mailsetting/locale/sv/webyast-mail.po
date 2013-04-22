@@ -1,91 +1,161 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_mail\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-20 09:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/mail_controller.rb:29
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr ""
+
+# %s is either BOOTP or DHCP
+#: app/models/mail_state.rb:42
+#, fuzzy
+#| msgid "The configuration is not initialized."
+msgid "Mail configuration test not confirmed"
+msgstr "Konfigurationen har inte initierats."
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr ""
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr ""
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "Lösenorden stämmer inte överens."
 
-#: app/controllers/mail_controller.rb:36
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
-msgstr "E-postinställningarna har sparats."
+msgstr ""
 
-#: app/controllers/mail_controller.rb:38
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
-msgstr "Ett e-posttest har skickats till %s."
+msgstr ""
 
-#: app/controllers/mail_controller.rb:50
-msgid "Error while saving mail settings: %s"
-msgstr "Ett fel inträffade när e-postinställningarna sparades: %s"
+#: app/controllers/mailsetting_controller.rb:72
+#, fuzzy
+#| msgid "Error while closing old opasswd file: %s"
+msgid "Error while saving mail settings."
+msgstr "Ett fel uppstod när den gamla opasswd-filen skulle stängas: %s"
 
-#: app/controllers/mail_controller.rb:67
-msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
-msgstr "Server för utgående e-post har inte angetts, men administratören har definierat adresser för vidarebefordran av e-post.\nÄndra %s<i>administratörens</i>%s inställningar eller konfigurationen av %s<i>e-posten</i>%s."
+#: app/controllers/mailsetting_controller.rb:85
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
 
-#: app/views/mail/index.html.erb:16
+#: app/views/mailsetting/index.html.erb:32
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Vänta..."
+
+#: app/views/mailsetting/index.html.erb:40
+#, fuzzy
+#| msgid "Passwords do not match."
 msgid "The passwords do not match."
 msgstr "Lösenorden stämmer inte överens."
 
-#: app/views/mail/index.html.erb:17
+#: app/views/mailsetting/index.html.erb:41
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
 msgid "Enter a valid e-mail address."
-msgstr "Ange en giltig e-postadress."
+msgstr "`%s' är inte en giltig ip-adress."
 
-#: app/views/mail/index.html.erb:18
+#: app/views/mailsetting/index.html.erb:42
+#, fuzzy
+#| msgid "Enter your IP address."
 msgid "Enter a valid domain name or an IP address."
-msgstr "Ange ett giltigt domännamn eller en IP-adress."
+msgstr "Ange IP-adress."
 
-#: app/views/mail/index.html.erb:35
+#: app/views/mailsetting/index.html.erb:68
+#, fuzzy
+#| msgid "Manual Settings"
 msgid "Mail Settings"
-msgstr "E-postinställningar"
+msgstr "Manuella inställningar"
 
-#: app/views/mail/index.html.erb:47
+#: app/views/mailsetting/index.html.erb:81
+#, fuzzy
+#| msgid "Manual settings"
+msgid "Outgoing mail server settings"
+msgstr "Manuella inställningar"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
-msgstr "Utgående e-postserver"
+msgstr ""
 
-#: app/views/mail/index.html.erb:50
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
-msgstr "Använd säker anslutning (TLS)"
+msgstr ""
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Aldrig"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
+#, fuzzy
+#| msgid "(%1 available)"
 msgid "If available"
-msgstr "Om tillgänglig"
+msgstr "(%1 tillgänglig)"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
+#, fuzzy
+#| msgid "Alwa&ys"
 msgid "Always"
-msgstr "Alltid"
+msgstr "Allt&id"
 
-#: app/views/mail/index.html.erb:53
+#: app/views/mailsetting/index.html.erb:96
+#, fuzzy
+#| msgid "Username: "
 msgid "User name"
-msgstr "Användarnamn"
+msgstr "Användarnamn: "
 
-#: app/views/mail/index.html.erb:56
+# password dialog title
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Lösenord"
 
-#: app/views/mail/index.html.erb:59
+#: app/views/mailsetting/index.html.erb:106
+#, fuzzy
+#| msgid "_Confirm Password:"
 msgid "Confirm password"
-msgstr "Bekräfta lösenord"
+msgstr "_Bekräfta lösenord"
 
-#: app/views/mail/index.html.erb:67
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr ""
+
+#: app/views/mailsetting/index.html.erb:118
+#, fuzzy
+#| msgid "Send Email to %1"
 msgid "Send test mail to"
-msgstr "Skicka testmeddelande till"
+msgstr "Skicka e-post till %1"
 
-#: app/views/mail/index.html.erb:69
+#: app/views/mailsetting/index.html.erb:120
+#, fuzzy
+#| msgid "Suspend failed"
 msgid "Send Mail"
-msgstr "Skicka post"
+msgstr "Viloläge misslyckades"
 
+#, fuzzy
+#~| msgid "Manual settings"
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Manuella inställningar"

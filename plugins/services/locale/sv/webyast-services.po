@@ -1,163 +1,280 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_services\n"
-"POT-Creation-Date: 2010-04-13 13:37+0200\n"
-"PO-Revision-Date: 2010-04-20 09:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/services_controller.rb:23
-msgid "(cannot read status)"
-msgstr "(det går inte att läsa status)"
-
-#: app/controllers/services_controller.rb:70
+#: app/controllers/services_controller.rb:88
+#, fuzzy
+#| msgid ""
+#| "Success:\n"
+#| "%s"
 msgid "success"
-msgstr "lyckades"
+msgstr ""
+"Lyckades:\n"
+"%s"
 
-#: app/controllers/services_controller.rb:71
+#: app/controllers/services_controller.rb:89
 msgid "unspecified error"
-msgstr "ospecificerat fel"
+msgstr ""
 
-#: app/controllers/services_controller.rb:72
+#: app/controllers/services_controller.rb:90
+#, fuzzy
+#| msgid "invalid argument syntax"
 msgid "invalid or excess argument(s)"
-msgstr "ogiltigt eller excess-argument"
+msgstr "ogiltig argumentsyntax"
 
-#: app/controllers/services_controller.rb:73
+#: app/controllers/services_controller.rb:91
+#, fuzzy
+#| msgid "not yet implemented"
 msgid "unimplemented feature"
-msgstr "ej implementerad funktion"
+msgstr "inte implementerat ännu"
 
-#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:92
 msgid "user had insufficient privilege"
-msgstr "användaren saknade tillräcklig behörighet"
+msgstr ""
 
-#: app/controllers/services_controller.rb:75
+#: app/controllers/services_controller.rb:93
+#, fuzzy
+#| msgid "not installed"
 msgid "program is not installed"
-msgstr "programmet är inte installerat"
+msgstr "inte installerad."
 
-#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:94
+#, fuzzy
+#| msgid "Not configured"
 msgid "program is not configured"
-msgstr "programmet är inte konfigurerat"
+msgstr "Inte inställd"
 
-#: app/controllers/services_controller.rb:77
-msgid "program is not runnning"
-msgstr "programmet körs inte"
+#: app/controllers/services_controller.rb:95
+#, fuzzy
+#| msgid "The hypervisor is not running."
+msgid "program is not running"
+msgstr "Hypervisorn körs inte."
 
-#: app/views/services/_result.rhtml:6
+#: app/views/services/_result.html.erb:9
+#, fuzzy
+#| msgid "Service unavailable"
 msgid "Service Call Result"
-msgstr "Resultat från servicesamtal"
+msgstr "Tjänst otillgänglig"
 
-#: app/views/services/_result.rhtml:9
+#: app/views/services/_result.html.erb:12
+#, fuzzy
+#| msgid "Connect Result"
 msgid "Result"
-msgstr "Resultat"
+msgstr "Anslutningsresultat"
 
-#: app/views/services/_result.rhtml:14
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Beskrivning"
 
-#: app/views/services/index.rhtml:141
+#: app/views/services/_status.html.erb:7
+msgid "Service will be started on boot."
+msgstr ""
+
+#: app/views/services/_status.html.erb:9
+msgid "Service will not be started on boot."
+msgstr ""
+
+#: app/views/services/_status.html.erb:32
+#, fuzzy
+#| msgid "unknown"
+msgid "status unknown"
+msgstr "okänd"
+
+#: app/views/services/_status.html.erb:34
+msgid "running"
+msgstr "igång"
+
+#: app/views/services/_status.html.erb:38
+msgid "dead"
+msgstr ""
+
+#: app/views/services/_status.html.erb:42
+msgid "not running"
+msgstr "inte igång"
+
+#: app/views/services/_status.html.erb:46
+#, fuzzy
+#| msgid "unknown"
+msgid "status unknown: %d"
+msgstr "okänd"
+
+#: app/views/services/_status.html.erb:49
+#, fuzzy
+#| msgid "lock-down status for the search area"
+msgid "Current status of the service:"
+msgstr "låsstatus för sökfältet"
+
+#: app/views/services/index.html.erb:48
+#, fuzzy
+#| msgid "System Settings"
 msgid "System Services"
-msgstr "Systemtjänster"
+msgstr "Systeminställningar"
 
-#: app/views/services/index.rhtml:147
+#: app/views/services/index.html.erb:58
+#, fuzzy
+#| msgid "you have no permission to execute this command"
 msgid "You do not have permission to execute the services."
-msgstr "Du har inte behörighet att köra dessa tjänster."
+msgstr "du har ingen behörighet att köra det här kommandot"
 
-#: app/views/services/index.rhtml:151
-msgid "Filter services"
-msgstr "Filtrera tjänster"
-
-#: app/views/services/index.rhtml:153
-msgid "All"
-msgstr "Alla"
-
-#: app/views/services/index.rhtml:154
-msgid "Running"
-msgstr "Körs"
-
-#: app/views/services/index.rhtml:155
-msgid "Not Running"
-msgstr "Körs inte"
-
-#: app/views/services/index.rhtml:156
-msgid "Dead"
-msgstr "Inaktiv"
-
-#: app/views/services/index.rhtml:157
-msgid "Started on Boot"
-msgstr "Startade vid uppstart"
-
-#: app/views/services/index.rhtml:158
-msgid "Not Started on Boot"
-msgstr "Startade inte vid uppstart"
-
-#: app/views/services/index.rhtml:165
+#: app/views/services/index.html.erb:66
+#, fuzzy
+#| msgid "Search:"
 msgid "Quick Search"
-msgstr "Snabbsökning"
+msgstr "Sökning:"
 
-#: app/views/services/index.rhtml:180
+#: app/views/services/index.html.erb:71
+#, fuzzy
+#| msgid "inetd service"
+msgid "Filter services"
+msgstr "Tjänster för e-post och diskussionsgrupper"
+
+#: app/views/services/index.html.erb:76
+#, fuzzy
+#| msgid "all"
+msgid "All"
+msgstr "alla"
+
+#: app/views/services/index.html.erb:77
+#, fuzzy
+#| msgid "running"
+msgid "Running"
+msgstr "igång"
+
+#: app/views/services/index.html.erb:78
+#, fuzzy
+#| msgid "not running"
+msgid "Not Running"
+msgstr "inte igång"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr ""
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:97
+#, fuzzy
+#| msgid "The action for service '%1' may not be empty."
 msgid "Description for service is not available"
-msgstr "Det finns ingen beskrivning för tjänsten"
+msgstr "Åtgärden för tjänsten %1 får inte vara tom."
 
-#: app/views/services/index.rhtml:203
+#: app/views/services/index.html.erb:121
+#, fuzzy
+#| msgid "Refresh"
 msgid "(refresh)"
-msgstr "(uppdatera)"
+msgstr "Uppdatera"
 
-#: app/views/services/index.rhtml:234
+#: app/views/services/index.html.erb:151
+#, fuzzy
+#| msgid "Start-Up"
 msgid "Start"
-msgstr "Starta"
+msgstr "Start"
 
-#: app/views/services/index.rhtml:235
+#: app/views/services/index.html.erb:152
 msgid "Stop"
-msgstr "Stoppa"
+msgstr ""
 
-#: app/views/services/index.rhtml:236
+#: app/views/services/index.html.erb:153
 msgid "Restart"
 msgstr "Starta om"
 
-#: app/views/services/index.rhtml:237
+#: app/views/services/index.html.erb:154
+#, fuzzy
+#| msgid "Start Konqueror"
 msgid "Start on Boot"
-msgstr "Starta vid uppstart"
+msgstr "Starta Konqueror"
 
-#: app/views/services/index.rhtml:238
+#: app/views/services/index.html.erb:155
+#, fuzzy
+#| msgid "Do Not Start"
 msgid "Do Not Start on Boot"
-msgstr "Starta inte vid uppstart"
+msgstr "Starta inte"
 
-#: app/views/services/_status.rhtml:6
-msgid "Service will be started on boot."
-msgstr "Tjänsten kommer att startas vid uppstart."
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+#, fuzzy
+#| msgid "Permission denied\n"
+msgid "Error: Refresh failed"
+msgstr "Åtkomst nekas\n"
 
-#: app/views/services/_status.rhtml:8
-msgid "Service will not be started on boot."
-msgstr "Tjänsten startar inte vid uppstart."
+#, fuzzy
+#~| msgid "Sorry, the server could not be added: "
+#~ msgid "List of services could not be read"
+#~ msgstr "Servern kunde inte läggas till: "
 
-#: app/views/services/_status.rhtml:31
-msgid "status unknown"
-msgstr "status okänd"
+#, fuzzy
+#~| msgid "Sorry, the server could not be added: "
+#~ msgid "List of custom services could not be read"
+#~ msgstr "Servern kunde inte läggas till: "
 
-#: app/views/services/_status.rhtml:33
-msgid "running"
-msgstr "körs"
+#, fuzzy
+#~| msgid "Unknown error\n"
+#~ msgid "Unknown error on server side"
+#~ msgstr "Okänt fel\n"
 
-#: app/views/services/_status.rhtml:37
-msgid "dead"
-msgstr "inaktiv"
+#, fuzzy
+#~| msgid "Repository"
+#~ msgid "Add New Repository"
+#~ msgstr "Arkiv"
 
-#: app/views/services/_status.rhtml:41
-msgid "not running"
-msgstr "körs inte"
+#, fuzzy
+#~| msgid "inetd service"
+#~ msgid "Filter repositories"
+#~ msgstr "Tjänster för e-post och diskussionsgrupper"
 
-#: app/views/services/_status.rhtml:45
-msgid "status unknown: %d"
-msgstr "status okänd: %d"
+#~ msgid "Enabled"
+#~ msgstr "Aktiverad"
 
-#: app/views/services/_status.rhtml:48
-msgid "Current status of the service:"
-msgstr "Nuvarande status för tjänsten:"
+#~ msgid "Disabled"
+#~ msgstr "Inaktiverad"
 
+#, fuzzy
+#~| msgid "unknown"
+#~ msgid "(unknown)"
+#~ msgstr "okänd"
+
+#, fuzzy
+#~| msgid "running"
+#~ msgid "(running)"
+#~ msgstr "igång"
+
+#, fuzzy
+#~| msgid "not running"
+#~ msgid "(not running)"
+#~ msgstr "inte igång"
+
+#~ msgid "Back"
+#~ msgstr "Tillbaka"
+
+#, fuzzy
+#~| msgid "Novell Services"
+#~ msgid "Custom Services"
+#~ msgstr "Novell Services"
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "status"
+#~ msgstr "Status"

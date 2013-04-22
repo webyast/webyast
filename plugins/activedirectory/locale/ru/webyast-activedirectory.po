@@ -1,0 +1,69 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Aleksey Osipov <aliks-os@yandex.ru>, 2005, 2006, 2007.
+# Alexander Melentiev <minton@opensuse.org>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-23 01:29+0400\n"
+"Last-Translator: Alexander Melentiev <minton@opensuse.org>\n"
+"Language-Team: Russian <opensuse-translation-ru@opensuse.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.2\n"
+
+msgid "Account settings"
+msgstr "Настройки учётной записи"
+
+msgid "Active Directory"
+msgstr "Active Directory"
+
+msgid "Active Directory Domain"
+msgstr "Домен Active Directory"
+
+msgid "Active Directory client configuraton successfully written."
+msgstr "Настройки клиента Active Directory успешно записаны."
+
+msgid "Administrator User Name"
+msgstr "Имя пользователя администратора"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Невозможно прочитать настройки клиента Active Directory"
+
+msgid "Enable Authentication of AD users"
+msgstr "Включить аутентификацию пользователей AD"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Ошибка присоединения к домену Active Directory: %s"
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Ошибка отключения от домена Active Directory: %s"
+
+msgid "Error while saving Active Directory client configuration."
+msgstr "Ошибка при сохранении настроек клиента Active Directory."
+
+msgid "Machine Account"
+msgstr "Учётная запись"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "Машина не является членом указанного домена. Введите учётные данные для входа."
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Please wait"
+msgstr "Подождите"
+
+msgid "This field is required."
+msgstr "Это поле обязательно."
+
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "Настройка подключения к Active Directory"

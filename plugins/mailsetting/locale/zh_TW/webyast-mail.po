@@ -1,115 +1,138 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# , 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:34\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-10 23:14+0800\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional <kde-i18n-doc@kde.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/mail_controller.rb:50 ./app/controllers/mail_controller.rb:50
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "要取回此機器的完整主機名稱是不可能的。如果郵件無法送出，諮詢您的網路管理員關於網路或/以及郵件設定。"
+
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "郵件組態設定測試無法確認"
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "當設定郵件，測試郵件已被發送到 %s。 這封郵件已遞送到這個位址了嗎？<br>如果是，按按鈕確認。否則，請再次檢查您的郵件設定。"
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "測試郵件已收到"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "密碼不符合。"
 
-#: app/controllers/mail_controller.rb:57 ./app/controllers/mail_controller.rb:57
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
-msgstr "已經寫入郵件設定。"
+msgstr "郵件設定已經寫入。"
 
-#: app/controllers/mail_controller.rb:59 ./app/controllers/mail_controller.rb:59
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
-msgstr "測試郵件已傳送到 %s。"
+msgstr "測試郵件已發送給 %s。"
 
-#: app/controllers/mail_controller.rb:71 ./app/controllers/mail_controller.rb:71
-msgid "Error while saving mail settings: %s"
-msgstr "儲存郵件設定時出錯︰%s"
+#: app/controllers/mailsetting_controller.rb:72
+#, fuzzy
+#| msgid "Error while saving mail settings: %s"
+msgid "Error while saving mail settings."
+msgstr "儲存郵件設定時發生錯誤：%s"
 
-#: app/controllers/mail_controller.rb:88 ./app/controllers/mail_controller.rb:88
-msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
-msgstr "未設定外送郵件伺服器，但管理員卻定義了郵件轉遞者。\n請變更 %s<i>administrator</i>%s 或 %s<i>mail</i>%s 組態。"
+#: app/controllers/mailsetting_controller.rb:85
+#, fuzzy
+#| msgid ""
+#| "No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+#| "Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"沒有設定外送郵件伺服器，但管理員已定義郵件轉遞者。\n"
+"變更 %s<i>管理員</i>%s 或 %s<i>郵件</i>%s 設定。"
 
-#: app/views/mail/index.html.erb:42 ./app/views/mail/index.html.erb:42
+#: app/views/mailsetting/index.html.erb:32
 msgid "Please wait"
 msgstr "請稍候"
 
-#: app/views/mail/index.html.erb:49 ./app/views/mail/index.html.erb:49
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
-msgstr "密碼不符。"
+msgstr "密碼不符合。"
 
-#: app/views/mail/index.html.erb:50 ./app/views/mail/index.html.erb:50
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
-msgstr "輸入有效的電子郵件地址。"
+msgstr "輸入有效的 e-mail 位址。"
 
-#: app/views/mail/index.html.erb:51 ./app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
-msgstr "輸入有效的網域名稱或 IP 位址。"
+msgstr "輸入適合的網域名稱或一個 IP 位址。"
 
-#: app/views/mail/index.html.erb:68 ./app/views/mail/index.html.erb:68 ./shortcuts.yml:6
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
 msgstr "郵件設定"
 
-#: app/views/mail/index.html.erb:80 ./app/views/mail/index.html.erb:80
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "外送郵件伺服器設定"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr "外送郵件伺服器"
 
-#: app/views/mail/index.html.erb:85 ./app/views/mail/index.html.erb:85
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
 msgstr "使用安全連線 (TLS)"
 
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "永不"
 
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
-msgstr "若可用"
+msgstr "如果可用"
 
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr "永遠"
 
-#: app/views/mail/index.html.erb:89 ./app/views/mail/index.html.erb:89
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
 msgstr "使用者名稱"
 
-#: app/views/mail/index.html.erb:93 ./app/views/mail/index.html.erb:93
+# password dialog title
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "密碼"
 
-#: app/views/mail/index.html.erb:97 ./app/views/mail/index.html.erb:97
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
 msgstr "確認密碼"
 
-#: app/views/mail/index.html.erb:105 ./app/views/mail/index.html.erb:105
-msgid "Send test mail to"
-msgstr "將測試郵件傳送到"
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "檢查郵件伺服器設定"
 
-#: app/views/mail/index.html.erb:107 ./app/views/mail/index.html.erb:107
+#: app/views/mailsetting/index.html.erb:118
+msgid "Send test mail to"
+msgstr "傳送測試郵件到"
+
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
 msgstr "傳送郵件"
 
-#: ./shortcuts.yml:7
-msgid "Manage outgoing mail settings"
-msgstr "管理外送郵件設定"
-
-#: app/models/mail_state.rb:40 ./app/models/mail_state.rb:40
-msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
-msgstr "無法取回機器的完整主機名稱。如果無法傳送郵件，請向網路管理員諮詢關於網路和/或郵件組態的資訊。"
-
-#: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
-msgid "Mail configuration test not confirmed"
-msgstr "未確認郵件組態測試"
-
-#: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
-msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
-msgstr "設定郵件期間，會將測試郵件傳送到 %s。郵件是否已傳送到此地址？<br>如果是，請按下按鈕確認，否則，請再次檢查您的郵件組態。"
-
-#: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
-msgid "Test mail received"
-msgstr "收到測試郵件"
-
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "管理外送郵件設定"

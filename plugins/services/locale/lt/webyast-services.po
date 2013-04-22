@@ -3,244 +3,199 @@
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
-# Mindaugas Baranauskas <embar@users.berlios.de>, 2010.
+# Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2010, 2011, 2012.
+# Mantas Kondrotas <dalelemanes@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
-"PO-Revision-Date: 2010-01-04 12:52+0200\n"
-"Last-Translator: Mindaugas Baranauskas <embar@users.berlios.de>\n"
-"Language-Team: Lithuanian <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-07-31 18:16+0300\n"
+"Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
+"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
+"X-Generator: Lokalize 1.4\n"
 
-#: app/controllers/services_controller.rb:46
-#: app/controllers/services_controller.rb:46
-msgid "(cannot read status)"
-msgstr "(nepavyksta nuskaityti būsenos)"
-
-#: app/controllers/services_controller.rb:74
-#: app/controllers/services_controller.rb:74
-msgid "List of services could not be read"
-msgstr ""
-
-#: app/controllers/services_controller.rb:76
-#: app/controllers/services_controller.rb:76
-msgid "List of custom services could not be read"
-msgstr ""
-
-#: app/controllers/services_controller.rb:112
-#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:88
 msgid "success"
 msgstr "sėkmingai"
 
-#: app/controllers/services_controller.rb:113
-#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:89
 msgid "unspecified error"
-msgstr ""
+msgstr "neapibrėžta klaida"
 
-#: app/controllers/services_controller.rb:114
-#: app/controllers/services_controller.rb:114
-#, fuzzy
+#: app/controllers/services_controller.rb:90
 msgid "invalid or excess argument(s)"
-msgstr "klaidinga argumento sintakse"
+msgstr "Negaliojantis arba nereikalingas argumentas(-ai)"
 
-#: app/controllers/services_controller.rb:115
-#: app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:91
 msgid "unimplemented feature"
-msgstr ""
+msgstr "neįvykdoma ypatybė"
 
-#: app/controllers/services_controller.rb:116
-#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:92
 msgid "user had insufficient privilege"
-msgstr ""
+msgstr "naudotojas neturi pakankamai teisių"
 
-#: app/controllers/services_controller.rb:117
-#: app/controllers/services_controller.rb:117
-#, fuzzy
+#: app/controllers/services_controller.rb:93
 msgid "program is not installed"
-msgstr "neįdiegta"
+msgstr "programa neįdiegta"
 
-#: app/controllers/services_controller.rb:118
-#: app/controllers/services_controller.rb:118
-#, fuzzy
+#: app/controllers/services_controller.rb:94
 msgid "program is not configured"
-msgstr "Nesukonfigūruota"
+msgstr "programa nesukonfigūruota"
 
-#: app/controllers/services_controller.rb:119
-#: app/controllers/services_controller.rb:119
-#, fuzzy
+#: app/controllers/services_controller.rb:95
 msgid "program is not running"
-msgstr "neveikia"
+msgstr "programa nepaleista"
 
-#: app/controllers/services_controller.rb:126
-#: app/controllers/services_controller.rb:126
-msgid "Unknown error on server side"
-msgstr ""
-
-#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
-msgstr "Paslaugos vykdymo rezultatas"
+msgstr "Paslaugos kreipinio rezultatas"
 
-#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+#: app/views/services/_result.html.erb:12
 msgid "Result"
 msgstr "Rezultatas"
 
-#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Aprašymas"
 
-#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
-#: shortcuts.yml:7
-msgid "System Services"
-msgstr "Sistemos paslaugos"
-
-#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
-#, fuzzy
-msgid "You do not have permission to execute the services."
-msgstr "Jūs neturite teisių įvykdyti šią paslaugą. Nuorodos uždraustos."
-
-#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
-#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
-#, fuzzy
-msgid "Filter services"
-msgstr "inetd paslauga"
-
-#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
-#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
-#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
-msgid "All"
-msgstr ""
-
-#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
-#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
-#, fuzzy
-msgid "Running"
-msgstr "veikia"
-
-#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
-#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
-#, fuzzy
-msgid "Not Running"
-msgstr "neveikia"
-
-#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
-#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
-#, fuzzy
-msgid "Dead"
-msgstr "(nebeveikia)"
-
-#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
-#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
-#, fuzzy
-msgid "Started on Boot"
-msgstr "Paleisti Konqueror"
-
-#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
-#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
-msgid "Not Started on Boot"
-msgstr ""
-
-#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
-#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
-#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
-#, fuzzy
-msgid "Quick Search"
-msgstr "Paieška:"
-
-#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
-msgid "Add New Repository"
-msgstr ""
-
-#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
-#, fuzzy
-msgid "Filter repositories"
-msgstr "inetd paslauga"
-
-#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
-msgid "Enabled"
-msgstr ""
-
-#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
-msgid "Disabled"
-msgstr ""
-
-#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
-msgid "Description for service is not available"
-msgstr ""
-
-#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
-#, fuzzy
-msgid "(refresh)"
-msgstr "Atnaujinti"
-
-#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
-#, fuzzy
-msgid "Start"
-msgstr "Paleisti „%1“"
-
-#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
-msgid "Stop"
-msgstr ""
-
-#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
-msgid "Restart"
-msgstr "Perkrauti"
-
-#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
-#, fuzzy
-msgid "Start on Boot"
-msgstr "Paleisti Konqueror"
-
-#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
-#, fuzzy
-msgid "Do Not Start on Boot"
-msgstr "Nepaleisti"
-
-#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+#: app/views/services/_status.html.erb:7
 msgid "Service will be started on boot."
-msgstr ""
+msgstr "Paslauga bus paleista kartu su operacine sistema."
 
-#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+#: app/views/services/_status.html.erb:9
 msgid "Service will not be started on boot."
-msgstr ""
+msgstr "Paslauga nebus paleista kartu su operacine sistema."
 
-#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
-#, fuzzy
+#: app/views/services/_status.html.erb:32
 msgid "status unknown"
-msgstr "nežinomas"
+msgstr "būsena nežinoma"
 
-#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+#: app/views/services/_status.html.erb:34
 msgid "running"
 msgstr "veikia"
 
-#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
-#, fuzzy
+#: app/views/services/_status.html.erb:38
 msgid "dead"
-msgstr "(nebeveikia)"
+msgstr "nebeveikia"
 
-#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+#: app/views/services/_status.html.erb:42
 msgid "not running"
 msgstr "neveikia"
 
-#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
-#, fuzzy
+#: app/views/services/_status.html.erb:46
 msgid "status unknown: %d"
-msgstr "(nežinoma: %d)"
+msgstr "nežinoma būsena: %d"
 
-#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
-#, fuzzy
+#: app/views/services/_status.html.erb:49
 msgid "Current status of the service:"
-msgstr "Dabartinis vartotojas:"
+msgstr "Dabartinė paslaugos būsena:"
 
-#: shortcuts.yml:8
-msgid "Manage the LSB init scripts"
-msgstr ""
+#: app/views/services/index.html.erb:48
+msgid "System Services"
+msgstr "Sistemos paslaugos"
+
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
+msgstr "Jūs neturite teisių paslaugos vykdymui."
+
+#: app/views/services/index.html.erb:66
+msgid "Quick Search"
+msgstr "Sparčioji paieška"
+
+#: app/views/services/index.html.erb:71
+msgid "Filter services"
+msgstr "Skirstyti paslaugas"
+
+#: app/views/services/index.html.erb:76
+msgid "All"
+msgstr "Visos"
+
+#: app/views/services/index.html.erb:77
+msgid "Running"
+msgstr "Veikia"
+
+#: app/views/services/index.html.erb:78
+msgid "Not Running"
+msgstr "Neveikia"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr "Nebeveikia"
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr "Paleista kartu su operacine sistema"
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr "Nepaleista kartu su operacine sistema"
+
+#: app/views/services/index.html.erb:97
+msgid "Description for service is not available"
+msgstr "Paslaugos aprašymas neprieinamas"
+
+#: app/views/services/index.html.erb:121
+msgid "(refresh)"
+msgstr "(atnaujinti)"
+
+#: app/views/services/index.html.erb:151
+msgid "Start"
+msgstr "Paleisti"
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr "Stabdyti"
+
+#: app/views/services/index.html.erb:153
+msgid "Restart"
+msgstr "Paleisti iš naujo"
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr "Paleisti kartu su operacine sistema"
+
+#: app/views/services/index.html.erb:155
+msgid "Do Not Start on Boot"
+msgstr "Nepaleisti kartu su operacine sistema"
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+msgid "Error: Refresh failed"
+msgstr "Klaida: atnaujinti nepavyko"
+
+#~ msgid "(cannot read status)"
+#~ msgstr "(nepavyksta nuskaityti būsenos)"
+
+#~ msgid "List of services could not be read"
+#~ msgstr "Nepavyksta perskaityti paslaugų sąrašo"
+
+#~ msgid "List of custom services could not be read"
+#~ msgstr "Nepavyksta perskaityti savitų paslaugų sąrašo"
+
+#~ msgid "Unknown error on server side"
+#~ msgstr "Serverio pusėje įvyko nežinoma klaida"
+
+#~ msgid "Manage the LSB init scripts"
+#~ msgstr "Tvarkyti LSB inicializacijos scenarijus"
+
+#~ msgid "Add New Repository"
+#~ msgstr "Pridėti naują saugyklą"
+
+#~| msgid "Filter services"
+#~ msgid "Filter repositories"
+#~ msgstr "Filtruoti saugyklas"
+
+#~ msgid "Enabled"
+#~ msgstr "Įgalinta"
+
+#~ msgid "Disabled"
+#~ msgstr "Uždrausta"
 
 #~ msgid "Invalid session, please login again."
 #~ msgstr "Negalima sesija, prisijunkite iš naujo."

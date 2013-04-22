@@ -1,0 +1,71 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Aleksey Osipov <aliks-os@yandex.ru>, 2005, 2006, 2007.
+# Alexander Melentiev <minton@opensuse.org>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-23 01:28+0400\n"
+"Last-Translator: Alexander Melentiev <minton@opensuse.org>\n"
+"Language-Team: Russian <opensuse-translation-ru@opensuse.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.2\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Невозможно прочитать настройки клиента Kerberos."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "Настройки клиента Kerberos успешно записаны."
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "Ошибка при сохранении настроек клиента Kerberos."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "Это поле обязательно."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "Введите имя домена или IP-адрес."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "Подождите"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "Клиент Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "Включить аутентификацию Kerberos"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "Домен по умолчанию"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "Область по умолчанию"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "Адрес сервера KDC"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Настроить клиент Kerberos"

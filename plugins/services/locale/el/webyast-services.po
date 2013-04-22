@@ -1,244 +1,197 @@
+# Kostantinos Koudaras <warlordfff@gmail.com>, 2011.
+# Efstathios Iosifidis <iosifidis@opensuse.org>, 2012.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
-"PO-Revision-Date: 2005-08-24 17:53+0300\n"
-"Last-Translator: Hellenic SuSE Translation Team <hstg@billg.gr>\n"
-"Language-Team: Hellenic-Ελληνικά-Greek <hstg@billg.gr>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-14 18:30+0300\n"
+"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
+"Language-Team: Ελληνικά, Σύγχρονα <opensuse-translation-el@opensuse.org>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bits\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: app/controllers/services_controller.rb:46
-#: app/controllers/services_controller.rb:46
-msgid "(cannot read status)"
-msgstr ""
-
-#: app/controllers/services_controller.rb:74
-#: app/controllers/services_controller.rb:74
-msgid "List of services could not be read"
-msgstr ""
-
-#: app/controllers/services_controller.rb:76
-#: app/controllers/services_controller.rb:76
-msgid "List of custom services could not be read"
-msgstr ""
-
-#: app/controllers/services_controller.rb:112
-#: app/controllers/services_controller.rb:112
-#, fuzzy
+#: app/controllers/services_controller.rb:88
 msgid "success"
-msgstr ""
-"Επιτυχία:\n"
-"%s"
+msgstr "Επιτυχία"
 
-#: app/controllers/services_controller.rb:113
-#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:89
 msgid "unspecified error"
-msgstr ""
+msgstr "απροσδιόριστο σφάλμα"
 
-#: app/controllers/services_controller.rb:114
-#: app/controllers/services_controller.rb:114
-#, fuzzy
+#: app/controllers/services_controller.rb:90
 msgid "invalid or excess argument(s)"
-msgstr "λανθασμένη σύνταξη παραμέτρου"
+msgstr "μη έγκυρο η υπερβολικό όρισμα(τα)"
 
-#: app/controllers/services_controller.rb:115
-#: app/controllers/services_controller.rb:115
-#, fuzzy
+#: app/controllers/services_controller.rb:91
 msgid "unimplemented feature"
-msgstr "δεν διεκπεραιώθηκε ακόμα"
+msgstr "ανεφάρμοστο χαρακτηριστικό"
 
-#: app/controllers/services_controller.rb:116
-#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:92
 msgid "user had insufficient privilege"
-msgstr ""
+msgstr "ο χρήστης δεν είχε επαρκή προνόμια"
 
-#: app/controllers/services_controller.rb:117
-#: app/controllers/services_controller.rb:117
-#, fuzzy
+#: app/controllers/services_controller.rb:93
 msgid "program is not installed"
-msgstr "μη εγκατεστημένο"
+msgstr "Το πρόγραμμα δεν είναι εγκατεστημένο"
 
-#: app/controllers/services_controller.rb:118
-#: app/controllers/services_controller.rb:118
-#, fuzzy
+#: app/controllers/services_controller.rb:94
 msgid "program is not configured"
-msgstr "Δεν έχει ρυθμιστεί"
+msgstr "Το πρόγραμμα δεν έχει ρυθμιστεί"
 
-#: app/controllers/services_controller.rb:119
-#: app/controllers/services_controller.rb:119
-#, fuzzy
+#: app/controllers/services_controller.rb:95
 msgid "program is not running"
-msgstr "Ο hypervisor δεν εκτελείται."
+msgstr "το πρόγραμμα δεν εκτελείται"
 
-#: app/controllers/services_controller.rb:126
-#: app/controllers/services_controller.rb:126
-msgid "Unknown error on server side"
-msgstr ""
-
-#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
-msgstr ""
+msgstr "Αποτέλεσμα υπηρεσίας κλήσης"
 
-#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
-#, fuzzy
+#: app/views/services/_result.html.erb:12
 msgid "Result"
-msgstr "Αποτέλεσμα Σύνδεσης"
+msgstr "Αποτέλεσμα"
 
-#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
-#: shortcuts.yml:7
-#, fuzzy
-msgid "System Services"
-msgstr "Ρυθμίσεις συστήματος"
-
-#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
-#, fuzzy
-msgid "You do not have permission to execute the services."
-msgstr "δεν έχετε άδεια να εκτελέσετε αυτή την εντολή"
-
-#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
-#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
-#, fuzzy
-msgid "Filter services"
-msgstr "Υπηρεσία inetd"
-
-#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
-#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
-#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
-#, fuzzy
-msgid "All"
-msgstr "όλα"
-
-#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
-#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
-#, fuzzy
-msgid "Running"
-msgstr "εκτελείται"
-
-#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
-#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
-#, fuzzy
-msgid "Not Running"
-msgstr "δεν εκτελείται"
-
-#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
-#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
-msgid "Dead"
-msgstr ""
-
-#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
-#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
-msgid "Started on Boot"
-msgstr ""
-
-#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
-#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
-msgid "Not Started on Boot"
-msgstr ""
-
-#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
-#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
-#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
-#, fuzzy
-msgid "Quick Search"
-msgstr "Έρευνα:"
-
-#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
-msgid "Add New Repository"
-msgstr ""
-
-#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
-#, fuzzy
-msgid "Filter repositories"
-msgstr "Υπηρεσία inetd"
-
-#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
-msgid "Enabled"
-msgstr ""
-
-#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
-msgid "Disabled"
-msgstr ""
-
-#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
-#, fuzzy
-msgid "Description for service is not available"
-msgstr "Η ενέργεια της υπηρεσίας '%1' μπορεί να μην είναι κενή."
-
-#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
-#, fuzzy
-msgid "(refresh)"
-msgstr "Ανανέωση"
-
-#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
-#, fuzzy
-msgid "Start"
-msgstr "Εκκίνηση"
-
-#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
-msgid "Stop"
-msgstr ""
-
-#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
-msgid "Restart"
-msgstr "Επανεκκίνηση"
-
-#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
-#, fuzzy
-msgid "Start on Boot"
-msgstr "Εκκίνηση Konqueror"
-
-#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
-#, fuzzy
-msgid "Do Not Start on Boot"
-msgstr "Να Μην Ξεκινήσει"
-
-#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+#: app/views/services/_status.html.erb:7
 msgid "Service will be started on boot."
-msgstr ""
+msgstr "Η υπηρεσία θα ξεκινήσει κατά την εκκίνηση."
 
-#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+#: app/views/services/_status.html.erb:9
 msgid "Service will not be started on boot."
-msgstr ""
+msgstr "Η υπηρεσία δεν θα ξεκινήσει κατά την εκκίνηση."
 
-#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
-#, fuzzy
+#: app/views/services/_status.html.erb:32
 msgid "status unknown"
-msgstr "άγνωστη"
+msgstr "Κατάσταση άγνωστη"
 
-#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+#: app/views/services/_status.html.erb:34
 msgid "running"
 msgstr "εκτελείται"
 
-#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
+#: app/views/services/_status.html.erb:38
 msgid "dead"
-msgstr ""
+msgstr "νεκρό"
 
-#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+#: app/views/services/_status.html.erb:42
 msgid "not running"
 msgstr "δεν εκτελείται"
 
-#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
-#, fuzzy
+#: app/views/services/_status.html.erb:46
 msgid "status unknown: %d"
-msgstr "άγνωστη"
+msgstr "κατάσταση άγνωστη: %d"
 
-#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
-#, fuzzy
+#: app/views/services/_status.html.erb:49
 msgid "Current status of the service:"
-msgstr "κατάσταση lock-down για την περιοχή ερεύνης"
+msgstr "Η τρέχουσα κατάσταση της υπηρεσίας:"
 
-#: shortcuts.yml:8
-msgid "Manage the LSB init scripts"
-msgstr ""
+#: app/views/services/index.html.erb:48
+msgid "System Services"
+msgstr "Υπηρεσίες συστήματος"
+
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
+msgstr "Δεν έχετε δικαιώματα να εκτελέσετε αυτές τις υπηρεσίες."
+
+#: app/views/services/index.html.erb:66
+msgid "Quick Search"
+msgstr "Γρήγορη Αναζήτηση"
+
+#: app/views/services/index.html.erb:71
+msgid "Filter services"
+msgstr "Φιλτράρισμα υπηρεσιών"
+
+#: app/views/services/index.html.erb:76
+msgid "All"
+msgstr "Όλα"
+
+#: app/views/services/index.html.erb:77
+msgid "Running"
+msgstr "Εκτελείται"
+
+#: app/views/services/index.html.erb:78
+msgid "Not Running"
+msgstr "Δεν εκτελείται"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr "Νεκρό"
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr "Άρχισε κατά την εκκίνηση"
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr "Δεν άρχισε κατά την εκκίνηση"
+
+#: app/views/services/index.html.erb:97
+msgid "Description for service is not available"
+msgstr "Η περιγραφή της υπηρεσίας δεν είναι διαθέσιμη"
+
+#: app/views/services/index.html.erb:121
+msgid "(refresh)"
+msgstr "(ανανέωση)"
+
+#: app/views/services/index.html.erb:151
+msgid "Start"
+msgstr "Εκκίνηση"
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr "Σταμάτημα"
+
+#: app/views/services/index.html.erb:153
+msgid "Restart"
+msgstr "Επανεκκίνηση"
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr "Έναρξη κατά την εκκίνηση"
+
+#: app/views/services/index.html.erb:155
+msgid "Do Not Start on Boot"
+msgstr "Να Μην Ξεκινήσει κατά την εκκίνηση"
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+msgid "Error: Refresh failed"
+msgstr "Σφάλμα: Αποχία ανανέωσης"
+
+#~ msgid "(cannot read status)"
+#~ msgstr "(αδυναμία ανάγνωσης κατάστασης)"
+
+#~ msgid "List of services could not be read"
+#~ msgstr "Η λίστα των υπηρεσιών δεν μπορεί να αναγνωστεί"
+
+#~ msgid "List of custom services could not be read"
+#~ msgstr "Η λίστα των προσαρμοσμένων υπηρεσιών δεν μπορεί να αναγνωστεί"
+
+#~ msgid "Unknown error on server side"
+#~ msgstr "Άγνωστο σφάλμα του εξυπηρετητή"
+
+#~ msgid "Manage the LSB init scripts"
+#~ msgstr "Διαχειριστείτε τα scripts αρχικοποίησης LSB"
+
+#~ msgid "Add New Repository"
+#~ msgstr "Προσθήκη Νέου Αποθετηρίου"
+
+#~| msgid "Filter services"
+#~ msgid "Filter repositories"
+#~ msgstr "Φίλτρο αποθετηρίων"
+
+#~ msgid "Enabled"
+#~ msgstr "Ενεργοποιημένο"
+
+#~ msgid "Disabled"
+#~ msgstr "Απενεργοποιημένο"
 
 #, fuzzy
 #~| msgid "unknown"

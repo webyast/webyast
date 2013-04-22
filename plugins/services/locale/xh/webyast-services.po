@@ -5,24 +5,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2006-11-03 14:26\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: i18n@suse.de\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/services_controller.rb:11
-msgid "Invalid session, please login again."
-msgstr ""
-
-#: app/controllers/services_controller.rb:34
-msgid "(cannot read status)"
-msgstr ""
-
-#: app/controllers/services_controller.rb:80
+#: app/controllers/services_controller.rb:88
 #, fuzzy
 #| msgid ""
 #| "Success:\n"
@@ -32,75 +25,233 @@ msgstr ""
 "Impumelelo:\n"
 "%s"
 
-#: app/views/services/_status.rhtml:14
-#, fuzzy
-#| msgid "unknown"
-msgid "(unknown)"
-msgstr "akwaziwa"
-
-#: app/views/services/_status.rhtml:16
-#, fuzzy
-#| msgid "running"
-msgid "(running)"
-msgstr "kuyaqhutywa"
-
-#: app/views/services/_status.rhtml:18
-msgid "(dead)"
+#: app/controllers/services_controller.rb:89
+msgid "unspecified error"
 msgstr ""
 
-#: app/views/services/_status.rhtml:20
+#: app/controllers/services_controller.rb:90
 #, fuzzy
-#| msgid "not running"
-msgid "(not running)"
-msgstr "akuqhutywa"
+#| msgid "invalid argument syntax"
+msgid "invalid or excess argument(s)"
+msgstr "ubumbo-zivakalisi lwempikiswano alusebenzi"
 
-#: app/views/services/_status.rhtml:22
+#: app/controllers/services_controller.rb:91
 #, fuzzy
-#| msgid "unknown"
-msgid "(unknown: %d)"
-msgstr "akwaziwa"
+#| msgid "not yet implemented"
+msgid "unimplemented feature"
+msgstr "ayikaphunyezwa"
 
-#: app/views/services/_result.rhtml:5
+#: app/controllers/services_controller.rb:92
+msgid "user had insufficient privilege"
+msgstr ""
+
+#: app/controllers/services_controller.rb:93
+#, fuzzy
+#| msgid "not installed"
+msgid "program is not installed"
+msgstr "ayihlohlwanga"
+
+#: app/controllers/services_controller.rb:94
+#, fuzzy
+#| msgid "Not configured"
+msgid "program is not configured"
+msgstr "Akwenziwanga Lubumbeko "
+
+#: app/controllers/services_controller.rb:95
+#, fuzzy
+#| msgid "The hypervisor is not running."
+msgid "program is not running"
+msgstr "I-hypervisor ayisebenzi."
+
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
 msgstr ""
 
-#: app/views/services/_result.rhtml:8
+#: app/views/services/_result.html.erb:12
 #, fuzzy
 #| msgid "Connect Result"
 msgid "Result"
 msgstr "Qhagamshela Isiphumo"
 
-#: app/views/services/_result.rhtml:12
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Inkcazelo"
 
-#: app/views/services/_result.rhtml:18 app/views/services/_result.rhtml:20
-#: app/views/services/index.rhtml:102
-msgid "Back"
-msgstr "Emva"
+#: app/views/services/_status.html.erb:7
+msgid "Service will be started on boot."
+msgstr ""
 
-#: app/views/services/index.rhtml:11
+#: app/views/services/_status.html.erb:9
+msgid "Service will not be started on boot."
+msgstr ""
+
+#: app/views/services/_status.html.erb:32
 #, fuzzy
-#| msgid "Novell Services"
-msgid "Custom Services"
-msgstr "Iinkonzo ze-Novell"
+#| msgid "unknown"
+msgid "status unknown"
+msgstr "akwaziwa"
 
-#: app/views/services/index.rhtml:13
+#: app/views/services/_status.html.erb:34
+msgid "running"
+msgstr "kuyaqhutywa"
+
+#: app/views/services/_status.html.erb:38
+msgid "dead"
+msgstr ""
+
+#: app/views/services/_status.html.erb:42
+msgid "not running"
+msgstr "akuqhutywa"
+
+#: app/views/services/_status.html.erb:46
+#, fuzzy
+#| msgid "unknown"
+msgid "status unknown: %d"
+msgstr "akwaziwa"
+
+#: app/views/services/_status.html.erb:49
+#, fuzzy
+#| msgid "lock-down status for the search area"
+msgid "Current status of the service:"
+msgstr "tshixela isimo sendawo yozingelo"
+
+#: app/views/services/index.html.erb:48
 #, fuzzy
 #| msgid "System Settings"
 msgid "System Services"
 msgstr "Imimiselo Yesixokelelwano"
 
-#: app/views/services/index.rhtml:20
-msgid "No custom service is defined on target machine."
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
 msgstr ""
 
-#: app/views/services/index.rhtml:22
-msgid "You do not have permission to execute the services. The links are disabled."
-msgstr ""
-
-#: app/views/services/index.rhtml:94
+#: app/views/services/index.html.erb:66
 #, fuzzy
-#| msgid "Status"
-msgid "status"
-msgstr "Isimo"
+#| msgid "Search:"
+msgid "Quick Search"
+msgstr "Zingela:"
+
+#: app/views/services/index.html.erb:71
+#, fuzzy
+#| msgid "inetd service"
+msgid "Filter services"
+msgstr "inkonzo ye-inetd"
+
+#: app/views/services/index.html.erb:76
+#, fuzzy
+#| msgid "all"
+msgid "All"
+msgstr "konke"
+
+#: app/views/services/index.html.erb:77
+#, fuzzy
+#| msgid "running"
+msgid "Running"
+msgstr "kuyaqhutywa"
+
+#: app/views/services/index.html.erb:78
+#, fuzzy
+#| msgid "not running"
+msgid "Not Running"
+msgstr "akuqhutywa"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr ""
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:97
+#, fuzzy
+#| msgid "The action for service '%1' may not be empty."
+msgid "Description for service is not available"
+msgstr "Inyathelo lenkonzo '%1' lisenokungabi likhamte."
+
+#: app/views/services/index.html.erb:121
+#, fuzzy
+#| msgid "Refresh"
+msgid "(refresh)"
+msgstr "Hlaziya"
+
+#: app/views/services/index.html.erb:151
+#, fuzzy
+#| msgid "Start-Up"
+msgid "Start"
+msgstr "Ukuqalisa"
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr ""
+
+#: app/views/services/index.html.erb:153
+#, fuzzy
+#| msgid "_Restart"
+msgid "Restart"
+msgstr "_Ukuphinda uqalise"
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr ""
+
+#: app/views/services/index.html.erb:155
+#, fuzzy
+#| msgid "Do Not Start"
+msgid "Do Not Start on Boot"
+msgstr "Musa ukuQalisa"
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+#, fuzzy
+#| msgid "Permission denied\n"
+msgid "Error: Refresh failed"
+msgstr "Imvume yaliwe\n"
+
+#, fuzzy
+#~| msgid "Unknown error\n"
+#~ msgid "Unknown error on server side"
+#~ msgstr "Imposiso engaziwayo\n"
+
+#, fuzzy
+#~| msgid "inetd service"
+#~ msgid "Filter repositories"
+#~ msgstr "inkonzo ye-inetd"
+
+#~ msgid "Enabled"
+#~ msgstr "Yenziwe yasebenza"
+
+#~ msgid "Disabled"
+#~ msgstr "Kususwe isakhono"
+
+#, fuzzy
+#~| msgid "unknown"
+#~ msgid "(unknown)"
+#~ msgstr "akwaziwa"
+
+#, fuzzy
+#~| msgid "running"
+#~ msgid "(running)"
+#~ msgstr "kuyaqhutywa"
+
+#, fuzzy
+#~| msgid "not running"
+#~ msgid "(not running)"
+#~ msgstr "akuqhutywa"
+
+#~ msgid "Back"
+#~ msgstr "Emva"
+
+#, fuzzy
+#~| msgid "Novell Services"
+#~ msgid "Custom Services"
+#~ msgstr "Iinkonzo ze-Novell"
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "status"
+#~ msgstr "Isimo"

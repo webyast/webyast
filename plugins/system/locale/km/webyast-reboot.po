@@ -1,34 +1,35 @@
+# translation of yast_webclient_system.km.po to Khmer
+# Seng Sutha <sutha@khmeros.info>, 2010.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+# Chan Sambathratanak <ratanak@khmeros.info>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: yast_webclient_system.km\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2009-10-28 11:30+0100\n"
-"PO-Revision-Date: 2006-02-18 09:47+0700\n"
-"Last-Translator: Keo Sophon <keosophon@khmeros.info>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-03 16:18+0700\n"
+"Last-Translator: Chan Sambathratanak <ratanak@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 RC1\n"
+"X-Language: km-KH\n"
 
-#: app/controllers/system_controller.rb:16
-#, fuzzy
-#| msgid "Creating the Virtual Machine"
+#: app/controllers/system_controller.rb:77
 msgid "Rebooting the machine..."
-msgstr "ការ​បង្កើត​ម៉ាស៊ីន​និម្មិត"
+msgstr "កំពុង​ចាប់ផ្ដើម​ម៉ាស៊ីន​ឡើង​វិញ..."
 
-#: app/controllers/system_controller.rb:20
-#: app/controllers/system_controller.rb:23
-#, fuzzy
-#| msgid "Cannot create the file."
+#: app/controllers/system_controller.rb:81
 msgid "Cannot reboot the machine!"
-msgstr "មិន​អាច​បង្កើត​ឯកសារ​បាន​ឡើយ ។"
+msgstr "មិន​អាច​ចាប់ផ្ដើម​ម៉ាស៊ីន​ឡើងវិញ​បាន​ទេ !"
 
-#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
-msgstr ""
+msgstr "កំពុង​បិទ​ម៉ាស៊ីន​..."
 
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:43
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
-msgstr ""
+msgstr "មិន​អាច​បិទ​ម៉ាស៊ីន​បាន​ទេ !"

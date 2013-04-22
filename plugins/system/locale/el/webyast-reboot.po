@@ -1,39 +1,32 @@
+# Kostantinos Koudaras <warlordfff@gmail.com>, 2011.
+# Efstathios Iosifidis <diamond_gr@freemail.gr>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2005-08-24 17:53+0300\n"
-"Last-Translator: Hellenic SuSE Translation Team <hstg@billg.gr>\n"
-"Language-Team: Hellenic-Ελληνικά-Greek <hstg@billg.gr>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-05-11 12:17+0300\n"
+"Last-Translator: Efstathios Iosifidis <diamond_gr@freemail.gr>\n"
+"Language-Team: Greek <opensuse-translation@opensuse.org>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/system_controller.rb:36
-#: app/controllers/system_controller.rb:36
-#, fuzzy
+#: app/controllers/system_controller.rb:77
 msgid "Rebooting the machine..."
-msgstr "Δημιουργία της Εικονικής Μηχανής"
+msgstr "Επανεκκίνηση του συστήματος..."
 
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
-#, fuzzy
+#: app/controllers/system_controller.rb:81
 msgid "Cannot reboot the machine!"
-msgstr "Αδυναμία δημιουργίας του αρχείου."
+msgstr "Αδυναμία επανεκκίνησης του συστήματος!"
 
-#: app/controllers/system_controller.rb:57
-#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
-msgstr ""
+msgstr "Τερματισμός του συστήματος..."
 
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
-msgstr ""
+msgstr "Αδυναμία τερματισμού του συστήματος!"

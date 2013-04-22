@@ -2,64 +2,104 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Kalman Kemenczy <kkemenczy@novell.com>, 2010.
+# Kalman Kemenczy <kkemenczy@opensuse.org>, 2011, 2012, 2013.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-03-11 11:12+0100\n"
-"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
-"Language-Team: collection <kde-i18n-doc@kde.org>\n"
+"Project-Id-Version: yast_webclient roles 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2013-02-25 09:33+0100\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@opensuse.org>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
-msgstr ""
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Érvénytelen szerepnév. Csak az a-z, A-Z, számok, szóköz, perjel és aláhúzás karakterek használhatók."
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "Ez a szerepnév már használatban van."
 
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "A(z) '%s' szerep eltávolítása sikeres."
 
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
-#, fuzzy
-msgid "Available Users"
-msgstr "Elérhető jogosultságok"
-
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
-msgstr "Szerepkörök"
+msgstr "Szerepek"
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "A felhasználó szerepkörökhöz rendeléséhez"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "húzza át a felhasználót a szerepkör tárolóhoz"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Ne jelenjen meg többé ez az üzenet"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr ""
+msgstr "Szerep létrehozása"
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Felhasználók hozzárendelése"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "A felhasználó már össze van rendelve"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "Elérhető jogosultságok"
+msgstr "Jogosultságok hozzárendelése"
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
-msgstr ""
+msgstr "teljes összecsukás"
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr ""
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "A mező megadása kötelező"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Csak az a-z, A-Z, számok, szóköz, perjel és aláhúzás karakterek használhatók."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Kérem, várjon…"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Hiba: A(z) <i>%s</i> szerep eltávolítása sikertelen."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Ez a szerep nem található."
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Állítsa be a szerepkörökhöz a jogosultságokat és rendelje hozzá a felhasználókat"
+
+#~ msgid "Selected Users"
+#~ msgstr "Kiválasztott felhasználók"
+
+#~ msgid "Available Users"
+#~ msgstr "Elérhető felhasználók"
+
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Kattintson rá a felhasználónévre a a hozzárendeléshez/eltávolításhoz"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Érvénytelen szerepkörnév"
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Hozzáférés felsorolása szerepkörök alapján"
 
 #~ msgid "Permissions granted by role"
 #~ msgstr "Hozzáférés kiadása szerepkörök alapján"
@@ -69,6 +109,9 @@ msgstr ""
 
 #~ msgid ")}-description"
 #~ msgstr ")}-leírás"
+
+#~ msgid "Remaining users"
+#~ msgstr "Többi felhasználó"
 
 #~ msgid "Save"
 #~ msgstr "Mentés"

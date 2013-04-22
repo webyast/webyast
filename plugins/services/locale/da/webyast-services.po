@@ -1,242 +1,198 @@
-# Martin Schlander <mschlander@opensuse.org>, 2009.
+# Martin Schlander <mschlander@opensuse.org>, 2009, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
-"PO-Revision-Date: 2009-10-05 17:00+0200\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-08-13 19:41+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <opensuse-translation@opensuse.org>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/services_controller.rb:46
-#: app/controllers/services_controller.rb:46
-msgid "(cannot read status)"
-msgstr "(kan ikke læse status)"
-
-#: app/controllers/services_controller.rb:74
-#: app/controllers/services_controller.rb:74
-msgid "List of services could not be read"
-msgstr ""
-
-#: app/controllers/services_controller.rb:76
-#: app/controllers/services_controller.rb:76
-msgid "List of custom services could not be read"
-msgstr ""
-
-#: app/controllers/services_controller.rb:112
-#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:88
 msgid "success"
 msgstr "gennemført"
 
-#: app/controllers/services_controller.rb:113
-#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:89
 msgid "unspecified error"
-msgstr ""
+msgstr "uspecificeret fejl"
 
-#: app/controllers/services_controller.rb:114
-#: app/controllers/services_controller.rb:114
-#, fuzzy
+#: app/controllers/services_controller.rb:90
 msgid "invalid or excess argument(s)"
-msgstr "ugyldig argumentsyntaks"
+msgstr "ugyldige eller overflødige argumenter"
 
-#: app/controllers/services_controller.rb:115
-#: app/controllers/services_controller.rb:115
-#, fuzzy
+#: app/controllers/services_controller.rb:91
 msgid "unimplemented feature"
-msgstr "endnu ikke implementeret"
+msgstr "ikke-implementeret funktion"
 
-#: app/controllers/services_controller.rb:116
-#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:92
 msgid "user had insufficient privilege"
-msgstr ""
+msgstr "brugeren har utilstrækkelige rettigheder"
 
-#: app/controllers/services_controller.rb:117
-#: app/controllers/services_controller.rb:117
-#, fuzzy
+#: app/controllers/services_controller.rb:93
 msgid "program is not installed"
-msgstr "'%s' er ikke installeret."
+msgstr "programmet er ikke installeret"
 
-#: app/controllers/services_controller.rb:118
-#: app/controllers/services_controller.rb:118
-#, fuzzy
+#: app/controllers/services_controller.rb:94
 msgid "program is not configured"
-msgstr "Ikke konfigureret"
+msgstr "programmet er ikke konfigureret"
 
-#: app/controllers/services_controller.rb:119
-#: app/controllers/services_controller.rb:119
-#, fuzzy
+#: app/controllers/services_controller.rb:95
 msgid "program is not running"
-msgstr "Hypervisoren kører ikke."
+msgstr "programmet kører ikke"
 
-#: app/controllers/services_controller.rb:126
-#: app/controllers/services_controller.rb:126
-msgid "Unknown error on server side"
-msgstr ""
-
-#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
 msgstr "Resultat af tjenestekald"
 
-#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+#: app/views/services/_result.html.erb:12
 msgid "Result"
 msgstr "Resultat"
 
-#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
-#: shortcuts.yml:7
-msgid "System Services"
-msgstr "Systemtjenester"
-
-#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
-#, fuzzy
-msgid "You do not have permission to execute the services."
-msgstr "Du har ikke rettigheder til at køre tjenesterne. Linkene deaktiveres."
-
-#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
-#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
-#, fuzzy
-msgid "Filter services"
-msgstr "inetd-tjeneste"
-
-#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
-#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
-#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
-#, fuzzy
-msgid "All"
-msgstr "Alt   "
-
-#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
-#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
-#, fuzzy
-msgid "Running"
-msgstr "kører"
-
-#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
-#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
-#, fuzzy
-msgid "Not Running"
-msgstr "kører ikke"
-
-#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
-#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
-#, fuzzy
-msgid "Dead"
-msgstr "(død)"
-
-#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
-#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
-msgid "Started on Boot"
-msgstr ""
-
-#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
-#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
-msgid "Not Started on Boot"
-msgstr ""
-
-#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
-#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
-#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
-#, fuzzy
-msgid "Quick Search"
-msgstr "Søg"
-
-#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
-msgid "Add New Repository"
-msgstr ""
-
-#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
-#, fuzzy
-msgid "Filter repositories"
-msgstr "inetd-tjeneste"
-
-#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
-msgid "Enabled"
-msgstr ""
-
-#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
-msgid "Disabled"
-msgstr ""
-
-#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
-#, fuzzy
-msgid "Description for service is not available"
-msgstr "Der skal angives en handling for tjenesten '%1'."
-
-#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
-#, fuzzy
-msgid "(refresh)"
-msgstr "Genopfrisk"
-
-#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
-#, fuzzy
-msgid "Start"
-msgstr "Opstart"
-
-#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
-msgid "Stop"
-msgstr ""
-
-#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
-msgid "Restart"
-msgstr "Genstart"
-
-#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
-#, fuzzy
-msgid "Start on Boot"
-msgstr "Start Konqueror"
-
-#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
-#, fuzzy
-msgid "Do Not Start on Boot"
-msgstr "Start ikke"
-
-#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+#: app/views/services/_status.html.erb:7
 msgid "Service will be started on boot."
-msgstr ""
+msgstr "Tjenesten vil blive startet under boot."
 
-#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+#: app/views/services/_status.html.erb:9
 msgid "Service will not be started on boot."
-msgstr ""
+msgstr "Tjenesten vil ikke blive startet under boot."
 
-#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
-#, fuzzy
+#: app/views/services/_status.html.erb:32
 msgid "status unknown"
-msgstr "Status ukendt"
+msgstr "status ukendt"
 
-#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+#: app/views/services/_status.html.erb:34
 msgid "running"
 msgstr "kører"
 
-#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
-#, fuzzy
+#: app/views/services/_status.html.erb:38
 msgid "dead"
-msgstr "(død)"
+msgstr "død"
 
-#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+#: app/views/services/_status.html.erb:42
 msgid "not running"
 msgstr "kører ikke"
 
-#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
-#, fuzzy
+#: app/views/services/_status.html.erb:46
 msgid "status unknown: %d"
-msgstr "Status ukendt"
+msgstr "status ukendt: %d"
 
-#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
-#, fuzzy
+#: app/views/services/_status.html.erb:49
 msgid "Current status of the service:"
-msgstr "fastlås status for søgeområdet"
+msgstr "Aktuel status for tjenesten:"
 
-#: shortcuts.yml:8
-msgid "Manage the LSB init scripts"
-msgstr ""
+#: app/views/services/index.html.erb:48
+msgid "System Services"
+msgstr "Systemtjenester"
+
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
+msgstr "Du har ikke rettigheder til at køre tjenesterne."
+
+#: app/views/services/index.html.erb:66
+msgid "Quick Search"
+msgstr "Hurtigsøg"
+
+#: app/views/services/index.html.erb:71
+msgid "Filter services"
+msgstr "Filtrér tjenester"
+
+#: app/views/services/index.html.erb:76
+msgid "All"
+msgstr "Alle"
+
+#: app/views/services/index.html.erb:77
+msgid "Running"
+msgstr "kører"
+
+#: app/views/services/index.html.erb:78
+msgid "Not Running"
+msgstr "Kører ikke"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr "Død"
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr "Startet under boot"
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr "Startes ikke under boot"
+
+#: app/views/services/index.html.erb:97
+msgid "Description for service is not available"
+msgstr "Beskrivelse af tjenesten er ikke tilgængelig"
+
+#: app/views/services/index.html.erb:121
+msgid "(refresh)"
+msgstr "(genopfrisk)"
+
+#: app/views/services/index.html.erb:151
+msgid "Start"
+msgstr "Start"
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr "Stop"
+
+#: app/views/services/index.html.erb:153
+msgid "Restart"
+msgstr "Genstart"
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr "Start under boot"
+
+#: app/views/services/index.html.erb:155
+msgid "Do Not Start on Boot"
+msgstr "Start ikke under boot"
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+msgid "Error: Refresh failed"
+msgstr "Fejl: Genopfrisk mislykkedes"
+
+#~ msgid "(cannot read status)"
+#~ msgstr "(kan ikke læse status)"
+
+#~ msgid "List of services could not be read"
+#~ msgstr "Listen over tjenester kunne ikke læses"
+
+#~ msgid "List of custom services could not be read"
+#~ msgstr "Listen over brugerdefinerede tjenester kunne ikke læses"
+
+#~ msgid "Unknown error on server side"
+#~ msgstr "Ukendt fejl på serverside"
+
+#~ msgid "Manage the LSB init scripts"
+#~ msgstr "Håndtering af LSB init-scripts"
+
+#, fuzzy
+#~| msgid "Repository"
+#~ msgid "Add New Repository"
+#~ msgstr "Softwarekilde"
+
+#, fuzzy
+#~| msgid "inetd service"
+#~ msgid "Filter repositories"
+#~ msgstr "inetd-tjeneste"
+
+#~ msgid "Enabled"
+#~ msgstr "Aktiveret"
+
+#~ msgid "Disabled"
+#~ msgstr "Deaktiveret"
 
 #~ msgid "Invalid session, please login again."
 #~ msgstr "Ugyldig session, log venligst ind igen."

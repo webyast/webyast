@@ -8,136 +8,339 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
-"PO-Revision-Date: 2001-10-18 10:13+0200\n"
-"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2011-12-13 19:27+0200\n"
+"Last-Translator: \n"
 "Language-Team: turkish <i18n@suse.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/users_controller.rb:18
-msgid "Invalid session, please login again."
-msgstr ""
+#: app/controllers/groups_controller.rb:31
+msgid "Missing group name parameter"
+msgstr "Grup ismi parametresi eksik"
 
-#: app/controllers/users_controller.rb:144
-msgid "User <i>%s</i> was successfully created."
-msgstr ""
+#: app/controllers/groups_controller.rb:47
+msgid "Missing group parameters"
+msgstr "Grup parametreleri eksik"
 
-#: app/controllers/users_controller.rb:148
-msgid "Empty UID value"
-msgstr ""
+#: app/controllers/groups_controller.rb:61
+msgid "Please enter a valid group name"
+msgstr "Lütfen geçerli bir grup adı girin"
 
-#: app/controllers/users_controller.rb:152
-msgid "UID: value >= 1000 is valid for local user only"
-msgstr ""
+#: app/controllers/groups_controller.rb:75
+msgid "Please enter a valid GID"
+msgstr "Lütden geçerli bir GID girin"
 
-#: app/controllers/users_controller.rb:197
-msgid "User <i>%s</i> was successfully updated."
-msgstr ""
+#: app/controllers/groups_controller.rb:89
+msgid "Please enter a valid group type. Only \"system\" or \"local\" are allowed."
+msgstr "Lütfen geçerli bir grup türü girin. Sadece \"sistem\" veya \"yerel\" türlerine izin veriliyor"
 
-#: app/controllers/users_controller.rb:218
-msgid "User <i>%s</i> was successfully removed."
-msgstr ""
+#: app/controllers/groups_controller.rb:104
+msgid "Please enter a valid list of members"
+msgstr "Lütfen geçerli üyelerin listesini girin."
 
-#: app/controllers/users_controller.rb:220
+#: app/controllers/groups_controller.rb:231
 #, fuzzy
-#| msgid "Error: Could not read profile %s: %s.\n"
-msgid "Error: Could not remove user <i>%s</i>."
-msgstr "Hata: %s profili okunamadı: %s.\n"
+#| msgid "Cannot update group <i>%s</i>: Unknown error"
+msgid "Cannot update group <i>%s</i>"
+msgstr "<i>%s</i> grubu güncellenemiyor: Bilinmeyen hata"
 
-#: app/views/users/index.html.erb:1
-msgid "Local User"
+#: app/controllers/groups_controller.rb:234
+msgid "Group <i>%s</i> has been updated."
+msgstr "<i>%s</i> grubu güncellenmiştir."
+
+#: app/controllers/groups_controller.rb:268
+#, fuzzy
+#| msgid "Cannot read groups list."
+msgid "Cannot create group <i>%s</i>"
+msgstr "Grupların listeleri okunamıyor."
+
+#: app/controllers/groups_controller.rb:271
+msgid "Group <i>%s</i> has been added."
+msgstr "<i>%s</i> grubu eklenmiştir."
+
+#: app/controllers/groups_controller.rb:306
+msgid "Cannot remove group <i>%{name}</i>: %{result}"
 msgstr ""
 
-#: app/views/users/index.html.erb:6
-msgid "Login"
-msgstr "Kullanıcı girişi"
+#: app/controllers/groups_controller.rb:308
+msgid "Group <i>%s</i> has been deleted."
+msgstr "<i>%s</i> grubu silinmiştir."
 
-#: app/views/users/index.html.erb:7 app/views/users/edit.html.erb:11
-#: app/views/users/new.html.erb:8
+#: app/controllers/users_controller.rb:110
+msgid "No users found."
+msgstr "Hiç kullanıcı bulunamadı"
+
+#: app/controllers/users_controller.rb:254
 #, fuzzy
-#| msgid "Name"
+#| msgid "User <i>%s</i> was successfully created."
+msgid "User %s was successfully created."
+msgstr "<i>%s</i> kullanıcısı başarılı bir şekilde oluşturuldu."
+
+#: app/controllers/users_controller.rb:299
+#, fuzzy
+#| msgid "User <i>%s</i> was successfully updated."
+msgid "User %s was successfully updated."
+msgstr "<i>%s</i> kullanıcısı başarılı bir şekilde güncellendi."
+
+#: app/controllers/users_controller.rb:318
+#, fuzzy
+#| msgid "Error: Could not remove user <i>%s</i>."
+msgid "Error: Could not remove user %s."
+msgstr "Hata: <i>%s</i> kullanıcısı silinemez."
+
+#: app/controllers/users_controller.rb:327
+#, fuzzy
+#| msgid "User <i>%s</i> was successfully removed."
+msgid "User %s was successfully removed."
+msgstr "<i>%s</i> kullanıcısı başarılı bir şekilde silindi."
+
+#: app/views/users/new.html.erb:71 app/views/users/index.html.erb:48
+msgid "Select Groups"
+msgstr "Grupları seç"
+
+#: app/views/users/new.html.erb:72 app/views/users/index.html.erb:49
+msgid "Selected Groups"
+msgstr "Seçili Gruplar"
+
+# include/ui/wizard_hw.ycp:48
+#: app/views/users/new.html.erb:73 app/views/users/index.html.erb:50
+msgid "Available Groups"
+msgstr "Mevcut Gruplar"
+
+#: app/views/users/new.html.erb:74 app/views/users/index.html.erb:51
+msgid "Click group names to select/unselect groups"
+msgstr "Grupları seçmek veya seçimini kaldırmak için grup isimlerine tıklayın."
+
+#: app/views/users/new.html.erb:91 app/views/users/index.html.erb:68
+#: app/views/users/_user_form.erb:91
+msgid "Select Default Group"
+msgstr "Geçerli grubu seç"
+
+#: app/views/users/new.html.erb:92 app/views/users/index.html.erb:69
+msgid "Click a group name to choose users default group"
+msgstr "Kullanıcıların geçerli grubunu seçmek için grup adına tıklayın"
+
+#: app/views/users/new.html.erb:106 app/views/users/index.html.erb:83
+msgid "Select Roles"
+msgstr "Rolleri Seç"
+
+#: app/views/users/new.html.erb:107 app/views/users/index.html.erb:84
+msgid "Selected Roles"
+msgstr "Seçili Roller"
+
+# include/ui/wizard_hw.ycp:48
+#: app/views/users/new.html.erb:108 app/views/users/index.html.erb:85
+msgid "Available Roles"
+msgstr "Mevcut Roller"
+
+#: app/views/users/new.html.erb:109 app/views/users/index.html.erb:86
+msgid "Click group names to select/unselect roles"
+msgstr "Rolleri seçmek veya seçimini kaldırmak için grup adlarına tıklayın."
+
+#: app/views/users/new.html.erb:138
+msgid "The passwords do not match."
+msgstr "Şifreler eşleşmiyor"
+
+#: app/views/users/new.html.erb:139 app/views/users/index.html.erb:110
+msgid "This field is required."
+msgstr "Bu alan gereklidir."
+
+#: app/views/users/new.html.erb:150 app/views/users/index.html.erb:101
+#: app/views/users/index.html.erb:126 app/views/users/_user_form.erb:153
+#: app/views/groups/new.html.erb:131 app/views/groups/index.html.erb:162
+#: app/views/groups/index.html.erb:173
+msgid "Please wait"
+msgstr "Lütfen bekleyin"
+
+#: app/views/users/new.html.erb:160 app/views/users/index.html.erb:134
+msgid "Password Strength:"
+msgstr "Şifre Güvenliği:"
+
+#: app/views/users/new.html.erb:162 app/views/users/index.html.erb:136
+msgid "Weak"
+msgstr "Zayıf"
+
+#: app/views/users/new.html.erb:163 app/views/users/index.html.erb:137
+msgid "Normal"
+msgstr "Normal"
+
+#: app/views/users/new.html.erb:164 app/views/users/index.html.erb:138
+msgid "Medium"
+msgstr "Orta"
+
+#: app/views/users/new.html.erb:165 app/views/users/index.html.erb:139
+msgid "Strong"
+msgstr "Güçlü"
+
+#: app/views/users/new.html.erb:166 app/views/users/index.html.erb:140
+msgid "Very Strong"
+msgstr "Çok güçlü"
+
+#: app/views/users/new.html.erb:204 app/views/users/index.html.erb:173
+msgid "Users"
+msgstr "Kullanıcılar"
+
+#: app/views/users/new.html.erb:204
+msgid "Add new user"
+msgstr "Yeni kullanıcı ekle"
+
+#: app/views/users/index.html.erb:109
+msgid " The passwords do not match."
+msgstr "Şifreler eşleşmiyor."
+
+#: app/views/users/index.html.erb:184 app/views/groups/index.html.erb:115
+msgid "Filter:"
+msgstr "Filtre:"
+
+#: app/views/users/index.html.erb:190
+msgid "New User"
+msgstr "Yeni Kullanıcı"
+
+#: app/views/users/index.html.erb:192 app/views/users/index.html.erb:227
+#: app/views/users/_user_form.erb:72
+msgid "Manage Groups"
+msgstr "Grupları Yönetme"
+
+#: app/views/users/_user_form.erb:25
+msgid "Login Settings"
+msgstr "Giriş Ayarları"
+
+#: app/views/users/_user_form.erb:28
 msgid "Full Name"
-msgstr "Ad"
+msgstr "Tam isim"
 
-#: app/views/users/index.html.erb:8
-msgid "Edit"
-msgstr ""
-
-#: app/views/users/index.html.erb:27
-#, fuzzy
-#| msgid "You are <strong>online</strong>"
-msgid "<strong>[New User]</strong>"
-msgstr "<strong>Çevrimiçi</strong> gözüküyorsunuz"
-
-#: app/views/users/index.html.erb:31 app/views/users/edit.html.erb:43
-#: app/views/users/new.html.erb:44
-msgid "Back"
-msgstr ""
-
-#: app/views/users/edit.html.erb:1
-msgid "Edit user %s"
-msgstr ""
-
-#: app/views/users/edit.html.erb:15 app/views/users/new.html.erb:12
-msgid "Groups"
-msgstr "Gruplar"
-
-#: app/views/users/edit.html.erb:19
-#, fuzzy
-#| msgid "Default Route"
-msgid "Default Group"
-msgstr "Öntanımlı yol"
-
-#: app/views/users/edit.html.erb:23 app/views/users/new.html.erb:20
-#, fuzzy
-#| msgid "Directory\n"
-msgid "Home Directory"
-msgstr "Dizin\n"
-
-#: app/views/users/edit.html.erb:27 app/views/users/new.html.erb:28
-#, fuzzy
-#| msgid "Login"
-msgid "Login Shell"
-msgstr "Kullanıcı girişi"
-
-#: app/views/users/edit.html.erb:31 app/views/users/new.html.erb:32
-#, fuzzy
-#| msgid "Login"
+#: app/views/users/_user_form.erb:34
 msgid "Login Name"
-msgstr "Kullanıcı girişi"
+msgstr "Kullanıcı İsmi"
 
-#: app/views/users/edit.html.erb:35 app/views/users/new.html.erb:36
-msgid "UID Number"
-msgstr ""
+#: app/views/users/_user_form.erb:38
+msgid "User already exists."
+msgstr "Kullanıcı zaten var."
 
-#: app/views/users/edit.html.erb:39 app/views/users/new.html.erb:40
+#: app/views/users/_user_form.erb:43
 msgid "Password"
 msgstr "Parola"
 
-#: app/views/users/edit.html.erb:43
-msgid "Update"
-msgstr "Güncelleştir"
+#: app/views/users/_user_form.erb:50
+msgid "Confirm Password"
+msgstr "Şifreyi Onayla"
 
-#: app/views/users/new.html.erb:1
-msgid "New User"
-msgstr ""
+#: app/views/users/_user_form.erb:59 app/views/users/_user_form.erb:63
+#: app/views/groups/new.html.erb:91 app/views/groups/index.html.erb:104
+msgid "Groups"
+msgstr "Gruplar"
 
-#: app/views/users/new.html.erb:16
-#, fuzzy
-#| msgid "Default route ok."
-msgid "Default Group (GID)"
-msgstr "Öntanımlı yol geçerli."
+#: app/views/users/_user_form.erb:82
+msgid "Default Group"
+msgstr "Geçerli Grup"
 
-#: app/views/users/new.html.erb:24
-msgid "Do not create home directory"
-msgstr ""
+#: app/views/users/_user_form.erb:103
+msgid "Advanced"
+msgstr "Gelişmiş"
 
-# clients/inst_custom_part.ycp:2940
-#: app/views/users/new.html.erb:44
-#, fuzzy
-#| msgid "Created On: "
-msgid "Create"
-msgstr "Oluşturulma tarihi: "
+#: app/views/users/_user_form.erb:106
+msgid "Home Directory"
+msgstr "Ev dizini"
+
+#: app/views/users/_user_form.erb:112
+msgid "Login Shell"
+msgstr "Kullanıcı girişi"
+
+#: app/views/users/_user_form.erb:118
+msgid "UID Number"
+msgstr "UID Numarası"
+
+#: app/views/users/_user_form.erb:127
+msgid "Roles"
+msgstr "Roller"
+
+#: app/views/users/_user_form.erb:136
+msgid "Manage Roles"
+msgstr "Rolleri Yönet"
+
+#: app/views/users/_user_form.erb:151 app/views/groups/new.html.erb:132
+#: app/views/groups/index.html.erb:163
+msgid "Save"
+msgstr "Kaydet"
+
+#: app/views/users/_user_form.erb:154 app/views/groups/index.html.erb:174
+msgid "Delete"
+msgstr "Silinecek"
+
+#: app/views/users/_user_form.erb:156
+msgid "Are you sure to delete user '%s'?"
+msgstr "'%s' kullanıcısını silmeye emin misiniz?"
+
+#: app/views/groups/new.html.erb:59 app/views/groups/index.html.erb:53
+msgid "Select Members"
+msgstr "Üyeleri Seç"
+
+#: app/views/groups/new.html.erb:60 app/views/groups/index.html.erb:54
+msgid "Selected Members"
+msgstr "Seçili Üyeler"
+
+# include/ui/wizard_hw.ycp:48
+#: app/views/groups/new.html.erb:61 app/views/groups/index.html.erb:55
+msgid "Available Members"
+msgstr "Mevcut Üyeler"
+
+#: app/views/groups/new.html.erb:62 app/views/groups/index.html.erb:56
+msgid "Click user names to select/unselect members"
+msgstr "Üyüleri seçmek veya seçimlerini kaldırmak için kullanıcı isimlerine tıklayın."
+
+#: app/views/groups/new.html.erb:91 app/views/groups/new.html.erb:102
+msgid "Add new group"
+msgstr "Yeni grup ekle"
+
+#: app/views/groups/new.html.erb:109 app/views/groups/index.html.erb:143
+msgid "Group Name"
+msgstr "Grup Adı"
+
+#: app/views/groups/new.html.erb:113 app/views/groups/index.html.erb:151
+msgid "Members"
+msgstr "Üyeler"
+
+#: app/views/groups/new.html.erb:116 app/views/groups/index.html.erb:154
+msgid "Manage Members"
+msgstr "Üyeleri Yönet"
+
+#: app/views/groups/index.html.erb:121
+msgid "New Group"
+msgstr "Yeni Grup"
+
+#: app/views/groups/index.html.erb:123 app/views/groups/index.html.erb:192
+msgid "Manage Users"
+msgstr "Kullanıcıları Yönet"
+
+#: app/views/groups/index.html.erb:147
+msgid "Group ID"
+msgstr "Grup ID'si"
+
+#: app/views/groups/index.html.erb:176
+msgid "Are you sure to delete group '%s'?"
+msgstr "'%s' grubunu silmeye emin misiniz?"
+
+#~ msgid "Cannot read users list."
+#~ msgstr "Kullanıcıların listeleri okunamıyor."
+
+#~ msgid "Group named <i>%s</i> was not found."
+#~ msgstr "<i>%s</i> adlı grup bulunamadı."
+
+#~ msgid "No groups found."
+#~ msgstr "Hiç grup bulunamadı."
+
+#~ msgid "Unknown backend error"
+#~ msgstr "Bilinmeyen sunucu uygulama hatası"
+
+#~ msgid "Manage user accounts"
+#~ msgstr "Kullanıcı hesaplarını yönet"
+
+#~ msgid "Manage groups"
+#~ msgstr "Grupları Yönet"
+
+#~ msgid "Login"
+#~ msgstr "Kullanıcı girişi"

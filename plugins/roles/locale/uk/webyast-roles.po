@@ -6,69 +6,135 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"Project-Id-Version: @PACKAGE@\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2006-03-22 23:18-0700\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
 msgstr ""
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
+#: app/controllers/roles_controller.rb:136
 #, fuzzy
-msgid "Available Users"
-msgstr "Наявні процесори"
+#| msgid "This system is already registered."
+msgid "Role name is already used."
+msgstr "Ця система вже зареєстрована."
 
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/controllers/roles_controller.rb:155
 #, fuzzy
+#| msgid "User <i>%s</i> was successfully removed."
+msgid "Role '%s' was successfully removed."
+msgstr "Успішно вилучено користувача <i>%s</i>."
+
+#: app/views/roles/index.html.erb:7
+#, fuzzy
+#| msgid "Role"
 msgid "Roles"
 msgstr "Роль"
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
-msgid "Create Role"
+#: app/views/roles/index.html.erb:25
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "In order to assign the user to roles,"
+msgstr "У доступі відмовлено"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
 msgstr ""
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
-msgid "Assign Permissions"
-msgstr "Наявні процесори"
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr ""
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:38
+#, fuzzy
+#| msgid "Create"
+msgid "Create Role"
+msgstr "Створити"
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr ""
+
+#: app/views/roles/index.html.erb:53
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "User already assigned"
+msgstr "У доступі відмовлено"
+
+#: app/views/roles/index.html.erb:104
+#, fuzzy
+#| msgid "User Permissions"
+msgid "Assign Permissions"
+msgstr "Права доступу користувачів"
+
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
 msgstr ""
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
+#: app/views/roles/index.html.erb:169
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required"
+msgstr "Назва файла - потрібна."
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
 msgstr ""
+
+#: app/views/roles/index.html.erb:235
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Зачекайте, будь ласка..."
+
+#, fuzzy
+#~| msgid "Error: Could not remove user <i>%s</i>."
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Помилка: Не вдалось вилучити користувача <i>%s</i>."
+
+#, fuzzy
+#~| msgid "Can't find %s."
+#~ msgid "Cannot find roles"
+#~ msgstr "Не вдається знайти %s."
+
+#, fuzzy
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "Вибраний ресурс"
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Наявні оновлення"
+
+#, fuzzy
+#~| msgid "Invalid principal name"
+#~ msgid "Invalid role name"
+#~ msgstr "Не правильна назва головного"
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "У доступі відмовлено"
 
 #, fuzzy
 #~| msgid "Permissions denied"
 #~ msgid "Permissions granted by role"
 #~ msgstr "У доступі відмовлено"
+
+#, fuzzy
+#~| msgid "Available Processors"
+#~ msgid "Available permissions"
+#~ msgstr "Наявні процесори"
 
 #, fuzzy
 #~| msgid "Description: "
@@ -79,6 +145,11 @@ msgstr ""
 #~| msgid "description"
 #~ msgid ")}-description"
 #~ msgstr "опис"
+
+#, fuzzy
+#~| msgid "Remaining time: %s"
+#~ msgid "Remaining users"
+#~ msgstr "Час, що залишився: %s"
 
 #~ msgid "Save"
 #~ msgstr "Зберегти"

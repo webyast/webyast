@@ -1,205 +1,169 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# translation of webyast-services.es.po to Spanish
+# Carlos E. Robinson <carlos.e.r@opensuse.org>, 2009.
+# Carlos E. Robinson M. <carlos.e.r@opensuse.org>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-services-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:24\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-services.es\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-17 00:33+0200\n"
+"Last-Translator: Carlos E. Robinson <carlos.e.r@opensuse.org>\n"
+"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Spanish\n"
 
-#: app/controllers/services_controller.rb:46 ./app/controllers/services_controller.rb:46
-msgid "(cannot read status)"
-msgstr "(no se puede leer el estado)"
-
-#: app/controllers/services_controller.rb:74 ./app/controllers/services_controller.rb:74
-msgid "List of services could not be read"
-msgstr "No es posible leer la lista de servicios"
-
-#: app/controllers/services_controller.rb:76 ./app/controllers/services_controller.rb:76
-msgid "List of custom services could not be read"
-msgstr "No es posible leer la lista de servicios personalizados"
-
-#: app/controllers/services_controller.rb:112 ./app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:88
 msgid "success"
-msgstr "correcto"
+msgstr "éxito"
 
-#: app/controllers/services_controller.rb:113 ./app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:89
 msgid "unspecified error"
 msgstr "error no especificado"
 
-#: app/controllers/services_controller.rb:114 ./app/controllers/services_controller.rb:114
+#: app/controllers/services_controller.rb:90
 msgid "invalid or excess argument(s)"
-msgstr "argumentos no válidos o excesivos"
+msgstr "argumento(s) inválido(s) o en exceso"
 
-#: app/controllers/services_controller.rb:115 ./app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:91
 msgid "unimplemented feature"
-msgstr "función no implementada"
+msgstr "funcionalidad no implementada"
 
-#: app/controllers/services_controller.rb:116 ./app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:92
 msgid "user had insufficient privilege"
-msgstr "usuario con privilegios insuficientes"
+msgstr "el usuario no tiene suficientes privilegios"
 
-#: app/controllers/services_controller.rb:117 ./app/controllers/services_controller.rb:117
+#: app/controllers/services_controller.rb:93
 msgid "program is not installed"
-msgstr "programa no instalado"
+msgstr "el programa no está instalado"
 
-#: app/controllers/services_controller.rb:118 ./app/controllers/services_controller.rb:118
+#: app/controllers/services_controller.rb:94
 msgid "program is not configured"
-msgstr "programa no configurado"
+msgstr "el programa no está configurado"
 
-#: app/controllers/services_controller.rb:119 ./app/controllers/services_controller.rb:119
+#: app/controllers/services_controller.rb:95
 msgid "program is not running"
 msgstr "el programa no está ejecutándose"
 
-#: app/controllers/services_controller.rb:126 ./app/controllers/services_controller.rb:126
-msgid "Unknown error on server side"
-msgstr "Error desconocido en el servidor"
-
-#: app/views/services/_result.rhtml:7 ./app/views/services/_result.rhtml:7
+# CER 2009 12.1: no me gusta
+# CER 2011 03 05 12.4 Sigue sin gustarme, lo cambio? “Resultado del servido de llamada inversa” o “resultado de la llamada de/al servicio”?
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
-msgstr "Resultado de la llamada de servicio"
+msgstr "Resultado de la llamada al servicio"
 
-#: app/views/services/_result.rhtml:10 ./app/views/services/_result.rhtml:10
+#: app/views/services/_result.html.erb:12
 msgid "Result"
 msgstr "Resultado"
 
-#: app/views/services/_result.rhtml:15 ./app/views/services/_result.rhtml:15
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Descripción"
 
-#: app/views/services/index.rhtml:191 ./app/views/services/index.rhtml:191 ./shortcuts.yml:7
-msgid "System Services"
-msgstr "Servicios del sistema"
-
-#: app/views/services/index.rhtml:197 ./app/views/services/index.rhtml:197
-msgid "You do not have permission to execute the services."
-msgstr "No tiene permiso para ejecutar los servicios."
-
-#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
-#: ./app/views/services/index.rhtml:202 ./app/views/services/index.rhtml:247
-msgid "Filter services"
-msgstr "Filtrar servicios"
-
-#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
-#: app/views/services/index.rhtml:266 ./app/views/services/index.rhtml:204
-#: ./app/views/services/index.rhtml:251 ./app/views/services/index.rhtml:266
-msgid "All"
-msgstr "Todo"
-
-#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
-#: ./app/views/services/index.rhtml:205 ./app/views/services/index.rhtml:252
-msgid "Running"
-msgstr "En ejecución"
-
-#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
-#: ./app/views/services/index.rhtml:206 ./app/views/services/index.rhtml:253
-msgid "Not Running"
-msgstr "No está en ejecución"
-
-#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
-#: ./app/views/services/index.rhtml:207 ./app/views/services/index.rhtml:254
-msgid "Dead"
-msgstr "Muerto"
-
-#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
-#: ./app/views/services/index.rhtml:208 ./app/views/services/index.rhtml:255
-msgid "Started on Boot"
-msgstr "Iniciado al arrancar"
-
-#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
-#: ./app/views/services/index.rhtml:209 ./app/views/services/index.rhtml:256
-msgid "Not Started on Boot"
-msgstr "No iniciado al arrancar"
-
-#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
-#: app/views/services/index.rhtml:235 ./app/views/services/index.rhtml:216
-#: ./app/views/services/index.rhtml:231 ./app/views/services/index.rhtml:235
-msgid "Quick Search"
-msgstr "Búsqueda rápida"
-
-#: app/views/services/index.rhtml:242 ./app/views/services/index.rhtml:242
-msgid "Add New Repository"
-msgstr "Añadir nuevo repositorio"
-
-#: app/views/services/index.rhtml:262 ./app/views/services/index.rhtml:262
-msgid "Filter repositories"
-msgstr "Filtrar repositorios"
-
-#: app/views/services/index.rhtml:267 ./app/views/services/index.rhtml:267
-msgid "Enabled"
-msgstr "Activado"
-
-#: app/views/services/index.rhtml:268 ./app/views/services/index.rhtml:268
-msgid "Disabled"
-msgstr "Inhabilitado"
-
-#: app/views/services/index.rhtml:289 ./app/views/services/index.rhtml:289
-msgid "Description for service is not available"
-msgstr "No hay disponible una descripción del servicio"
-
-#: app/views/services/index.rhtml:313 ./app/views/services/index.rhtml:313
-msgid "(refresh)"
-msgstr "(actualizar)"
-
-#: app/views/services/index.rhtml:345 ./app/views/services/index.rhtml:345
-msgid "Start"
-msgstr "Inicio"
-
-#: app/views/services/index.rhtml:346 ./app/views/services/index.rhtml:346
-msgid "Stop"
-msgstr "Detener"
-
-#: app/views/services/index.rhtml:347 ./app/views/services/index.rhtml:347
-msgid "Restart"
-msgstr "Reiniciar"
-
-#: app/views/services/index.rhtml:348 ./app/views/services/index.rhtml:348
-msgid "Start on Boot"
-msgstr "Iniciar al arrancar"
-
-#: app/views/services/index.rhtml:349 ./app/views/services/index.rhtml:349
-msgid "Do Not Start on Boot"
-msgstr "No iniciar al arrancar"
-
-#: app/views/services/_status.rhtml:7 ./app/views/services/_status.rhtml:7
+#: app/views/services/_status.html.erb:7
 msgid "Service will be started on boot."
-msgstr "El servicio se reiniciará al arrancar."
+msgstr "El servicio será iniciado durante el arranque."
 
-#: app/views/services/_status.rhtml:9 ./app/views/services/_status.rhtml:9
+#: app/views/services/_status.html.erb:9
 msgid "Service will not be started on boot."
-msgstr "El servicio no se iniciará al arrancar."
+msgstr "El servicio no será iniciado durante el arranque."
 
-#: app/views/services/_status.rhtml:32 ./app/views/services/_status.rhtml:32
+#: app/views/services/_status.html.erb:32
 msgid "status unknown"
 msgstr "estado desconocido"
 
-#: app/views/services/_status.rhtml:34 ./app/views/services/_status.rhtml:34
+#: app/views/services/_status.html.erb:34
 msgid "running"
 msgstr "en ejecución"
 
-#: app/views/services/_status.rhtml:38 ./app/views/services/_status.rhtml:38
+#: app/views/services/_status.html.erb:38
 msgid "dead"
 msgstr "muerto"
 
-#: app/views/services/_status.rhtml:42 ./app/views/services/_status.rhtml:42
+#: app/views/services/_status.html.erb:42
 msgid "not running"
-msgstr "no está en ejecución"
+msgstr "no se está ejecutando"
 
-#: app/views/services/_status.rhtml:46 ./app/views/services/_status.rhtml:46
+#: app/views/services/_status.html.erb:46
 msgid "status unknown: %d"
 msgstr "estado desconocido: %d"
 
-#: app/views/services/_status.rhtml:49 ./app/views/services/_status.rhtml:49
+#: app/views/services/_status.html.erb:49
 msgid "Current status of the service:"
 msgstr "Estado actual del servicio:"
 
-#: ./shortcuts.yml:8
-msgid "Manage the LSB init scripts"
-msgstr "Gestionar los guiones de inicio LSB"
+#: app/views/services/index.html.erb:48
+msgid "System Services"
+msgstr "Servicios del sistema"
 
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
+msgstr "No tiene usted permiso para ejecutar los servicios."
+
+#: app/views/services/index.html.erb:66
+msgid "Quick Search"
+msgstr "Búsqueda rápida"
+
+#: app/views/services/index.html.erb:71
+msgid "Filter services"
+msgstr "Servicios de filtro"
+
+#: app/views/services/index.html.erb:76
+msgid "All"
+msgstr "Todo"
+
+#: app/views/services/index.html.erb:77
+msgid "Running"
+msgstr "Ejecutando"
+
+#: app/views/services/index.html.erb:78
+msgid "Not Running"
+msgstr "No ejecutando"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr "Muerto"
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr "Iniciado durante el arranque"
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr "No iniciado durante el arranque"
+
+#: app/views/services/index.html.erb:97
+msgid "Description for service is not available"
+msgstr "La descripción del servicio no está disponible"
+
+#: app/views/services/index.html.erb:121
+msgid "(refresh)"
+msgstr "(refrescar)"
+
+#: app/views/services/index.html.erb:151
+msgid "Start"
+msgstr "Iniciar"
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr "Alto"
+
+#: app/views/services/index.html.erb:153
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr "Iniciar durante el arranque"
+
+#: app/views/services/index.html.erb:155
+msgid "Do Not Start on Boot"
+msgstr "No iniciar durante el arranque"
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+msgid "Error: Refresh failed"
+msgstr "Error: Falló el refresco"

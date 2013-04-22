@@ -1,0 +1,88 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2003-08-14 10:47+0200\n"
+"Last-Translator: xxx <yyy@example.org>\n"
+"Language-Team: Tamil <i18n@suse.de>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Could not load the global configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "உலகமய உள்ளமைவை ஏற்ற முடியவில்லை."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:65
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving LDAP client configuration."
+msgstr "சான்றிதழை விளக்கும்போது பிழை."
+
+#: app/views/ldap/index.html.erb:33
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "கோப்புபெயர் தேவைப்படுகிறது."
+
+#: app/views/ldap/index.html.erb:34
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "IP முகவரியை உள்ளிடவும்"
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:88
+#, fuzzy
+#| msgid "LDAP client service"
+msgid "LDAP client"
+msgstr "LDAP கிளையன்ட் சேவை"
+
+#: app/views/ldap/index.html.erb:101
+#, fuzzy
+#| msgid "Select WEP authentication mode:"
+msgid "Enable LDAP Authentication"
+msgstr "WEP ஏற்கத்தக்கதாக்குதல் வகையை தேர்ந்தெடுக்கவும்:"
+
+#: app/views/ldap/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "LDAP Server Address"
+msgstr "பெயர் சர்வர் முகவரி"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:127
+#, fuzzy
+#| msgid "Current Connection"
+msgid "Secure Connection"
+msgstr "நடப்பு இணைப்பு"
+
+#, fuzzy
+#~| msgid "Configure scanner?"
+#~ msgid "Configure LDAP client"
+#~ msgstr "வருடியை உள்ளமைக்கலாமா?"

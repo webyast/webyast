@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-30 16:16+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2009-09-24 21:07+0100\n"
 "Last-Translator: Jaromir Cervenka <cervajz@cervajz.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -15,27 +15,19 @@ msgstr ""
 "X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: app/controllers/system_controller.rb:36
-#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:77
 msgid "Rebooting the machine..."
 msgstr "Restartování systému..."
 
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:81
 msgid "Cannot reboot the machine!"
 msgstr "Nelze restartovat systém!"
 
 # počítače mi přišlo blbé a stroje taky. Cervajz.
-#: app/controllers/system_controller.rb:57
-#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
 msgstr "Vypínání systému...."
 
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
 msgstr "Nelze vypnout systém!"

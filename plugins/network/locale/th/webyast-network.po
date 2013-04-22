@@ -3,148 +3,258 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: i18n@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2008-01-04 08:58+0100\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Thai <i18n@suse.de>\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/network_controller.rb:89
-#: app/controllers/network_controller.rb:89
-#, fuzzy
-msgid "Manual"
-msgstr "สั่งด้วยตนเอง"
-
-#: app/controllers/network_controller.rb:89
-#: app/controllers/network_controller.rb:89
-msgid "Automatic"
-msgstr "อัตโนมัติ"
-
-#: app/controllers/network_controller.rb:163
-#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
 msgstr ""
 
-#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
-#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
-#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
-#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
-#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
-#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
-#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
-msgid "This field is required"
-msgstr ""
-
-#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
-#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
-#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
-msgid "Enter a valid IP address"
-msgstr ""
-
-#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
-msgid "Enter a valid subnet mask or prefix"
-msgstr ""
-
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-msgid "Enter a valid domain name"
-msgstr ""
-
-#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
-msgid "whitespace - invalid character."
-msgstr ""
-
-#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
-msgid " - can not start with a digit."
-msgstr ""
-
-#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
-msgid "periodic '-' is not allowed."
-msgstr ""
-
-#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
-msgid "can not end with (-) hyphen."
-msgstr ""
-
-#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
-msgid "can not start with (-) hyphen."
-msgstr ""
-
-#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
-msgid " - is invalid character for hostname."
-msgstr ""
-
-#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
-#: shortcuts.yml:6
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "ระบบเครือข่าย"
 
-#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
-msgid "General settings"
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+#, fuzzy
+#| msgid "Interface"
+msgid "Interface name"
+msgstr "ส่วนเชื่อมต่อ"
+
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
 msgstr ""
 
-#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr ""
+
+#: app/views/network/_form.html.erb:56
 #, fuzzy
+#| msgid "Start services"
+msgid "Bridge devices:"
+msgstr "เริ่มบริการ"
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr ""
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
+msgstr ""
+
+#: app/views/network/_form.html.erb:132
+#, fuzzy
+#| msgid "Configuration"
 msgid "Configuration mode"
 msgstr "การปรับแต่งค่า"
 
-#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
-msgid "IP Address"
-msgstr "หมายเลขไอพี"
-
-#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
-msgid "IP address"
-msgstr "ที่อยู่ไอพี"
-
-#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+#: app/views/network/_form.html.erb:162
 #, fuzzy
-msgid "Subnet mask/Prefixlen"
-msgstr "ค่าซับเน็ตมาสก์ใช้ไม่ได้"
+#| msgid "Configuration"
+msgid "DNS configuration"
+msgstr "การปรับแต่งค่า"
 
-#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
-#, fuzzy
-msgid "Default route"
-msgstr "การหาเส้นทาง (Route) ปริยาย"
-
-#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
-#, fuzzy
-msgid "DNS"
-msgstr "โมเด็ม DSL"
-
-#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+#: app/views/network/_form.html.erb:168
 msgid "Hostname"
 msgstr "ชื่อเครื่อง"
 
-#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+#: app/views/network/_form.html.erb:172
 msgid "Domain"
 msgstr "โดเมน"
 
-#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
-msgid "Change hostname by DHCP"
-msgstr ""
-
-#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+#: app/views/network/_form.html.erb:177
 #, fuzzy
+#| msgid "Name Servers"
 msgid "Name servers"
 msgstr "เครื่องให้บริการสืบค้นชื่อ"
 
-#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+#: app/views/network/_form.html.erb:182
 #, fuzzy
+#| msgid "Search in"
 msgid "Search domains"
 msgstr "ค้นหาใน"
 
-#: shortcuts.yml:7
+#: app/views/network/_form.html.erb:187
 #, fuzzy
-msgid "Manage network devices"
-msgstr "อุปกรณ์เครือข่าย"
+#| msgid "&Change Hostname via DHCP"
+msgid "Change hostname by DHCP"
+msgstr "เปลี่ยนชื่อเครื่องผ่านทาง DHCP"
 
-#~ msgid "Not configured"
-#~ msgstr "ยังไม่มีการปรับแต่ง"
+#: app/views/network/_form.html.erb:202
+#, fuzzy
+#| msgid "Configuration"
+msgid "IP configuration"
+msgstr "การปรับแต่งค่า"
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
+msgid "IP address"
+msgstr "ที่อยู่ไอพี"
+
+#: app/views/network/_form.html.erb:213
+#, fuzzy
+#| msgid "Subnetmask is invalid."
+msgid "Subnet mask/Prefixlen"
+msgstr "ค่าซับเน็ตมาสก์ใช้ไม่ได้"
+
+#: app/views/network/_form.html.erb:217
+#, fuzzy
+#| msgid "D&efault Route"
+msgid "Default route"
+msgstr "การหาเส้นทาง (Route) ปริยาย"
+
+#: app/views/network/_form.html.erb:227
+#, fuzzy
+#| msgid "&Save"
+msgid "Save"
+msgstr "จัดเก็บ"
+
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+#, fuzzy
+#| msgid "Invalid IP address."
+msgid "Enter a valid IP address"
+msgstr "ที่อยู่ไอพีใช้งานไม่ได้"
+
+#: app/views/network/_validation.html.erb:59
+#, fuzzy
+#| msgid "Enter a valid server name."
+msgid "Enter a valid subnet mask or prefix"
+msgstr "ป้อนชื่อเครื่องแม่ข่ายที่ใช้งานได้"
+
+#: app/views/network/_validation.html.erb:67
+#, fuzzy
+#| msgid "Enter a valid filename."
+msgid "Enter a valid hostname"
+msgstr "ป้อนชื่อแฟ้มที่ใช้งานได้"
+
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+#, fuzzy
+#| msgid "Enter a valid filename."
+msgid "Enter a valid domain name"
+msgstr "ป้อนชื่อแฟ้มที่ใช้งานได้"
+
+#: app/views/network/_validation.html.erb:83
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "โปรดรอ..."
+
+#: app/views/network/index.html.erb:36
+#, fuzzy
+#| msgid "Interface"
+msgid "Physical Interfaces"
+msgstr "ส่วนเชื่อมต่อ"
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
+msgid "Interface"
+msgstr "ส่วนเชื่อมต่อ"
+
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr ""
+
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+#, fuzzy
+#| msgid "Not configured"
+msgid "configure"
+msgstr "ยังไม่มีการปรับแต่ง"
+
+#: app/views/network/index.html.erb:64
+#, fuzzy
+#| msgid "Interface"
+msgid "Virtual Interfaces"
+msgstr "ส่วนเชื่อมต่อ"
+
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr ""
+
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr ""
+
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr ""
+
+#: app/views/network/index.html.erb:98
+#, fuzzy
+#| msgid "Delete"
+msgid "delete"
+msgstr "ลบ"
+
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr ""
+
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr ""
+
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr ""
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr ""
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Manually"
+#~ msgid "Manual"
+#~ msgstr "สั่งด้วยตนเอง"
+
+#~ msgid "Automatic"
+#~ msgstr "อัตโนมัติ"
+
+#, fuzzy
+#~| msgid "Detect network devices"
+#~ msgid "Manage network devices"
+#~ msgstr "ตรวจสอบอุปกรณ์เครือข่าย"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "General settings"
+#~ msgstr "การตั้งค่าทั่วไป"
+
+#~ msgid "IP Address"
+#~ msgstr "หมายเลขไอพี"
+
+#, fuzzy
+#~| msgid "DSL"
+#~ msgid "DNS"
+#~ msgstr "โมเด็ม DSL"
 
 #, fuzzy
 #~| msgid "Hostname not specified."
@@ -155,9 +265,6 @@ msgstr "อุปกรณ์เครือข่าย"
 #~| msgid "Zone type %1 is not supported."
 #~ msgid "Domain is required. An empty domain is not supported."
 #~ msgstr "ยังไม่รองรับโซนประเภท %1"
-
-#~ msgid "Interface"
-#~ msgstr "ส่วนเชื่อมต่อ"
 
 #~ msgid "Select"
 #~ msgstr "เลือก"
@@ -175,16 +282,13 @@ msgstr "อุปกรณ์เครือข่าย"
 #~ msgid "Routing"
 #~ msgstr "การหาเส้นทาง (Routing)"
 
-#, fuzzy
-#~| msgid "&Save"
-#~ msgid "Save"
-#~ msgstr "จัดเก็บ"
-
 #~ msgid "Cancel"
 #~ msgstr "ยกเลิก"
 
-#~ msgid "Configuration"
-#~ msgstr "การปรับแต่งค่า"
+#, fuzzy
+#~| msgid "Network Devices"
+#~ msgid "Edit Network Device"
+#~ msgstr "อุปกรณ์เครือข่าย"
 
 #~ msgid "ID"
 #~ msgstr "ค่าประจำตัว"

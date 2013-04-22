@@ -3,284 +3,274 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: i18n@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2008-01-04 08:58+0100\n"
 "Last-Translator: i18n@suse.de\n"
 "Language-Team: Thai <i18n@suse.de>\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/registration_controller.rb:32
-#: app/controllers/registration_controller.rb:32
+#: app/models/registration_state.rb:27
 #, fuzzy
+#| msgid "Registration"
+msgid "Registration is missing"
+msgstr "การลงทะเบียน"
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr ""
+
+#: app/models/registration_state.rb:30
+#, fuzzy
+#| msgid "Registered Host"
+msgid "register"
+msgstr "เครื่องที่ลงทะเบียนไว้แล้ว"
+
+#: app/controllers/registration_controller.rb:29
+#, fuzzy
+#| msgid "Procmail"
 msgid "Email"
 msgstr "Procmail"
 
-#: app/controllers/registration_controller.rb:33
-#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:30
 #, fuzzy
+#| msgid "System Type"
 msgid "System name"
 msgstr "ชนิดของระบบ"
 
-#: app/controllers/registration_controller.rb:34
-#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:31
 #, fuzzy
+#| msgid "Registration"
 msgid "SLES registration code"
 msgstr "การลงทะเบียน"
 
-#: app/controllers/registration_controller.rb:35
-#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:32
 #, fuzzy
+#| msgid "Registration"
 msgid "SLED registration code"
 msgstr "การลงทะเบียน"
 
-#: app/controllers/registration_controller.rb:36
-#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:33
+#, fuzzy
+#| msgid "Registration"
+msgid "SLMS registration code"
+msgstr "การลงทะเบียน"
+
+#: app/controllers/registration_controller.rb:34
 msgid "Appliance registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:37
-#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:35
 msgid "WebYaST registration code"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:38
-#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:36
 #, fuzzy
+#| msgid "Registration"
 msgid "Registration code"
 msgstr "การลงทะเบียน"
 
-#: app/controllers/registration_controller.rb:39
-#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:37
 msgid "Hostname"
 msgstr "ชื่อเครื่อง"
 
-#: app/controllers/registration_controller.rb:40
-#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:38
 #, fuzzy
+#| msgid "&Device name"
 msgid "Device name"
 msgstr "ชื่ออุปกรณ์"
 
-#: app/controllers/registration_controller.rb:41
-#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:39
 #, fuzzy
+#| msgid "Service name"
 msgid "Appliance name"
 msgstr "ชื่อของบริการ"
 
-#: app/controllers/registration_controller.rb:42
-#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:40
 #, fuzzy
+#| msgid "Registration"
 msgid "registration code"
 msgstr "การลงทะเบียน"
 
-#: app/controllers/registration_controller.rb:52
-#: app/controllers/registration_controller.rb:52
-msgid "Invalid session, please login again."
-msgstr ""
-
-#: app/controllers/registration_controller.rb:62
-#: app/controllers/registration_controller.rb:62
-msgid "No permissions for registration"
-msgstr ""
-
-#: app/controllers/registration_controller.rb:111
-#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:81
 msgid "Please try to register again later."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:115
-#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:85
 #, fuzzy
+#| msgid "MBR restored successfully."
 msgid "Registration did not succeed."
 msgstr "คืนค่าส่วน MBR ของฮาร์ดดิสก์เรียบร้อยแล้ว"
 
-#: app/controllers/registration_controller.rb:119
-#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:89
 #, fuzzy
+#| msgid "Creation was skipped"
 msgid "Registration was skipped."
 msgstr "การสร้างถูกข้าม"
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:93
 msgid "This may be a temporary issue."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:127
-#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:97
 msgid "The system might not receive necessary updates."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:143
-#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:113
 msgid "The registration server returned invalid or incomplete data."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
+#, fuzzy
+#| msgid "Could not load the global configuration."
 msgid "Could not read the registration configuration."
-msgstr ""
+msgstr "ไม่สามารถโหลดการปรับแต่งค่าส่วนรวมได้"
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "The registration backend is not installed correctly"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:152
-#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:122
 msgid "Please refer to your support contact."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:181
-#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:213
-#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:183
 #, fuzzy
+#| msgid "Service Name"
 msgid "Service added:"
 msgstr "ชื่อของบริการ"
 
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:189
 #, fuzzy
+#| msgid "Upload enabled"
 msgid "Catalog enabled:"
 msgstr "อนุญาตให้อัปโหลด"
 
-#: app/controllers/registration_controller.rb:250
-#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:215
 #, fuzzy
+#| msgid "Repository &Name:"
 msgid "Repository added:"
 msgstr "ชื่อของคลังแพกเกจ:"
 
-#: app/controllers/registration_controller.rb:326
-#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:357
 #, fuzzy
+#| msgid "File system %1 is already in the list."
 msgid "This system is already registered."
 msgstr "มีระบบแฟ้ม %1 อยู่ในรายการอยู่แล้ว"
 
-#: app/controllers/registration_controller.rb:355
-#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:382
 #, fuzzy
+#| msgid "MBR restored successfully."
 msgid "Registration finished successfully."
 msgstr "คืนค่าส่วน MBR ของฮาร์ดดิสก์เรียบร้อยแล้ว"
 
-#: app/controllers/registration_controller.rb:365
-#: app/controllers/registration_controller.rb:365
-msgid ""
-"<p><b>Repositories were not modified during the registration process.</b></"
-"p><p>It is likely that an incorrect registration code was used. If this is "
-"the case, please attempt the registration process again to get an update "
-"repository.</p><p>Please make sure that this system has an update repository "
-"configured, otherwise it will not receive updates.</p>"
-msgstr ""
-
-#: app/controllers/registration_controller.rb:399
-#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:396
 msgid "A connection to the registration server could not be established."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:403
-#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:400
 #, fuzzy
+#| msgid "The repository metadata is invalid."
 msgid "The supplied registration data was invalid."
-msgstr "เครื่องให้บริการสืบค้นชื่อตัวหลักใช้งานไม่ได้"
+msgstr "ข้อมูลกำกับของคลังแพกเกจใช้งานไม่ได้"
 
-#: app/controllers/registration_controller.rb:407
-#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:404
 #, fuzzy
+#| msgid "The primary name server is invalid."
 msgid "The registration code you entered was invalid."
 msgstr "เครื่องให้บริการสืบค้นชื่อตัวหลักใช้งานไม่ได้"
 
-#: app/controllers/registration_controller.rb:413
-#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:410
 msgid "The transmitted registration data created a conflict."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:421
-#: app/controllers/registration_controller.rb:421
-msgid ""
-"Registration can not be performed. There is no product installed that can be "
-"registered."
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:436
-#: app/controllers/registration_controller.rb:436
-msgid ""
-"A connection to the registration server could not be established or it did "
-"not reply."
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:453
-#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:454
 #, fuzzy
+#| msgid "The primary name server is invalid."
 msgid "The registration server returned invalid data."
 msgstr "เครื่องให้บริการสืบค้นชื่อตัวหลักใช้งานไม่ได้"
 
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
 #, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "โปรดรอ..."
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
+#, fuzzy
+#| msgid "%1 is not a valid IPv4 address."
 msgid "Please enter a valid Email address."
 msgstr "%1 ไม่ใช่ค่าที่อยู่แบบ IPv4 ที่ถูกต้อง"
 
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-msgid "register plugin"
-msgstr ""
-
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-#: shortcuts.yml:6
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
 msgstr "การลงทะเบียน"
 
-#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+#: app/views/registration/index.html.erb:93
 #, fuzzy
+#| msgid "Read installation information"
 msgid "Registration Information"
 msgstr "อ่านข้อมูลการติดตั้ง"
 
-#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
 msgstr ""
 
-#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+#: app/views/registration/index.html.erb:102
 #, fuzzy
+#| msgid "System:"
 msgid "System number (GUID)"
 msgstr "ระบบ:"
 
-#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+#: app/views/registration/index.html.erb:105
 #, fuzzy
+#| msgid "Registration"
 msgid "Register again"
 msgstr "การลงทะเบียน"
 
-#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+#: app/views/registration/index.html.erb:118
 msgid "Next"
 msgstr "ถัดไป"
 
-#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+#: app/views/registration/index.html.erb:131
 #, fuzzy
+#| msgid "Memory Information"
 msgid "Mandatory Information"
 msgstr "หน่วยความจำ"
 
-#: app/views/registration/index.rhtml:104
-#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.html.erb:151
 #, fuzzy
+#| msgid "&Details"
 msgid "Details"
 msgstr "รายละเอียด"
 
-#: app/views/registration/index.rhtml:128
-#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.html.erb:179
 msgid "Postpone"
 msgstr ""
 
-#: shortcuts.yml:7
 #, fuzzy
-msgid "System Registration"
-msgstr "การลงทะเบียน"
+#~| msgid "Registration"
+#~ msgid "System Registration"
+#~ msgstr "การลงทะเบียน"
 
 #, fuzzy
 #~| msgid "MBR restored successfully."

@@ -1,13 +1,506 @@
+# translation of yast_webclient.fi.po to suomi
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2009.
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2010, 2012.
+# Katariina Kemppainen <katariina@opensuse.fi>, 2010, 2011.
+# Harri Miettinen <harmie@opensuse.fi>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: yast_webclient.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-27 16:23+0200\n"
-"PO-Revision-Date: 2005-08-02 10:52+0300\n"
-"Last-Translator: Jyri Palokangas <jmp@netti.fi>\n"
-"Language-Team:  <fi@li.org>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-30 21:10+0300\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: Lokalize 1.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/helpers/application_helper.rb:47
+msgid " - "
+msgstr " - "
+
+#: app/helpers/application_helper.rb:43
+msgid " or "
+msgstr " tai "
+
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr "(ilmoituslinkki)"
+
+#: app/views/layouts/application.html.erb:129
+msgid "...Wait..."
+msgstr "...Odota..."
+
+#: locale/model_attributes.rb:9
+msgid "Account|Current sign in at"
+msgstr "Tili|Tämänhetkinen kirjautuminen osoitteesta"
+
+#: locale/model_attributes.rb:11
+msgid "Account|Current sign in ip"
+msgstr "Tili|Tämänhetkinen kirjautuminen IP:stä"
+
+#: locale/model_attributes.rb:10
+msgid "Account|Last sign in at"
+msgstr "Tili|Viimeisin kirjautuminen osoitteesta"
+
+#: locale/model_attributes.rb:12
+msgid "Account|Last sign in ip"
+msgstr "Tili|Viimeisin kirjautumis IP"
+
+#: locale/model_attributes.rb:6
+msgid "Account|Remember created at"
+msgstr "Tili|Remember created at"
+
+#: locale/model_attributes.rb:5
+msgid "Account|Remember token"
+msgstr "Tili|Muista token"
+
+#: locale/model_attributes.rb:7
+msgid "Account|Remote ip"
+msgstr "Tili|Etä IP"
+
+#: locale/model_attributes.rb:4
+msgid "Account|Salt"
+msgstr "Tili|Suola"
+
+#: locale/model_attributes.rb:8
+msgid "Account|Sign in count"
+msgstr "Tili|Kirjautumisten määrä"
+
+#: locale/model_attributes.rb:3
+msgid "Account|Username"
+msgstr "Tili|Käyttäjänimi"
+
+#: app/helpers/view_helpers/label_helper.rb:23
+msgid "Add"
+msgstr "Lisää"
+
+#: app/views/controlpanel/index.html.erb:136
+msgid "All"
+msgstr "Kaikki"
+
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr "Oletko varma?"
+
+#: app/helpers/application_helper.rb:56 app/helpers/application_helper.rb:70
+#: app/helpers/application_helper.rb:94
+msgid "Back"
+msgstr "Takaisin"
+
+#: app/views/controlpanel/basesystem.haml:21
+msgid "Base system setup"
+msgstr "Perusjärjestelmän asetus"
+
+# cancel button label
+#: app/helpers/application_helper.rb:60
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: app/views/controlpanel/index.html.erb:128
+msgid "Configuration"
+msgstr "Määritykset"
+
+#: app/views/controlpanel/basesystem.haml:2
+msgid "Continue initial system setup"
+msgstr "Jatka alkuperäistä järjestelmäasetusta."
+
+#: app/views/shared/cookies_disabled.html.erb:8
+msgid "Cookies disabled ?"
+msgstr "Evästeet poistettu käytöstä?"
+
+#: app/helpers/view_helpers/label_helper.rb:31
+msgid "Delete"
+msgstr "Poista"
+
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr "Älä unohda sisällyttää virheen yksityiskohtia."
+
+#: app/helpers/view_helpers/label_helper.rb:27
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: app/views/controlpanel/index.html.erb:21
+#: app/views/controlpanel/index.html.erb:40
+msgid "Error: Cannot check the current status."
+msgstr "Virhe: Tämänhetkisen tilan tarkistaminen ei onnistu."
+
+#: app/helpers/application_helper.rb:78 app/helpers/application_helper.rb:90
+msgid "Finish"
+msgstr "Valmis"
+
+#: app/views/controlpanel/index.html.erb:133
+msgid "Frequently used modules:"
+msgstr "Useimmin käytetyt moduulit:"
+
+#: app/views/layouts/application.html.erb:75
+msgid "Home"
+msgstr "Koti"
+
+#: app/views/layouts/application.html.erb:50
+msgid "JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr "JavaScript-tuki puuttuu tai on poistettu käytöstä. Ota JavaScript  käyttöön tai käytä tuettua selainta (%sFireFox 3.5%s tai %sInternet Explorer 8%s)."
+
+#: app/views/controlpanel/index.html.erb:99
+msgid "Loading patch information"
+msgstr "Ladataan tietoja korjauksista"
+
+#: app/views/controlpanel/index.html.erb:73
+msgid "Loading system information"
+msgstr "Ladataan järjestelmätietoja"
+
+#: app/views/layouts/application.html.erb:88
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+#: app/views/layouts/application.html.erb:57
+msgid "My Appliance"
+msgstr "My Appliance"
+
+#: app/helpers/application_helper.rb:77 app/helpers/application_helper.rb:90
+msgid "Next"
+msgstr "Seuraava"
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr "Tietoja ei ole saatavilla"
+
+#: lib/yast_service.rb:118
+msgid "Not authorized! (%s)"
+msgstr "Ei sallittua! (%s)"
+
+#: app/controllers/application_controller.rb:73
+msgid "Operation is forbidden. If you have to do it, please contact system administrator"
+msgstr "Toiminto ei ole sallittu. Jos haluat käyttää tätä toimintoa, ota yhteyttä järjestelmänvalvojaan"
+
+#: app/views/controlpanel/index.html.erb:109
+msgid "Patch plugin is not installed."
+msgstr "Korjaus-liitännäistä ei ole asennettu."
+
+#: app/views/controlpanel/index.html.erb:104
+msgid "Patch status summary is disabled in the config file."
+msgstr "Korjausten yhteenvetotila on poistettu käytöstä määritystiedostossa."
+
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr "Ilmoita virheestä niin voimme korjata ongelman!"
+
+#: app/views/shared/cookies_disabled.html.erb:12
+msgid "Please enable cookies in your browser and <a href=\"/session\">login again</a>"
+msgstr "Ota evästeet käyttöön selaimessasi ja <a href=\"/session\">kirjaudu uudelleen</a>"
+
+#: app/views/shared/exception_trap.html.erb:7
+msgid "Problem:"
+msgstr "Ongelma:"
+
+#: app/views/controlpanel/index.html.erb:118
+msgid "Really reboot the machine?"
+msgstr "Käynnistetäänkö tietokone uudelleen?"
+
+#: app/views/controlpanel/index.html.erb:121
+msgid "Really shutdown the machine?"
+msgstr "Sammutetaanko tietokone varmasti?"
+
+# reboot button label
+#: app/views/controlpanel/index.html.erb:118
+msgid "Reboot"
+msgstr "Käynnistä uudelleen"
+
+#: app/helpers/application_helper.rb:75
+msgid "Save"
+msgstr "Tallenna"
+
+#: app/views/shared/exception_trap.html.erb:22
+msgid "Show details..."
+msgstr "Näytä yksityiskohtaiset tiedot..."
+
+#: app/views/controlpanel/index.html.erb:121
+msgid "Shutdown"
+msgstr "Sammuta"
+
+#: app/views/sessions/new.html.haml:1 app/views/sessions/new.html.haml:19
+msgid "Sign in"
+msgstr "Kirjaudu sisään"
+
+#: app/views/controlpanel/index.html.erb:83
+msgid "Status plugin is not installed."
+msgstr "Tila-liitännäistä ei ole asennettu."
+
+#: app/views/controlpanel/index.html.erb:66
+msgid "System status"
+msgstr "Järjestelmän tila"
+
+#: app/views/controlpanel/index.html.erb:78
+msgid "System status summary is disabled in the config file."
+msgstr "Järjestelmän yhteenvetotila on poistettu käytöstä määritystiedostossa."
+
+#: app/views/controlpanel/index.html.erb:92
+msgid "System updates"
+msgstr "Järjestelmäpäivitykset"
+
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr "Ongelma haettaessa tietoja palvelimelta."
+
+#: app/views/shared/exception_trap.html.erb:3
+msgid "This is embarrassing...."
+msgstr "Tämä on hävettävää..."
+
+#: app/helpers/view_helpers/html_helper.rb:153
+msgid "Unknown error"
+msgstr "Tuntematon virhe"
+
+#: app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr "Olemme pahoillamme, törmäsimme ongelmiin."
+
+#: app/views/layouts/application.html.erb:35
+msgid "WebYaST"
+msgstr "WebYaST"
+
+#: app/views/controlpanel/index.html.erb:149
+msgid "WebYaST modules are not installed on your system!"
+msgstr "WebYaST moduuleja ei ole asennettu järjestelmääsi!"
+
+#: app/views/shared/cookies_disabled.html.erb:10
+msgid "WebYaST tried to establish and save a session in your web browser but failed."
+msgstr "WebYaST yritti luoda ja tallentaa istunnon selaimeesi, mutta yritys epäonnistui."
+
+#: app/views/layouts/application.html.erb:43
+msgid "You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr "Käytät tukematonta selainta. Vaihda joko %sFireFox 3.5 tai uudempaan%s tai %sInternet Explorer 8%s. Kiitos! [%sclose%s]"
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr "Sinulla ei ole oikeuksia muokata asetuksia."
+
+#: app/views/controlpanel/index.html.erb:154
+msgid "You have no permissions to see or change the modules, please contact the administrator to set up permissions first!"
+msgstr "Sinulla ei ole oikeuksia tarkastella tai muuttaa moduuleja, ota yhteyttä järjestelmävalvojaan oikeuksien asettamista varten!"
+
+#: app/views/layouts/application.html.erb:98
+msgid "You will be logged off in"
+msgstr "Sinut kirjataan ulos"
+
+#: app/views/controlpanel/basesystem.haml:1
+msgid "Your initial system setup was not completed. Please continue with setting up the modules."
+msgstr "Alkuperäinen järjestelmäasetus ei ole valmis. Jatka moduulien asettamisella."
+
+#: locale/model_attributes.rb:2
+msgid "account"
+msgstr "tili"
+
+#: app/views/layouts/application.html.erb:98
+msgid "seconds due to session timeout. "
+msgstr "sekunnissa johtuen istunnon aikakatkaisusta. "
+
+#~ msgid "Hide Details"
+#~ msgstr "Piilota tiedot"
+
+#~ msgid "You need to specify the host"
+#~ msgstr "Sinun täytyy määrittää kone."
+
+#~ msgid "No login specified"
+#~ msgstr "Kirjautumisnimeä ei ole määritetty"
+
+#~ msgid "No password specified"
+#~ msgstr "Salasanaa ei ole määritetty"
+
+#~ msgid "Host has blocked user %s. It cannot login until  %s"
+#~ msgstr "Koneella on estetty käyttäjä %s. Se ei voi kirjautua ennen %s"
+
+#~ msgid "Login incorrect. Check your username and password."
+#~ msgstr "Kirjautumisvirhe. Tarkista käyttäjätunnus ja salasana."
+
+#~ msgid "Session timeout"
+#~ msgstr "Istunnon aikakatkaisu"
+
+# %s is FTP or HTTP
+#~ msgid "Please login to continue"
+#~ msgstr "Kirjaudu sisään jatkaaksesi"
+
+#~ msgid "You must logout before you can login"
+#~ msgstr "Sinun täytyy kirjautua ulos ennen sisäänkirjautumista"
+
+#~ msgid "can't be blank"
+#~ msgstr "ei voi olla tyhjä"
+
+#~ msgid "is out of allowed values"
+#~ msgstr "ei kuulu sallittuihin arvoihin"
+
+#~ msgid "can't be empty"
+#~ msgstr "ei voi olla tyhjä"
+
+#~ msgid "is invalid"
+#~ msgstr "on virheellinen"
+
+#~ msgid "Invalid parameters:"
+#~ msgstr "Virheelliset parametrit:"
+
+#~ msgid "Can't connect to host %s."
+#~ msgstr "Koneeseen %s yhdistäminen ei onnistu."
+
+#~ msgid "Make sure the host is up and that the YaST web service is running."
+#~ msgstr "Varmista, että kone vastaa ja että YaST-verkkopalvelu on käynnissä."
+
+#~ msgid "Please select a host to connect to."
+#~ msgstr "Valitse kone, johon yhdistetään."
+
+#~ msgid "The host '%s' cannot be found."
+#~ msgstr "Konetta '%s' ei löytynyt."
+
+#~ msgid "Please double-check the host URL."
+#~ msgstr "Varmista koneen verkko-osoite."
+
+#~ msgid "Language Selection"
+#~ msgstr "Kielen valinta"
+
+#~ msgid "Problem occured on target machine."
+#~ msgstr "Tapahtui virhe kohdekoneessa."
+
+#~ msgid "Editing YaST-Web-Service"
+#~ msgstr "Muokataan YaST-verkkopalvelua"
+
+#~ msgid "YaST-Web-Service"
+#~ msgstr "YaST-verkkopalvelu"
+
+#~ msgid "Name"
+#~ msgstr "Nimi"
+
+#~ msgid "Url"
+#~ msgstr "Verkko-osoite"
+
+#~ msgid "Description"
+#~ msgstr "Kuvaus"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Please choose a service:"
+#~ msgstr "Valitse palvelu:"
+
+#~ msgid "Really delete host %s ?"
+#~ msgstr "Poistetaanko kone %s varmasti?"
+
+#~ msgid "New WebYaST Host"
+#~ msgstr "Uusi WebYaST-kone"
+
+#~ msgid "URL"
+#~ msgstr "Verkko-osoite"
+
+#~ msgid "Create"
+#~ msgstr "Luo"
+
+#~ msgid "Index"
+#~ msgstr "Hakemisto"
+
+#~ msgid "Status"
+#~ msgstr "Tila"
+
+#~ msgid "System actions"
+#~ msgstr "Järjestelmätoiminnot"
+
+#~ msgid "Really reboot %s?"
+#~ msgstr "Käynnistetäänkö %s uudelleen?"
+
+#~ msgid "Really shutdown %s?"
+#~ msgstr "Sammutetaanko %s varmasti?"
+
+# label for language selection
+#~ msgid "Language:"
+#~ msgstr "Kieli:"
+
+#~ msgid "Connected host:"
+#~ msgstr "Yhdistetyt koneet:"
+
+#~ msgid "User:"
+#~ msgstr "Käyttäjä:"
+
+#~ msgid "Control panel"
+#~ msgstr "Ohjauskeskus"
+
+#~ msgid "Login"
+#~ msgstr "Sisäänkirjautuminen"
+
+#~ msgid "Enter login credentials for host %s."
+#~ msgstr "Anna kirjautumisvaltuutus koneelle %s."
+
+#~ msgid "Username:"
+#~ msgstr "Käyttäjätunnus:"
+
+#~ msgid "Password:"
+#~ msgstr "Salasana:"
+
+#~ msgid "Service %s is not available in the target machine"
+#~ msgstr "Palvelua %s ei ole saatavissa kohdekoneella"
+
+#~ msgid "Service %s is not running on the target machine"
+#~ msgstr "Palvelu %s ei ole käynnissä kohdekoneella"
+
+#~ msgid "Permission %s is not granted for user %s"
+#~ msgstr "Oikeutta %s ei myönnetty käyttäjälle %s"
+
+#~ msgid "Policy kit exception for user %s and permission %s (untranslated message): %s"
+#~ msgstr "Policy kit -poikkeus käyttäjälle %s ja käyttöoikeus %s (kääntämätön viesti): %s"
+
+#~ msgid "A user is no longer logged to target machine. Please log in again."
+#~ msgstr "Käyttäjä ei ole enää kirjautuneena kohdekoneella. Kirjaudu uudestaan."
+
+#~ msgid "Target system is not consistent: Missing or corrupted file %s"
+#~ msgstr "Kohdejärjestelmä ei ole yhtenäinen. Tiedosto %s puuttuu tai on vioittunut"
+
+#~ msgid "There is no predefined ntp server at /etc/sysconfig/network/config - NETCONFIG_NTP_STATIC_SERVERS"
+#~ msgstr "Esimääritettyjä ntp-palvelimia ei löytynyt /etc/sysconfig/network/config - NETCONFIG_NTP_STATIC_SERVERS"
+
+#~ msgid "Error occurred during ntp synchronization: %s"
+#~ msgstr "Tapahtui virhe ntp-synkronoinnin aikana: %s"
+
+#~ msgid "Error while saving administrator settings: %s"
+#~ msgstr "Virhe tallennettaessa järjestelmävalvojan asetuksia: %s"
+
+#~ msgid "Select locale"
+#~ msgstr "Valitse paikallisasetukset"
+
+#~ msgid "Account|Remember token expires at"
+#~ msgstr "Tili|Muista token vanhentuu"
+
+#~ msgid "host"
+#~ msgstr "kone"
+
+#~ msgid "Host|Name"
+#~ msgstr "Kone|Nimi"
+
+#~ msgid "Host|Url"
+#~ msgstr "Kone|Verkko-osoite"
+
+#~ msgid "Host|Description"
+#~ msgstr "Kone|Kuvaus"
+
+#~ msgid "Host|Created at"
+#~ msgstr "Kone|Luonti aika"
+
+#~ msgid "Host|Updated at"
+#~ msgstr "Kone|Päivitys aika"
+
+#~ msgid "Show all modules"
+#~ msgstr "Näytä kaikki moduulit"
+
+#~ msgid "Broken permission setup on rest-service. Can be fixed by grantwebyastrights script."
+#~ msgstr "Toimimaton oikeuksien asetus rest-palvelussa. Voidaan korjata suorittamalla grantwebyastrights-komentojono."
+
+#~ msgid "You must accept all EULAs before using this product!"
+#~ msgstr "Sinun täytyy hyväksyä kaikki käyttöoikeussopimukset ennen tämän tuotteen käyttöä!"
+
+#~ msgid "Cannot redirect to EULA. Make sure yast2-webclient-eulas package is installed"
+#~ msgstr "Ei voi uudelleen ohjata EULAa. Varmista että yast2-webclient-eulas-paketti on asennettu"
+
+#~ msgid "Set up the system"
+#~ msgstr "Aseta järjestelmä"
+
+#~ msgid "Name:"
+#~ msgstr "Nimi:"

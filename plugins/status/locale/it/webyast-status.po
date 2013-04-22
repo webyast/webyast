@@ -1,184 +1,266 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# translation of yast_webclient_status.po to italiano
+# Andrea Florio <andrea@opensuse.org>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:27\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_status\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-17 09:02+0100\n"
+"Last-Translator: Andrea Turrini <andrea.turrini@gmail.com>\n"
+"Language-Team: Italian <opensuse-translation@opensuse.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
 
-#: app/controllers/status_controller.rb:149 ./app/controllers/status_controller.rb:149
-msgid "No data found for showing system status."
-msgstr "Non è stato trovato alcun dato da mostrare nello stato del sistema."
-
-#: app/controllers/status_controller.rb:157 ./app/controllers/status_controller.rb:157
-msgid "Status not available."
-msgstr "Stato non disponibile."
-
-#: app/controllers/status_controller.rb:176 ./app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
-msgstr "Impossibile connettersi all'host"
-
-#: app/controllers/status_controller.rb:178 ./app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr "Impossibile connettersi all'host %s."
-
-#: app/controllers/status_controller.rb:217 ./app/controllers/status_controller.rb:217
-msgid "Limits exceeded for "
-msgstr "Limiti superati per "
-
-#: app/controllers/status_controller.rb:242 ./app/controllers/status_controller.rb:242
-msgid "Status not available"
-msgstr "Stato non disponibile"
-
-#: app/controllers/status_controller.rb:266 ./app/controllers/status_controller.rb:266
-msgid "Status not available (no permissions)"
-msgstr "Stato non disponibile (nessuna autorizzazione)"
-
-#: app/controllers/status_controller.rb:328 ./app/controllers/status_controller.rb:328
-msgid "exceeded"
-msgstr "superato"
-
-#: app/controllers/status_controller.rb:342 ./app/controllers/status_controller.rb:342
-msgid "undercut"
-msgstr "inferiore"
-
-#: app/controllers/status_controller.rb:444 ./app/controllers/status_controller.rb:444
-msgid "Limits have been written."
-msgstr "I limiti sono stati scritti."
-
-#: app/views/status/edit.html.erb:48 ./app/views/status/edit.html.erb:48
-msgid "Only numbers are valid !"
-msgstr "Sono ammessi solo numeri"
-
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: ./app/views/status/edit.html.erb:75 ./app/views/status/index.html.erb:52 ./shortcuts.yml:6
-msgid "Status"
-msgstr "Stato"
-
-#: app/views/status/edit.html.erb:75 ./app/views/status/edit.html.erb:75
-msgid "Settings"
-msgstr "Impostazioni"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "undercuts"
-msgstr "è inferiore"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "exceeds"
-msgstr "supera"
-
-#: app/views/status/index.html.erb:103 ./app/views/status/index.html.erb:103
-msgid "details"
-msgstr "dettagli"
-
-#: app/views/status/index.html.erb:119 ./app/views/status/index.html.erb:119
-msgid "Details"
-msgstr "Dettagli"
-
-#: app/views/status/index.html.erb:187 ./app/views/status/index.html.erb:187
-msgid "Edit Limits"
-msgstr "Modifica limiti"
-
-#: app/views/status/_status_graph.html.erb:2 ./app/views/status/_status_graph.html.erb:2
-msgid "A problem occured when loading status information."
-msgstr "Errore durante il caricamento delle informazioni sullo stato."
-
-#: app/views/status/_status_graph.html.erb:90 ./app/views/status/_status_graph.html.erb:90
-msgid "Show last"
-msgstr "Mostra ultimo"
-
-#: app/views/status/_status_graph.html.erb:91 ./app/views/status/_status_graph.html.erb:91
-msgid "5 Minutes"
-msgstr "5 minuti"
-
-#: app/views/status/_status_graph.html.erb:92 ./app/views/status/_status_graph.html.erb:92
-msgid "15 Minutes"
-msgstr "15 minuti"
-
-#: app/views/status/_status_graph.html.erb:93 ./app/views/status/_status_graph.html.erb:93
-msgid "30 Minutes"
-msgstr "30 minuti"
-
-#: app/views/status/_status_graph.html.erb:94 ./app/views/status/_status_graph.html.erb:94
-msgid "1 Hour"
-msgstr "1 ora"
-
-#: app/views/status/_status_graph.html.erb:95 ./app/views/status/_status_graph.html.erb:95
-msgid "6 Hours"
-msgstr "6 ore"
-
-#: app/views/status/_status_graph.html.erb:96 ./app/views/status/_status_graph.html.erb:96
-msgid "12 Hours"
-msgstr "12 ore"
-
-#: app/views/status/_status_summary.html.erb:6 ./app/views/status/_status_summary.html.erb:6
-msgid "An problem occured when loading status information."
-msgstr "Errore durante il caricamento delle informazioni sullo stato."
-
-#: app/views/status/_status_summary.html.erb:13 ./app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr "Impossibile leggere lo stato del sistema. Connessione interrotta."
-
-#: app/views/status/_status_summary.html.erb:16 ./app/views/status/_status_summary.html.erb:16
-msgid "Your system is healthy."
-msgstr "Il sistema è integro."
-
-#: app/views/status/_status_summary.html.erb:26 ./app/views/status/_status_summary.html.erb:26
-msgid "Loading system information"
-msgstr "Caricamento delle informazioni sul sistema in corso"
-
-#: app/views/status/_status_progress.html.erb:8 ./app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
-msgstr "Verifica dello stato del sistema in corso"
-
-#: ./shortcuts.yml:7
-msgid "Show system status"
-msgstr "Mostra stato sistema"
-
-#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
-#: ./config/status_configuration.yaml:64
+#: app/models/graph.rb:109
 msgid "GByte"
 msgstr "GByte"
 
-#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
-#: ./config/status_configuration.yaml:63
+#: app/models/graph.rb:110
 msgid "Disk"
 msgstr "Disco"
 
-#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
-#: ./config/status_configuration.yaml:6
+#: app/models/graph.rb:133
 msgid "MByte/s"
 msgstr "MByte/s"
 
-#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
-#: ./config/status_configuration.yaml:5
+#: app/models/graph.rb:134
 msgid "Network"
 msgstr "Rete"
 
-#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
-#: ./config/status_configuration.yaml:87
+#: app/models/graph.rb:157
 msgid "MByte"
 msgstr "MByte"
 
-#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
-#: ./config/status_configuration.yaml:86
+#: app/models/graph.rb:158
 msgid "Memory"
 msgstr "Memoria"
 
-#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
-#: ./config/status_configuration.yaml:29
+#: app/models/graph.rb:179
 msgid "Percent"
-msgstr "Percentuale"
+msgstr "Percento"
 
-#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
-#: ./config/status_configuration.yaml:28
+#: app/models/graph.rb:180
 msgid "CPU"
 msgstr "CPU"
 
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+msgid "Error: Cannot get information."
+msgstr "Errore: impossibile ottenere le informazioni."
+
+#: app/controllers/status_controller.rb:119
+msgid "No data found for showing system status."
+msgstr "Non è stato trovato alcun dato per mostrare lo stato del sistema."
+
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
+msgid "Status not available."
+msgstr "Stato non disponibile."
+
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
+msgstr "Collectd non è sincronizzato."
+
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
+msgid "Status not available (no permissions)"
+msgstr "Stato non disponibile (nessun permesso)"
+
+#: app/controllers/status_controller.rb:150
+msgid "Limits exceeded for "
+msgstr "Limiti ecceduti per "
+
+#: app/controllers/status_controller.rb:263
+msgid "exceeded"
+msgstr "ecceduto"
+
+#: app/controllers/status_controller.rb:277
+msgid "undercut"
+msgstr "rimasto sotto"
+
+#: app/controllers/status_controller.rb:376
+msgid "Limits have been written."
+msgstr "I limiti sono stati scritti."
+
+#: app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr "Si è verificato un errore durante la lettura dello stato delle informazioni."
+
+#: app/views/status/_status_graph.html.erb:11
+msgid "No data available"
+msgstr "Nessun dato disponibile"
+
+#: app/views/status/_status_graph.html.erb:100
+msgid "Show last"
+msgstr "Mostra ultimi"
+
+#: app/views/status/_status_graph.html.erb:102
+msgid "5 Minutes"
+msgstr "5 minuti"
+
+#: app/views/status/_status_graph.html.erb:103
+msgid "15 Minutes"
+msgstr "15 minuti"
+
+#: app/views/status/_status_graph.html.erb:104
+msgid "30 Minutes"
+msgstr "30 minuti"
+
+#: app/views/status/_status_graph.html.erb:105
+msgid "1 Hour"
+msgstr "un'ora"
+
+#: app/views/status/_status_graph.html.erb:106
+msgid "6 Hours"
+msgstr "6 ore"
+
+#: app/views/status/_status_graph.html.erb:107
+msgid "12 Hours"
+msgstr "12 ore"
+
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr "Solo i numeri sono validi!"
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "Stato"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr "rimane sotto"
+
+#: app/views/status/edit.html.erb:102
+msgid "exceeds"
+msgstr "eccede"
+
+#: app/views/status/_status_summary.html.erb:4
+msgid "An problem occured when loading status information."
+msgstr "Si è verificato un errore durante la lettura delle informazioni dello stato."
+
+#: app/views/status/_status_summary.html.erb:38
+msgid "Your system is healthy."
+msgstr "Il sistema è sano."
+
+#: app/views/status/_status_summary.html.erb:49
+msgid "Loading system information"
+msgstr "Lettura delle informazioni di sistema"
+
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
+msgstr "Errore: impossibile controllare lo stato attuale."
+
+#: app/views/status/index.html.erb:157
+msgid "details"
+msgstr "dettagli"
+
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "Dettagli"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
+msgstr "Modifica limiti"
+
+#~ msgid "Can't connect to host"
+#~ msgstr "Impossibile connettersi all'host"
+
+#~ msgid "Can't connect to host %s."
+#~ msgstr "Impossibile connettersi all'host %s."
+
+#~ msgid "Status not available"
+#~ msgstr "Stato non disponibile"
+
+#~ msgid "Cannot read system status - you have been logged out."
+#~ msgstr "Impossibile leggere lo stato del sistema - si è stati disconnessi."
+
+#~ msgid "Checking system status"
+#~ msgstr "Verifica dello stato del sistema"
+
+#~ msgid "Show system status"
+#~ msgstr "Mostra lo stato del sistema"
+
+#~ msgid "Registration is missing"
+#~ msgstr "La registrazione è mancante"
+
+#~ msgid "Please register your system in order to get updates."
+#~ msgstr "Registrare il sistema per ottenere gli aggiornamenti."
+
+#~ msgid "register"
+#~ msgstr "registra"
+
+#~ msgid "Mail configuration test not confirmed"
+#~ msgstr "Test della configurazione della posta non confermato"
+
+#~ msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+#~ msgstr "Durante la configurazione della posta, un messaggio di prova è stato inviato a %s. Il messaggio è stato recapitato a tale indirizzo?<br>Se sì, confermarlo premendo il pulsante. Altrimenti controllare di nuovo la configurazione della posta."
+
+#~ msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+#~ msgstr "Non è stato possibile ottenere il nome host completo della macchina. Se la posta non può essere recapitata, controllare con l'amministratore di rete la configurazione della posta e/o della rete."
+
+#~ msgid "Test mail received"
+#~ msgstr "Messaggio di prova ricevuto"
+
+#~ msgid "Start collectd"
+#~ msgstr "Avvia collectd"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Sessione non valida, per favore fai il login di nuovo."
+
+#~ msgid "Disk free limits exceeded;"
+#~ msgstr "Il limite di spazio libero sul disco è stato superato;"
+
+#~ msgid "Saving limits failed!"
+#~ msgstr "Salvataggio dei limiti fallito!"
+
+#~ msgid "Disk usage"
+#~ msgstr "Utilizzo del disco"
+
+#~ msgid "Back"
+#~ msgstr "Indietro"
+
+#~ msgid "free"
+#~ msgstr "libero"
+
+#~ msgid "used"
+#~ msgstr "utilizzato"
+
+#~ msgid "Configure Status Limits"
+#~ msgstr "Configura i limiti di stato"
+
+#~ msgid "Status Path"
+#~ msgstr "Percorso stato"
+
+#~ msgid "Minimum Value"
+#~ msgstr "Valore minimo"
+
+#~ msgid "Maximum Value"
+#~ msgstr "Valore massimo"
+
+#~ msgid "Save"
+#~ msgstr "Salva"
+
+#~ msgid "No status information available"
+#~ msgstr "Nessuna informazione sullo stato disponibile."
+
+#~ msgid "Events"
+#~ msgstr "Eventi"
+
+#~ msgid "These values have been evaluated the last 5 minutes."
+#~ msgstr "Questi valori sono stati valutati negli ultimi 5 minuti."
+
+#~ msgid "Show details..."
+#~ msgstr "Mostra dettagli..."

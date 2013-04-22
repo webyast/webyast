@@ -6,56 +6,59 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-licenses-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"Project-Id-Version: @PACKAGE@\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2006-03-22 23:18-0700\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: app/controllers/eulas_controller.rb:93
-#: app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:122
 msgid "You must accept all licences before using this product!"
 msgstr ""
 
-#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+#: app/views/eulas/all_accepted.erb:26 app/views/eulas/no_licenses.erb:26
 #, fuzzy
-msgid "Accept End User License Agreement"
+#| msgid "_Accept Agreement"
+msgid "Accept End User Licence Agreement"
 msgstr "_Прийняти угоду"
 
-#: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
+#: app/views/eulas/all_accepted.erb:37
 #, fuzzy
-msgid "There are no licenses to accept."
-msgstr "Немає визначених увімкнених служб."
+#| msgid "All services have been refreshed."
+msgid "All licenses have already been accepted"
+msgstr "Всі служби було освіжено."
 
-#: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
+#: app/views/eulas/show.html.erb:30
 #, fuzzy
-msgid "License Agreement"
+#| msgid "_Accept Agreement"
+msgid "Licence Agreement"
 msgstr "_Прийняти угоду"
 
-#: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54
+#: app/views/eulas/show.html.erb:50
 #, fuzzy
+#| msgid "The license agreement failed"
 msgid "Yes, I agree to the license agreement."
 msgstr "Ліцензійну угоду не прийнято"
 
-#: app/views/eulas/show.html.erb:57 app/views/eulas/show.html.erb:57
+#: app/views/eulas/show.html.erb:54
 msgid "No, I do not agree."
 msgstr ""
 
-#: app/views/eulas/show.html.erb:69 app/views/eulas/show.html.erb:69
+#: app/views/eulas/show.html.erb:71
 msgid "Back"
 msgstr "Назад"
 
-#: app/views/eulas/all_accepted.erb:2 app/views/eulas/all_accepted.erb:2
+#: app/views/eulas/no_licenses.erb:36
 #, fuzzy
-msgid "All licenses have already been accepted"
-msgstr "Всі служби було освіжено."
+#| msgid "There are no enabled services defined."
+msgid "There are no licenses to accept."
+msgstr "Немає визначених увімкнених служб."
 
 #, fuzzy
 #~| msgid "Available Processors"

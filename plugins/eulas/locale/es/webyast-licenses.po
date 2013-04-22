@@ -1,48 +1,50 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# translation of webyast-licenses.es.po to Spanish
+# Carlos E. Robinson <carlos.e.r@opensuse.org>, 2009.
+# Carlos E. Robinson M. <carlos.e.r@opensuse.org>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-licenses-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:24\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-licenses.es\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-15 04:36+0200\n"
+"Last-Translator: Carlos E. Robinson <carlos.e.r@opensuse.org>\n"
+"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Spanish\n"
+"X-Generator: KBabel 1.11.4\n"
 
-#: app/controllers/eulas_controller.rb:93 ./app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:122
 msgid "You must accept all licences before using this product!"
-msgstr "Debe aceptar todas las licencias antes de usar este producto."
+msgstr "¡Debe aceptar todas las licencias antes de usar este producto!"
 
-#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-#: ./app/views/eulas/no_licenses.erb:1 ./app/views/eulas/all_accepted.erb:1
-msgid "Accept End User License Agreement"
-msgstr "Aceptar acuerdo de licencia de usuario final"
+#: app/views/eulas/all_accepted.erb:26 app/views/eulas/no_licenses.erb:26
+msgid "Accept End User Licence Agreement"
+msgstr "Acepte el acuerdo de licencia de usuario final"
 
-#: app/views/eulas/no_licenses.erb:2 ./app/views/eulas/no_licenses.erb:2
-msgid "There are no licenses to accept."
-msgstr "No hay licencias que aceptar."
+#: app/views/eulas/all_accepted.erb:37
+msgid "All licenses have already been accepted"
+msgstr "Ya han sido aceptadas todas las licencias"
 
-#: app/views/eulas/show.html.erb:24 ./app/views/eulas/show.html.erb:24
-msgid "License Agreement"
+#: app/views/eulas/show.html.erb:30
+msgid "Licence Agreement"
 msgstr "Acuerdo de licencia"
 
-#: app/views/eulas/show.html.erb:42 ./app/views/eulas/show.html.erb:42
+#: app/views/eulas/show.html.erb:50
 msgid "Yes, I agree to the license agreement."
-msgstr "Sí, acepto el acuerdo de licencia."
+msgstr "Si, acepto el acuerdo de licencia."
 
-#: app/views/eulas/show.html.erb:45 ./app/views/eulas/show.html.erb:45
+#: app/views/eulas/show.html.erb:54
 msgid "No, I do not agree."
-msgstr "No, no lo acepto."
+msgstr "No, no estoy de acuerdo."
 
-#: app/views/eulas/show.html.erb:57 ./app/views/eulas/show.html.erb:57
+#: app/views/eulas/show.html.erb:71
 msgid "Back"
 msgstr "Atrás"
 
-#: app/views/eulas/all_accepted.erb:2 ./app/views/eulas/all_accepted.erb:2
-msgid "All licenses have already been accepted"
-msgstr "Ya se han aceptado todas las licencias"
+#: app/views/eulas/no_licenses.erb:36
+msgid "There are no licenses to accept."
+msgstr "No hay licencias que aceptar."
 

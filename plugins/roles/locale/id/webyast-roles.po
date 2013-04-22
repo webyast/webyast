@@ -2,39 +2,84 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2002-10-08 13:38+0200\n"
 "Last-Translator: I Made Wiryana <made@nakula.rvs.uni-bielefeld.de>\n"
 "Language-Team: Indonesian <i18n@suse.de>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/views/roles/_role_edit.erb:31
-msgid "Permissions granted by role"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
 msgstr ""
 
-#: app/views/roles/_role_edit.erb:44
-#, fuzzy
-#| msgid "Available space"
-msgid "Available permissions"
-msgstr "Ruang tersedia"
-
-#: app/views/roles/_role_edit.erb:56
-msgid "Description of permissions"
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
 msgstr ""
 
-#: app/views/roles/_role_edit.erb:58
-#, fuzzy
-#| msgid "Description"
-msgid ")}-description"
-msgstr "Deskripsi"
-
-#: app/views/roles/_role_edit.erb:64
-msgid "Save"
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
 msgstr ""
 
-#: app/views/roles/index.rhtml:12
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr ""
+
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr ""
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr ""
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr ""
+
+#: app/views/roles/index.html.erb:38
+msgid "Create Role"
+msgstr ""
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr ""
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr ""
+
+#: app/views/roles/index.html.erb:104
+#, fuzzy
+#| msgid "Available space"
+msgid "Assign Permissions"
+msgstr "Ruang tersedia"
+
+#: app/views/roles/index.html.erb:107
+msgid "collapse all"
+msgstr ""
+
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr ""
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Available space"
+#~ msgid "Available Users"
+#~ msgstr "Ruang tersedia"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid ")}-description"
+#~ msgstr "Deskripsi"

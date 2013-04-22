@@ -1,0 +1,82 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2003-08-14 10:47+0200\n"
+"Last-Translator: xxx <yyy@example.org>\n"
+"Language-Team: Tamil <i18n@suse.de>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/kerberos_controller.rb:30
+#, fuzzy
+#| msgid "Could not load the requested scheme configuration."
+msgid "Cannot read Kerberos client configuraton."
+msgstr "கேட்கப்பட்ட திட்ட உள்ளமைவை எற்ற முடியவில்லை."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/kerberos_controller.rb:47
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving Kerberos client configuration."
+msgstr "சான்றிதழை விளக்கும்போது பிழை."
+
+#: app/views/kerberos/index.html.erb:32
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "கோப்புபெயர் தேவைப்படுகிறது."
+
+#: app/views/kerberos/index.html.erb:33
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "IP முகவரியை உள்ளிடவும்"
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:98
+#, fuzzy
+#| msgid "Default Hat"
+msgid "Default Domain"
+msgstr "முன்னிருந்த ஹாட்"
+
+#: app/views/kerberos/index.html.erb:103
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Realm"
+msgstr "முன்னிருந்த வழி"
+
+#: app/views/kerberos/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "KDC Server Address"
+msgstr "பெயர் சர்வர் முகவரி"
+
+#, fuzzy
+#~| msgid "Configure KPowersave..."
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Kpowersaveவை உள்ளமைக்கவும்..."

@@ -1,115 +1,133 @@
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
+# Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2010, 2013.
+# Mantas Kondrotas <dalelemanes@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2001-10-18 09:54+0200\n"
-"Last-Translator: Jonas Gocentas <jonasgocentas@florida.usa.com>\n"
-"Language-Team: Lithuanian <i18n@suse.de>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2013-01-25 09:34+0200\n"
+"Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
+"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
+"X-Generator: Lokalize 1.5\n"
 
-#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Nebuvo įmanoma nuskaityti viso pagrindinio kompiuterio pavadinimo. Jei laiškas nebuvo įteiktas, pasikonsultuokite dėl tinklo ir/ar pašto konfigūracijos su tinko administratoriumi."
+
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "Pašto konfigūracijos bandymas nėra patvirtintas"
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Kol vyko pašto konfigūravimas, bandomasis laiškas buvo išsiųstas į %s . Ar šiuo adresu buvo pristatytas laiškas?<br>Jei taip, patvirtinkite jį paspausdami mygtuką. Priešingu atveju dar kartą patikrinkite pašto konfigūraciją."
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "Bandomas laiško priėmimas"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
-msgstr "Slaptažodžiai nesutampa"
+msgstr "Slaptažodžiai nesutampa."
 
-#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
-msgstr ""
+msgstr "Pašto nuostatos buvo įrašytos."
 
-#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
-msgstr ""
+msgstr "Bandomasis laiškas išsiųstas į %s."
 
-#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
-#, fuzzy
-msgid "Error while saving mail settings: %s"
-msgstr "Klaida išsaugant žurnalo failą"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "Klaida įrašant pašto nuostatas."
 
-#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
-"No outgoing mail server is set, but administrator has mail forwarders "
-"defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
+"Nėra nustatytas laiškų išsiuntimo serveris, tačiau administratorius apibrėžė laiškų persiuntėjus.\n"
+"        Pakeiskite %s<i>administratoriaus</i>%s arba %s<i>pašto</i>%s konfigūraciją."
 
-#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "Palaukite"
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
-msgstr "Slaptažodžiai nesutampa"
+msgstr "Slaptažodžiai nesutampa."
 
-#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
-msgstr "„%s“ nėra galiojantis ip adresas."
+msgstr "Įveskite galiojantį elektroninio pašto adresą."
 
-#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
-msgstr "Įveskite savo IP adresą."
+msgstr "Įveskite galiojantį srities vardą arba IP adresą."
 
-#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
-#: shortcuts.yml:6
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
-msgstr "Rankiniai nustatymai"
+msgstr "Pašto nuostatos"
 
-#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "Laiškų išsiuntimo serverio nuostatos"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
-msgstr ""
+msgstr "Laiškų išsiuntimo serveris"
 
-#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
-msgstr ""
+msgstr "Naudoti saugų ryšį (TLS)"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Niekada"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
-msgstr "(%1 laisvos vietos)"
+msgstr "Jei prieinama"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
-msgstr "&Visada"
+msgstr "Visada"
 
-#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
-msgstr "Vartotojo vardas: "
+msgstr "Naudotojo vardas"
 
 # password dialog title
-#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
-msgstr "_Patvirtinkite slaptažodį:"
+msgstr "Patvirtinkite slaptažodį"
 
-#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "Laiškų tikrinimo serverio nuostatos"
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
-msgstr "Siųsti el. paštą %1"
+msgstr "Siųsti bandomąjį laišką į"
 
-#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
-msgstr "Nepavyko sustabdyti"
+msgstr "Siųsti laišką"
 
-#: shortcuts.yml:7
-msgid "Manage outgoing mail settings"
-msgstr ""
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Tvarkyti išsiunčiamo laiško nuostatas"
