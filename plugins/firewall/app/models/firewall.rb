@@ -23,7 +23,8 @@ require 'base'
 
 class Firewall < BaseModel::Base
 
-  attr_accessor :use_firewall, :fw_services, :running
+  attr_accessor :use_firewall, :fw_services
+  attr_reader   :running
 
   def self.find
     Firewall.new YastService.Call("YaPI::FIREWALL::Read")
