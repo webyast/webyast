@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <firewall>
+  <running type="boolean">false</running>
   <use_firewall type="boolean">true</use_firewall>
   <fw_services type="array">
     <fw_service>
