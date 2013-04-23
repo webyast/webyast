@@ -42,7 +42,7 @@
     <div class="right" >
       <%= render :partial => 'shared/online_help', :locals => { :help_name => "firewall"} %>
       <span class="right" style="padding:2px; background:#f5f5f5; -moz-border-radius:2px; -webkit-border-radius:2px;">
-      <% if @firewall.use_firewall %>
+      <% if @firewall.running %>
         <button id="on" class="active" value="on"><%=_("Enabled")%></button>
         <button id="off" value="off"><%=_("Disabled")%></button>
       <% else %>
@@ -65,14 +65,14 @@
     <% end %>
   </div>
 
-  <input type="checkbox" name="use_firewall" id="use_firewall" value="true" <%=  "checked=\"checked\"" if @firewall.use_firewall %> <%=  "disabled=\"disabled\"" if disabled %> />
+  <input type="checkbox" name="use_firewall" id="use_firewall" value="true" <%=  "checked=\"checked\"" if @firewall.running %> <%=  "disabled=\"disabled\"" if disabled %> />
 
   <div class="clearfix"></div>
 
   <div id="firewall-wrapper">
     <div id="allowedContainer">
       <label><span class="icon-border"><%= image_tag("locko.png", :class=>"label-image") %></span><%= _("Allowed services") %></label>
-      <% if @firewall.use_firewall %>
+      <% if @firewall.running %>
         <script type="text/javascript">jQuery(function($){ enableFirewallForm() })</script>
         <div id="allowed_services" class="services round5">
       <% else %>
@@ -86,7 +86,7 @@
 
     <div id="blockedContainer">
       <label><span class="icon-border"><%= image_tag("lock.png", :class=>"label-image") %></span><%= _("Blocked services") %></label>
-      <% if @firewall.use_firewall %>
+      <% if @firewall.running %>
         <div id="blocked_services" class="services round5">
       <% else %>
         <div id="blocked_services" class="services round5 firewallForm_disabled">
