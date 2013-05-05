@@ -44,7 +44,7 @@ Source:         %{mod_full_name}.gem
 Source1:        MailSettings.pm
 Source2:        org.opensuse.yast.modules.yapi.mailsettings.policy
 Source3:        postfix-update-hostname
-Source4:        50-default-webyast-mailsetting.rules
+Source4:        40-default-webyast-mailsetting.rules
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 # install these packages into Hudson chroot environment
@@ -169,7 +169,7 @@ install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mailsettings.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-mailsetting.rules
+/etc/polkit-1/rules.d/40-default-webyast-mailsetting.rules
 %endif
 
 %restart_script_name

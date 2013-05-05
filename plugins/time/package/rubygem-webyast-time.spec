@@ -43,7 +43,7 @@ Summary:        WebYaST - time management
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
-Source1:        50-default-webyast-time.rules
+Source1:        40-default-webyast-time.rules
 
 # YaPI/TIME.pm, *.policy
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -126,7 +126,7 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-time.rules
+/etc/polkit-1/rules.d/40-default-webyast-time.rules
 %endif
 
 # precompiled assets

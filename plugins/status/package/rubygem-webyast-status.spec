@@ -48,7 +48,7 @@ Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.metrics.policy
 Source2:        org.opensuse.yast.modules.logfile.policy
 Source3:        LogFile.rb
-Source4:        50-default-webyast-status.rules
+Source4:        40-default-webyast-status.rules
 
 PreReq:         collectd, %insserv_prereq
 Requires:       rrdtool
@@ -199,7 +199,7 @@ rccollectd restart
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.metrics.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.logfile.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-status.rules
+/etc/polkit-1/rules.d/40-default-webyast-status.rules
 %endif
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml

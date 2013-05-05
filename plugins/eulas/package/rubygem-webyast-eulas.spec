@@ -43,7 +43,7 @@ Source:         %{mod_full_name}.gem
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.yapi.licenses.policy
 Source3:        eulas-opensuse12_3.yml
-Source4:        50-default-webyast-eulas.rules
+Source4:        40-default-webyast-eulas.rules
 
 #
 %define plugin_name eulas
@@ -161,7 +161,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.licenses.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-eulas.rules
+/etc/polkit-1/rules.d/40-default-webyast-eulas.rules
 %endif
 
 %restart_script_name

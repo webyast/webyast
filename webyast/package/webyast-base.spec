@@ -136,7 +136,7 @@ Source13:       control_panel.yml
 Source14:       config.yml
 Source15:       config.yml.new
 Source16:       update_webyast_service
-Source17:       50-default-webyast-base.rules
+Source17:       40-default-webyast-base.rules
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  pkg-config
@@ -626,7 +626,7 @@ mkdir -p /var/lib/webyast
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-base.rules
+/etc/polkit-1/rules.d/40-default-webyast-base.rules
 %endif
 %config %{webyast_dir}/config/initializers/secret_token.rb
 %config %{webyast_dir}/config/environment.rb

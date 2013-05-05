@@ -51,7 +51,7 @@ Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.firewall.policy
 Source2:        FIREWALL.pm
-Source3:        50-default-webyast-firewall.rules
+Source3:        40-default-webyast-firewall.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -138,7 +138,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.firewall.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-firewall.rules
+/etc/polkit-1/rules.d/40-default-webyast-firewall.rules
 %endif
 
 # YaPI dir

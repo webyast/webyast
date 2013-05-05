@@ -55,7 +55,7 @@ Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.patches.policy
 Source2:        org.opensuse.yast.modules.yapi.packages.policy
 Source3:        org.opensuse.yast.modules.yapi.repositories.policy
-Source4:        50-default-webyast-software.rules
+Source4:        40-default-webyast-software.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -155,7 +155,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.packages.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.repositories.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-software.rules
+/etc/polkit-1/rules.d/40-default-webyast-software.rules
 %endif
 %attr(775,%{webyast_user},root) /var/lib/webyast/software
 

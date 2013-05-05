@@ -42,7 +42,7 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.network.policy
-Source2:        50-default-webyast-network.rules
+Source2:        40-default-webyast-network.rules
 
 # YaPI/NETWORK.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -133,7 +133,7 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.network.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-network.rules
+/etc/polkit-1/rules.d/40-default-webyast-network.rules
 %endif
 
 %restart_script_name

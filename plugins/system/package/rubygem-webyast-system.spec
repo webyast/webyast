@@ -41,7 +41,7 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.system.policy
-Source2:        50-default-webyast-system.rules
+Source2:        40-default-webyast-system.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -134,7 +134,7 @@ fi
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.system.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-system.rules
+/etc/polkit-1/rules.d/40-default-webyast-system.rules
 %endif
 
 %restart_script_name

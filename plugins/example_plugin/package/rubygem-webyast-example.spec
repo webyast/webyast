@@ -37,7 +37,7 @@ Source2:        exampleService.rb
 Source3:        example.service.service
 Source4:        org.opensuse.yast.modules.yapi.example.policy
 Source5:        wicd-rpmlintrc
-Source6:        50-default-webyast-example.rules
+Source6:        40-default-webyast-example.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -134,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %attr(744,root,root) /usr/sbin/exampleService.rb
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.example.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-example.rules
+/etc/polkit-1/rules.d/40-default-webyast-example.rules
 %endif
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service

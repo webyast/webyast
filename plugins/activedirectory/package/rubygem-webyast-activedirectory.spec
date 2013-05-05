@@ -50,7 +50,7 @@ Requires:       yast2-core >= 2.17.30.1
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.activedirectory.policy
 Source2:        ActiveDirectory.pm
-Source3:        50-default-webyast-activedirectory.rules
+Source3:        40-default-webyast-activedirectory.rules
 #
 Summary:        Webyast module for configuring activedirectory settings
 License:        GPL-2.0
@@ -134,7 +134,7 @@ install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.activedirectory.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-activedirectory.rules
+/etc/polkit-1/rules.d/40-default-webyast-activedirectory.rules
 %endif
 
 # YaPI dir

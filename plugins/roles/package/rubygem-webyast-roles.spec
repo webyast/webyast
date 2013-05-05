@@ -45,7 +45,7 @@ Source:         %{mod_full_name}.gem
 Source1:        roles.yml
 Source2:        roles_assign.yml
 Source3:        org.opensuse.yast.modules.yapi.roles.policy
-Source4:        50-default-webyast-roles.rules
+Source4:        40-default-webyast-roles.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -133,7 +133,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %attr(0600,%{webyast_user},%{webyast_user}) %config %{webyast_vardir}/roles/*
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.roles.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-roles.rules
+/etc/polkit-1/rules.d/40-default-webyast-roles.rules
 %endif
 
 %restart_script_name

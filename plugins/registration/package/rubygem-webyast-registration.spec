@@ -39,7 +39,7 @@ Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.register.policy
 Source2:        org.opensuse.yast.modules.yapi.mirrorcredentials.policy
 Source3:	MirrorCredentials.pm
-Source4:        50-default-webyast-registration.rules
+Source4:        40-default-webyast-registration.rules
 
 # YaST2/modules/YSR.pm  
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
@@ -148,7 +148,7 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.register.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mirrorcredentials.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-registration.rules
+/etc/polkit-1/rules.d/40-default-webyast-registration.rules
 %endif
 
 %restart_script_name

@@ -41,7 +41,7 @@ Provides:	webyast-root-user-ui = %{version}
 Url:            http://en.opensuse.org/Portal:WebYaST
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.administrator.policy
-Source2:        50-default-webyast-administrator.rules
+Source2:        40-default-webyast-administrator.rules
 #
 Summary:        Webyast module for configuring administrator settings
 License:        GPL-2.0
@@ -118,7 +118,7 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.administrator.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-administrator.rules
+/etc/polkit-1/rules.d/40-default-webyast-administrator.rules
 %endif
 
 %restart_script_name

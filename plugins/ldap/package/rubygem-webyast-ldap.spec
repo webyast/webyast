@@ -43,7 +43,7 @@ Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.ldap.policy
 Source2:        LDAP.pm
-Source3:        50-default-webyast-ldap.rules
+Source3:        40-default-webyast-ldap.rules
 
 # LDAP.pm is using yast2-ldap-client API
 Requires:       nss_ldap
@@ -157,7 +157,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.ldap.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-ldap.rules
+/etc/polkit-1/rules.d/40-default-webyast-ldap.rules
 %endif
 
 %restart_script_name

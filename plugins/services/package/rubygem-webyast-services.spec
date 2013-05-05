@@ -45,7 +45,7 @@ Source1:        org.opensuse.yast.modules.yapi.services.policy
 Source2:        YML.rb
 Source3:        filter_services.yml
 Source4:        SERVICES.pm
-Source5:        50-default-webyast-services.rules
+Source5:        40-default-webyast-services.rules
 
 # so SERVICES.pm is able to call YML.rb
 Requires:       yast2-ruby-bindings >= 0.3.2.1
@@ -150,7 +150,7 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.services.policy
 %if %suse_version >= 1230
-/etc/polkit-1/rules.d/50-default-webyast-services.rules
+/etc/polkit-1/rules.d/40-default-webyast-services.rules
 %endif
 
 %dir /etc/webyast/
