@@ -71,7 +71,7 @@ if File.exists? File.expand_path("../../.git",  __FILE__)
       # needed for rake gettext:find
       gem 'ruby_parser'
 
-      gem "ruby-debug"
+      gem "ruby-debug19"
     end
 end
 
