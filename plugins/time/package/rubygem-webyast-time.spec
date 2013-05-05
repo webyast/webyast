@@ -94,6 +94,7 @@ needed at runtime.
 %gem_install %{S:0}
 
 %if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %endif
 
