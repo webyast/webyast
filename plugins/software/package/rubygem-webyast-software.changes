@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May  7 15:01:53 UTC 2013 - lslezak@suse.cz
+
+- support for PackageKit 0.8.x
+
+-------------------------------------------------------------------
 Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
 
 - support for the new polkit (Javascript rules file) (bnc#816478)

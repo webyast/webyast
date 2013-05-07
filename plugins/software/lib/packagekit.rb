@@ -132,7 +132,7 @@ class PackageKit
     packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
     
     # get transaction id via this interface
-    tid = packagekit_iface.GetTid
+    tid = packagekit_iface.CreateTransaction
     
     # retrieve transaction (proxy) object
     transaction_proxy = pk_service.object(tid[0])

@@ -127,12 +127,14 @@ private
       rescue Exception => e
         Rails.logger.warn "Error while reading patches: #{e.inspect}"
 
-        if e.description.match /Repository (.*) needs to be signed/
-          flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
-        elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
-          flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
-        elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
-          flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
+        if e.responds_to? :description
+            if e.description.match /Repository (.*) needs to be signed/
+              flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
+            elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+              flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+            elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+              flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
+            end
         else
           flash[:error] = e.message
         end
