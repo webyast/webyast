@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-activedirectory
-Version:        0.3.12
+Version:        0.3.13
 Release:        0
 %define mod_name webyast-activedirectory
 %define mod_full_name %{mod_name}-%{version}
