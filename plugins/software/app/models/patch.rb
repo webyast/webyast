@@ -226,6 +226,39 @@ class Patch < Resolvable
     end
   end
 
+  # needed for PackageKit 0.8+
+  def self.resolve_package_type kind_number
+    case kind_number
+      when  1 then _("unknown")
+      when  2 then _("installed")
+      when  3 then _("available")
+      when  4 then _("low")
+      when  5 then _("enhancement")
+      when  6 then _("normal")
+      when  7 then _("bugfix")
+      when  8 then _("recommended")
+      when  9 then _("security")
+      when 10 then _("blocked")
+      when 11 then _("downloading")
+      when 12 then _("updating")
+      when 13 then _("installing")
+      when 14 then _("removing")
+      when 15 then _("cleanup")
+      when 16 then _("obsoleting")
+      when 17 then _("collection_installed")
+      when 18 then _("collection_available")
+      when 19 then _("finished")
+      when 20 then _("reinstalling")
+      when 21 then _("downgrading")
+      when 22 then _("preparing")
+      when 23 then _("decompressing")
+      when 24 then _("untrusted")
+      when 25 then _("trusted")
+      when 26 then _("last")
+      else         _("unspecified")
+    end
+  end
+
   # find patches using PackageKit
   def self.do_find(what)
     bg_status = nil #not needed due caching
@@ -238,7 +271,7 @@ class Patch < Resolvable
         if what == :available || line2 == what
           update = Patch.new(:resolvable_id => line2,
             :version => columns[1],
-            :kind => line1,
+            :kind => ( PackageKit.version_0_8 ? resolve_package_type(line1) : line1 ),
             :name => columns[0],
             :arch => columns[2],
             :repo => columns[3],

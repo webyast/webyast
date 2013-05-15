@@ -127,7 +127,7 @@ private
       rescue Exception => e
         Rails.logger.warn "Error while reading patches: #{e.inspect}"
 
-        if e.responds_to? :description
+        if e.respond_to? :description
             if e.description.match /Repository (.*) needs to be signed/
               flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
             elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
