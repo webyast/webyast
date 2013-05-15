@@ -48,8 +48,8 @@ You may need to reload the page after applying the patch.") -%></p>
       <% if patch_kinds.has_key?(patch_update.kind) %>
         <td class="icon kind" ><%= image_tag(patch_kinds[patch_update.kind]) %> </td>
       <% else %>
-        <% TODO FIXME: properly handle the new kind %>
-        <td><%=h patch_update.kind %></td>
+        <%# TODO FIXME: properly handle the new kind %>
+        <td><%= PackageKit.version_0_8 ? patch_update.kind : patch_update.kind.humanize %></td>
       <% end %>
 
       <td class="label"><div style="font-size:13px;"><strong><%=h patch_update.name %></strong></div><div style="color:#777777; font-size:11px;"><%=h patch_update.summary %></div></td>

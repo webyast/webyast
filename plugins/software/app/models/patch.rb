@@ -232,7 +232,7 @@ class Patch < Resolvable
     patch_updates = Array.new
 
     DbusLock.synchronize do
-      PackageKit.transact("GetUpdates", 0, "Package", bg_status) do |line1,line2,line3|
+      PackageKit.transact("GetUpdates", (PackageKit.version_0_8 ? 0 : "none"), "Package", bg_status) do |line1,line2,line3|
         Rails.logger.debug "** Found patch : #{line2.inspect}"
         columns = line2.split ";"
         if what == :available || line2 == what

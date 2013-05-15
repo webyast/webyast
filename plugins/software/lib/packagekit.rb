@@ -51,6 +51,11 @@ end
 
 class PackageKit
 
+  cattr_reader :version_0_8
+
+  # PackageKit API 0.8.x ?
+  @@version_0_8 = nil
+
   private
   def self.improve_error(dbus_error)
     # check if it is a known error
@@ -130,9 +135,12 @@ class PackageKit
 
     # use the (generic) 'PackageKit' interface
     packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
+
+    # check for PackageKit 0.8.x
+    @@version_0_8 = packagekit_iface.methods["CreateTransaction"].present?
     
     # get transaction id via this interface
-    tid = packagekit_iface.CreateTransaction
+    tid = @@version_0_8 ? packagekit_iface.CreateTransaction : packagekit_iface.GetTid
     
     # retrieve transaction (proxy) object
     transaction_proxy = pk_service.object(tid[0])
