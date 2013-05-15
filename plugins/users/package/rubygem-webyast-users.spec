@@ -23,6 +23,7 @@ Release:        0
 %define mod_full_name %{mod_name}-%{version}
 #
 #
+Requires:       yast2-users
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
