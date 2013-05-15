@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 15 12:27:19 UTC 2013 - lslezak@suse.cz
+
+- do not report unregistered system when SUSE Manager is used
+  for registration (bnc#811705)
+- 0.3.18.1
+
+-------------------------------------------------------------------
 Fri Feb 22 06:40:31 UTC 2013 - jreidinger@suse.com
 
 - add rest documentation so it is clear how to use it (BNC#790162)

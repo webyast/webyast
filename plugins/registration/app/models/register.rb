@@ -154,6 +154,7 @@ public
   end
 
   def is_registered?
+    return true if File.exists?("/etc/sysconfig/rhn/systemid")
     @guid.present? && @guid != 0
   end
 
