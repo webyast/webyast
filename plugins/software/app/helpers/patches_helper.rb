@@ -7,7 +7,9 @@ module PatchesHelper
       "normal" => 'kupdateapplet_yellow.png',
       "optional" => 'kupdateapplet_optional.png',
       "low" => 'kupdateapplet_green.png',
-      "enhancement" => 'kupdateapplet_optional.png'
+      "enhancement" => 'kupdateapplet_optional.png',
+      "recommended" => 'kupdateapplet_green.png',
+      "bugfix"      => 'kupdateapplet_green.png'
     }
   end
 

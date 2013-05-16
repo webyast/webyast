@@ -254,8 +254,8 @@ private
     authorize! :read, Patch
     @patch_updates = Patch.find :all
     kind = params[:value]
-    search_map = { "green" => ["normal","low"], "security" => ["security"],
-                   "important" => "important", 'optional' => ["enhancement"] }
+    search_map = { "green" => ["normal","low","bugfix","recommended"], "security" => ["security"],
+                   "important" => "important", 'optional' => ["enhancement","other"] }
     unless kind == "all"
       search_list = search_map[kind] || [kind]
       @patch_updates = @patch_updates.find_all { |patch| search_list.include?(patch.kind) }
