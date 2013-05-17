@@ -30,7 +30,7 @@ class StatusController < ApplicationController
       flash[:error] = _("Status not available.")
     when CollectdOutOfSyncError
       logger.error error.message
-      flash[:error] = _("Collectd is out of sync. Status not available.")
+      flash[:error] = _("Collectd is out of sync.")
     end
     respond_to do |format|
       format.html { redirect_to root_path }
