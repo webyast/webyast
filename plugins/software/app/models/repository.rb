@@ -85,7 +85,8 @@ class Repository < BaseModel::Base
       repositories = []
 
       DbusLock.synchronize do
-        PackageKit.transact('GetRepoList', 0, 'RepoDetail') { |id, name, enabled|
+        PackageKit.connect
+        PackageKit.transact('GetRepoList', (PackageKit.version_0_8 ? 0 : "none"), 'RepoDetail') { |id, name, enabled|
           Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
           if what == :all || id == what

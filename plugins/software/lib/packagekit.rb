@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -83,14 +83,14 @@ class PackageKit
 
   def self.dbusloop proxy, error = ''
     dbusloop = DBus::Main.new
-    proxy.on_signal("ErrorCode") do |u1,u2| 
+    proxy.on_signal("ErrorCode") do |u1,u2|
       error_string = "#{u1}: #{u2}"
       Rails.logger.error error_string
       dbusloop.quit
       error << error_string if error.empty?
     end
-    
-    proxy.on_signal("RepoSignatureRequired") do |u1,u2,u3,u4,u5,u6,u7,u8| 
+
+    proxy.on_signal("RepoSignatureRequired") do |u1,u2,u3,u4,u5,u6,u7,u8|
       error_string = "Repository #{u2} needs to be signed"
       Rails.logger.error error_string
       dbusloop.quit
@@ -115,16 +115,18 @@ class PackageKit
   #
   # connect to PackageKit and create Transaction proxy
   #
-  # return Array of <transaction proxy>,<packagekit interface>,<transaction 
+  # return Array of <transaction proxy>,<packagekit interface>,<transaction
   #
   # Reference: http://www.packagekit.org/gtk-doc/index.html
   #
 
   def self.connect
+    return [@transaction_iface, @packagekit_iface] if @connected
+
     system_bus = DBus::SystemBus.instance # RORSCAN_ITL
     # connect to PackageKit service via SystemBus
     pk_service = system_bus.service("org.freedesktop.PackageKit") # RORSCAN_ITL
-    
+
     # Create PackageKit proxy object
     packagekit_proxy = pk_service.object("/org/freedesktop/PackageKit")
 
@@ -134,25 +136,25 @@ class PackageKit
     end
 
     # use the (generic) 'PackageKit' interface
-    packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
+    @packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
 
     # check for PackageKit 0.8.x
-    @@version_0_8 = packagekit_iface.methods["CreateTransaction"].present?
-    
+    @@version_0_8 = @packagekit_iface.methods["CreateTransaction"].present?
+
     # get transaction id via this interface
-    tid = @@version_0_8 ? packagekit_iface.CreateTransaction : packagekit_iface.GetTid
-    
+    tid = @@version_0_8 ? @packagekit_iface.CreateTransaction : @packagekit_iface.GetTid
+
     # retrieve transaction (proxy) object
     transaction_proxy = pk_service.object(tid[0])
     self.no_gc do
       transaction_proxy.introspect
     end
-    
+
     # use the 'Transaction' interface
-    transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
+    @transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
     transaction_proxy.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    [transaction_iface, packagekit_iface]
+    [@transaction_iface, @packagekit_iface]
   rescue DBus::Error => dbus_error
     Rails.logger.warn "Caught DBus error: #{dbus_error.inspect}"
     raise self.improve_error dbus_error
@@ -196,9 +198,9 @@ class PackageKit
       error = ''
       result = nil
       transaction_iface, packagekit_iface = self.connect
-    
+
       proxy = transaction_iface.object
-    
+
       # set the custom signal handler if set
       proxy.on_signal(signal.to_s, &block) if !signal.blank? && block_given?
       proxy.on_signal("Error") { dbusloop.quit }
@@ -240,7 +242,7 @@ class PackageKit
     rescue Exception => e
       raise e
     end
-    
+
     result
   end
 
