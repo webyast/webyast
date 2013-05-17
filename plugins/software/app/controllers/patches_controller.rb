@@ -126,17 +126,12 @@ private
         @patch_updates = Patch.find(:all)
       rescue Exception => e
         Rails.logger.warn "Error while reading patches: #{e.inspect}"
-
-        if e.respond_to? :description
-            if e.description.match /Repository (.*) needs to be signed/
-              flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
-            elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
-              flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
-            elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
-              flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
-            end
-        else
-          flash[:error] = e.message
+        if e.message.match /Repository (.*) needs to be signed/
+          flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
+        elsif e.message.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+          flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+        elsif e.message.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+          flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
         end
         @patch_updates = []
         @error = true
@@ -200,13 +195,13 @@ private
       rescue Exception => error
         Rails.logger.warn "Caught exception: #{error.inspect}"
 
-        if error.description.match /Repository (.*) needs to be signed/
+        if error.message.match /Repository (.*) needs to be signed/
           error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % h($1)).html_safe
           error_type = :unsigned
-        elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+        elsif error.message.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
           error_type = :locked
-        elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+        elsif error.message.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
           error_string = _("Software management is locked by another application (PID %s).") % $1
           error_type = :locked
         else
