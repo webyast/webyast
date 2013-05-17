@@ -51,10 +51,11 @@ end
 
 class PackageKit
 
-  cattr_reader :version_0_8
-
   # PackageKit API 0.8.x ?
-  @@version_0_8 = nil
+  def self.version_0_8
+    connect unless @connected
+    @version_0_8
+  end
 
   private
   def self.improve_error(dbus_error)
@@ -121,8 +122,6 @@ class PackageKit
   #
 
   def self.connect
-    return [@transaction_iface, @packagekit_iface] if @connected
-
     system_bus = DBus::SystemBus.instance # RORSCAN_ITL
     # connect to PackageKit service via SystemBus
     pk_service = system_bus.service("org.freedesktop.PackageKit") # RORSCAN_ITL
@@ -139,10 +138,10 @@ class PackageKit
     @packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
 
     # check for PackageKit 0.8.x
-    @@version_0_8 = @packagekit_iface.methods["CreateTransaction"].present?
+    @version_0_8 = @packagekit_iface.methods["CreateTransaction"].present?
 
     # get transaction id via this interface
-    tid = @@version_0_8 ? @packagekit_iface.CreateTransaction : @packagekit_iface.GetTid
+    tid = @version_0_8 ? @packagekit_iface.CreateTransaction : @packagekit_iface.GetTid
 
     # retrieve transaction (proxy) object
     transaction_proxy = pk_service.object(tid[0])
@@ -153,6 +152,8 @@ class PackageKit
     # use the 'Transaction' interface
     @transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
     transaction_proxy.default_iface = "org.freedesktop.PackageKit.Transaction"
+
+    @connected = true
 
     [@transaction_iface, @packagekit_iface]
   rescue DBus::Error => dbus_error

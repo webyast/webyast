@@ -245,7 +245,6 @@ class Patch < Resolvable
     patch_updates = Array.new
 
     DbusLock.synchronize do
-      PackageKit.connect
       PackageKit.transact("GetUpdates", (PackageKit.version_0_8 ? 0 : "none"), "Package", bg_status) do |line1,line2,line3|
         Rails.logger.debug "** Found patch : #{line2.inspect}"
         columns = line2.split ";"
