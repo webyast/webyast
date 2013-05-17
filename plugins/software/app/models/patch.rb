@@ -423,12 +423,9 @@ class Patch < Resolvable
           dbusloop.quit
         end
 
-        if transaction_iface.methods["UpdatePackages"] && # catch mocking
-          transaction_iface.methods["UpdatePackages"].params.size == 2 &&
-            transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
-          #PackageKit of 11.2
-          transaction_iface.UpdatePackages(true,  #only_trusted
-            [patch_id])
+        if PackageKit.version_0_8
+          # only trusted packages
+          transaction_iface.UpdatePackages 2, [patch_id]
         else
           #PackageKit older versions like SLES11
           transaction_iface.UpdatePackages([patch_id])
