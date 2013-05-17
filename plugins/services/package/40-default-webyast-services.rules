@@ -2,7 +2,7 @@
 
 polkit.addRule(function(action, subject) {
   if ((action.id == "org.opensuse.yast.modules.yapi.services.read"
-    || action.id == "org.opensuse.yast.modules.yapi.services.write"
+    || action.id == "org.opensuse.yast.modules.yapi.services.execute"
     ) && (subject.user == "webyast" || subject.user == "root"))
   {
     return polkit.Result.YES;
