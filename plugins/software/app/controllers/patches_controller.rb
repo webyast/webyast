@@ -25,6 +25,11 @@ require "license_required_exception"
 class PatchesController < ApplicationController
   include ERB::Util
 
+  # just for marking the kind texts for translation, used in _patches.html.erb
+  # TRANSLATORS: patch severity
+  KIND_TRANSLATIONS = [ N_("Low"), N_("Enhancement"), N_("Normal"),
+    N_("Bugfix"), N_("Recommended"), N_("Security"), N_("Other") ]
+
 private
 
   def collect_done_patches
