@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 21 15:35:57 UTC 2013 - vmoravec@suse.cz
+
+- improve PackageKit 0.8+ compatibility
+- other minor fixes
+
+-------------------------------------------------------------------
 Tue May  7 15:01:53 UTC 2013 - lslezak@suse.cz
 
 - support for PackageKit 0.8.x

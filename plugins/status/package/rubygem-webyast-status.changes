@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May 21 15:46:18 UTC 2013 - vmoravec@suse.cz
+
+- fix redirection to main page 
+
+-------------------------------------------------------------------
 Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
 
 - support for the new polkit (Javascript rules file) (bnc#816478)
