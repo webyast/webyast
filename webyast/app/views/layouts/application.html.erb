@@ -122,10 +122,12 @@
               <%= link_to _("Home"), '/controlpanel'%>
             </span>
             <span class="userbar-icon user-icon">
-              <% if WebyastEngine.find "Users" %>
-                <%= link_to(current_account.username, :controller => :users) %>
+              <% if current_account.username == 'root' %>
+                <%= link_to_if(WebyastEngine.find("Administrator").present?,
+                    current_account.username, {:controller=>:administrator, :action=>:index}) %>
               <% else %>
-                <%= current_account.username %>
+                <%= link_to_if(WebyastEngine.find("Users").present?,
+                    current_account.username, {:controller=>:users, :action=>:index}) %>
               <% end %>
             </span>
             <span class="userbar-icon" style=" text-align:center;">

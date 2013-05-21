@@ -33,7 +33,7 @@ class StatusController < ApplicationController
       flash[:error] = _("Collectd is out of sync.")
     end
     respond_to do |format|
-      format.html { redirect_to :action => :index, :controller => :status }
+      format.html { redirect_to root_path }
       format.xml  { render :xml  => error.to_xml,  :status => 500 }
       format.json { render :json => error.to_json, :status => 500 }
     end

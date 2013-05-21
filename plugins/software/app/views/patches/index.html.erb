@@ -57,11 +57,13 @@
       $('table.available_patches tr td').hide();
       $('table.available_patches tr.patch_kind_recommended td').show();
       $('table.available_patches tr.patch_kind_low td').show();
+      $('table.available_patches tr.patch_kind_bugfix td').show();
     });
      
     $('#optional').click(function(){
       $('table.available_patches tr td').hide();
       $('table.available_patches tr.patch_kind_enhancement td').show();
+      $('table.available_patches tr.patch_kind_other td').show();
     });
 
     $('table.available_patches td').click(function(){
@@ -151,8 +153,9 @@
       	@patch_updates.each do |p|
       	  # don't count installed patches
 	        unless p.installed
-                  search_map = { "normal" => "green", "low" => "green", "security" => "security",
-                                 "important" => "important", "enhancement" => "optional" }
+                  search_map = { "normal" => "green", "low" => "optional", "security" => "security",
+                                 "important" => "important", "enhancement" => "optional",
+                                 "recommended" => "green", "bugfix" => "green" }
                   key = search_map[p.kind] || p.kind
 	          if @hash.has_key?(key)
 	            @hash[key] += 1
@@ -194,7 +197,7 @@
             <%= image_tag("kupdateapplet_green.png") %><%=_("Recommended") %>&nbsp;<span>(<%=@hash["green"]%>)</span>
         </button>
         <button type="submit" id="optional" class="right">
-          <%= image_tag("kupdateapplet_optional.png") %><%=_("Optional") %>&nbsp;<span>(<%=@hash["optional"] + @hash["low"] %>)</span>
+          <%= image_tag("kupdateapplet_optional.png") %><%=_("Optional") %>&nbsp;<span>(<%=@hash["optional"] %>)</span>
         </button>
       </div>
       <div class="clearfix"></div>

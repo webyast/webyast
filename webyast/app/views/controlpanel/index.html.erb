@@ -21,8 +21,8 @@
 
 <% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
 <% display_status = ControlPanelConfig.read 'display_system_status', true %>
-<% status_present = WebyastEngine.find "Status" %>
-<% patches_present = WebyastEngine.find "Software" %>
+<% status_present = WebyastEngine.find("Status").present? %>
+<% patches_present = WebyastEngine.find("Software").present? %>
 
 <% content_for :head do %>
   <% javascript_tag do -%>
