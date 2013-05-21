@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue May 21 15:25:14 UTC 2013 - vmoravec@suse.cz
+
+- resolve issues with PolicyKit and PackageKit
+  (bnc#809579, bnc#810336, bnc#809028)
+- redirect to root_path after login and remove templates for
+  sessions.create
+- other minor fixes
+
+-------------------------------------------------------------------
 Mon Apr 22 13:35:07 UTC 2013 - lslezak@suse.cz
 
 - support for the new polkit (bnc#808762, bnc#816478)
