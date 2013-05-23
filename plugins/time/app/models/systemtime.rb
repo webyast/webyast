@@ -329,14 +329,14 @@ class Systemtime < BaseModel::Base
   def set_time_config
     case config
     when "manual"
-      if service_available && ntp_available
+      if service_available && ntp_available && ntpd_running
         service = Service.new "ntp"
         Rails.logger.info "Stopping ntpd service.."
         service_result    = service.save(:execute => "stop") || {}
         self.ntpd_running = !(service_result['exit'] == '0')
       end
     when "ntp_sync"
-      if ntp_available
+      if ntp_available && !ntpd_running
         ntp.actions[:synchronize]     = true
         ntp.actions[:synchronize_utc] = utcstatus
         ntp.actions[:ntp_server]      = ntp_server
