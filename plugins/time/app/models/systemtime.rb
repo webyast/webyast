@@ -317,9 +317,8 @@ class Systemtime < BaseModel::Base
   def ntp_check
     self.ntp_available     = class_exists?("Ntp")
     self.service_available = class_exists?("Service")
-    #FIXME is condition for available service not needed?
-    if ntp_available
-      `pgrep -f /usr/sbin/ntpd`
+    if ntp_available && service_available
+      `pgrep -f /usr/sbin/ntpd` rescue nil
       Rails.logger.info "Checking ntpd... #{'not ' unless $?.exitstatus == 0}running."
       self.ntpd_running = $?.exitstatus == 0
       self.ntp = Ntp.find
@@ -330,14 +329,14 @@ class Systemtime < BaseModel::Base
   def set_time_config
     case config
     when "manual"
-      if service_available && ntp_available
+      if service_available && ntp_available && ntpd_running
         service = Service.new "ntp"
         Rails.logger.info "Stopping ntpd service.."
         service_result    = service.save(:execute => "stop") || {}
         self.ntpd_running = !(service_result['exit'] == '0')
       end
     when "ntp_sync"
-      if ntp_available
+      if ntp_available && !ntpd_running
         ntp.actions[:synchronize]     = true
         ntp.actions[:synchronize_utc] = utcstatus
         ntp.actions[:ntp_server]      = ntp_server
