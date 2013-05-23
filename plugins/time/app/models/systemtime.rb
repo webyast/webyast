@@ -336,7 +336,7 @@ class Systemtime < BaseModel::Base
         self.ntpd_running = !(service_result['exit'] == '0')
       end
     when "ntp_sync"
-      if ntp_available
+      if ntp_available && !ntpd_running
         ntp.actions[:synchronize]     = true
         ntp.actions[:synchronize_utc] = utcstatus
         ntp.actions[:ntp_server]      = ntp_server
