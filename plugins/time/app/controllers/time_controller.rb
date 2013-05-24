@@ -50,6 +50,7 @@ class TimeController < ApplicationController
   def update
     authorize! :write, Time
     system_time = Systemtime.new params[:systemtime]
+    system_time.utcstatus = params[:systemtime][:utcstatus]
     raise InvalidParameters.new system_time.errors.full_messages unless system_time.valid?
     if system_time.config_ntp_sync?
       authorize! :execute, Service
