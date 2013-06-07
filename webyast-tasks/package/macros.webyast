@@ -42,7 +42,7 @@
     export RAILS_PARENT=%{webyast_dir} \
     cp %{webyast_dir}/Gemfile Gemfile.restility \
     echo 'gem "restility"' >> Gemfile.restility \
-    LC_ALL=en_US.UTF-8 BUNDLE_GEMFILE=Gemfile.restility rake restdoc \
+    LC_ALL=en_US.UTF-8 BUNDLE_GEMFILE=Gemfile.restility bundle exec rake restdoc \
     rm -f Gemfile.restility Gemfile.restility.lock \
     rm -rf restdoc \
     cd -
@@ -75,10 +75,10 @@
     rm -rf $TEST_DB_PATH \
     cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
     cp %{webyast_dir}/Gemfile.test Gemfile.test \
-    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test rake db:create \
-    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test rake db:schema:load \
+    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test bundle exec rake db:create \
+    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test bundle exec rake db:schema:load \
     echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test \
-    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 rake test \
+    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 bundle exec rake test \
     rm -rf $TEST_DB_PATH Gemfile.test Gemfile.test.lock log \
     cd -
 
@@ -86,7 +86,8 @@
 %webyast_build_plugin_assets \
     export RAILS_PARENT=%{webyast_dir} \
     cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
-    BUNDLE_GEMFILE=Gemfile.assets rake assets:precompile \
+    cp /srv/www/webyast/Gemfile.assets . \
+    BUNDLE_GEMFILE=Gemfile.assets bundle exec rake assets:precompile \
     rm -f Gemfile.assets Gemfile.assets.lock \
     rm -rf tmp \
     mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/public/assets \

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jun  7 11:44:55 UTC 2013 - lslezak@suse.cz
+
+- use "bundle exec" for running rake tasks
+
+-------------------------------------------------------------------
 Wed Dec 19 08:35:16 UTC 2012 - lslezak@suse.cz
 
 - make the update script symlinks relative so they are valid also
