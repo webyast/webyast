@@ -7,6 +7,9 @@ module PolKit1
   # defaults are "40-default-webyast-*", use something lower to override the defaults
   FILE_PREFIX = "30-webyast"
 
+  # taken from ActionView::Helpers::JavaScriptHelper
+  JS_ESCAPE_MAP =	{ '\\' => '\\\\', '</' => '<\/', "\r\n" => '\n', "\n" => '\n', "\r" => '\n', '"' => '\\"', "'" => "\\'" }
+
   def self.polkit1_check(perm, user_name)
     raise "invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
     polkit1_check_uid perm, Etc.getpwnam(user_name).uid
@@ -14,8 +17,9 @@ module PolKit1
 
   def self.polkit1_write(perm, granted, user_name)
     raise "User name required" if user_name.nil? || user_name.empty?
-    raise "Invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
     raise "Action name required" if perm.nil? || perm.empty?
+    # see "DECLARING ACTIONS" section in "man polkit" for valid action names
+    raise "Invalid action name" unless perm.match /\A[a-zA-Z0-9.-]+\z/
 
     file = File.join(POLKIT_PATH, "#{FILE_PREFIX}-#{user_name}-#{perm}.rules")
 
@@ -30,7 +34,7 @@ module PolKit1
 
 polkit.addRule(function(action, subject) {
   if (action.id == \"#{perm}\" &&
-    subject.user == \"#{user_name}\")
+    subject.user == \"#{escape_javascript user_name}\")
   {
     return polkit.Result.YES;
   }
@@ -44,5 +48,11 @@ polkit.addRule(function(action, subject) {
     end
   end
 
+  private
+
+  def self.escape_javascript str
+    # taken from ActionView::Helpers::JavaScriptHelper
+    str.gsub(/(\|<\/|\r\n|\342\200\250|[\n\r"'])/) {|match| JS_ESCAPE_MAP[match] }
+  end
 end
 
