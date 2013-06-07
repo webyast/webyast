@@ -92,7 +92,7 @@ class TestControllerTest < ActionController::TestCase
     Basesystem.stubs(:installed?).returns(true)
     get :redirect
     assert_response :redirect
-    assert_redirected_to "/controlpanel/index"
+    assert_redirected_to root_path
   end
 
   def test_success_redirect_wizard
@@ -113,7 +113,7 @@ class TestControllerTest < ActionController::TestCase
   def test_exception_trap_no_permission
     get :no_permission
     assert_response :redirect
-    assert_redirected_to "/controlpanel/index"
+    assert_redirected_to root_path
     assert flash
   end
 

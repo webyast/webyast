@@ -58,11 +58,6 @@ class RaisingControllerTest < ActionController::TestCase
     devise_sign_in(ControlpanelController) # authenticate user/account
     @controller = RaisingController.new
     @routes = Rails.application.routes.dup
-
-    Rails.application.routes.draw do
-      match ':controller/:action'
-      match '/sessions/new(.:format)' => 'sessions#new'
-    end
   end
 
   def test_catch_not_found
