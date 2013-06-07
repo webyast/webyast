@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jun  7 15:00:20 UTC 2013 - lslezak@suse.cz
+
+- updated tests to make it build again
+
+-------------------------------------------------------------------
 Fri Feb 22 14:34:06 UTC 2013 - locilka@suse.cz
 
 - Sorting restdoc documents alphabetically (bnc#805246)
