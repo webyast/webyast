@@ -7,7 +7,7 @@ class DeviseColumns < ActiveRecord::Migration
       t.rename :login, :username
       #t.rememberable
 
-      if Devise::VERSION.match /^2\./
+      if Devise::VERSION.match /\A[2-3]/
         ## Trackable
         t.integer  :sign_in_count, :default => 0
         t.datetime :current_sign_in_at
