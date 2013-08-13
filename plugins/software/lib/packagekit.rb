@@ -135,13 +135,13 @@ class PackageKit
     end
 
     # use the (generic) 'PackageKit' interface
-    @packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
+    packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
 
     # check for PackageKit 0.8.x
-    @version_0_8 = @packagekit_iface.methods["CreateTransaction"].present?
+    @version_0_8 = packagekit_iface.methods["CreateTransaction"].present?
 
     # get transaction id via this interface
-    tid = @version_0_8 ? @packagekit_iface.CreateTransaction : @packagekit_iface.GetTid
+    tid = @version_0_8 ? packagekit_iface.CreateTransaction : packagekit_iface.GetTid
 
     # retrieve transaction (proxy) object
     transaction_proxy = pk_service.object(tid[0])
@@ -150,12 +150,13 @@ class PackageKit
     end
 
     # use the 'Transaction' interface
-    @transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
+    transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
     transaction_proxy.default_iface = "org.freedesktop.PackageKit.Transaction"
 
     @connected = true
 
-    [@transaction_iface, @packagekit_iface]
+    [transaction_iface, packagekit_iface]
+
   rescue DBus::Error => dbus_error
     Rails.logger.warn "Caught DBus error: #{dbus_error.inspect}"
     raise self.improve_error dbus_error

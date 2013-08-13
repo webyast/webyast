@@ -318,7 +318,7 @@ class Systemtime < BaseModel::Base
     self.ntp_available     = class_exists?("Ntp")
     self.service_available = class_exists?("Service")
     if ntp_available && service_available
-      `pgrep -f /usr/sbin/ntpd` rescue nil
+      `pgrep -f /usr/sbin/ntpd` rescue nil # pgrep is not always available, e.g. OBS
       Rails.logger.info "Checking ntpd... #{'not ' unless $?.exitstatus == 0}running."
       self.ntpd_running = $?.exitstatus == 0
       self.ntp = Ntp.find
