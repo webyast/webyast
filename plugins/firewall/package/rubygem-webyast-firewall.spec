@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-firewall
-Version:        0.3.11
+Version:        0.3.12
 Release:        0
 %define mod_name webyast-firewall
 %define mod_full_name %{mod_name}-%{version}
@@ -51,6 +51,7 @@ Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.firewall.policy
 Source2:        FIREWALL.pm
+Source3:        40-default-webyast-firewall.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -93,6 +94,10 @@ Usually in RDoc and RI formats.
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 #YaPI
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
@@ -109,8 +114,10 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 #
 # granting all permissions for root
 #
+%if %suse_version < 1230
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
+%endif
 
 %restart_webyast
 
@@ -130,6 +137,9 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.firewall.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-firewall.rules
+%endif
 
 # YaPI dir
 %dir /usr/share/YaST2/

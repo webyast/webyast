@@ -1,0 +1,24 @@
+// default permissions for "webyast" and "root" users
+
+polkit.addRule(function(action, subject) {
+  if ((action.id == "org.opensuse.yast.modules.yapi.packages.read"
+    || action.id == "org.opensuse.yast.modules.yapi.patches.read"
+    || action.id == "org.opensuse.yast.modules.yapi.patches.install"
+    || action.id == "org.opensuse.yast.modules.yapi.repositories.read"
+    || action.id == "org.opensuse.yast.modules.yapi.repositories.write"
+    ) && subject.user == "root")
+  {
+    return polkit.Result.YES;
+  }
+
+  // permissions for actions done by webyast
+  if ((action.id == "org.freedesktop.packagekit.system-sources-configure"
+    || action.id == "org.freedesktop.packagekit.system-update"
+    || action.id == "org.freedesktop.packagekit.package-eula-accept"
+    ) && subject.user == "webyast")
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript

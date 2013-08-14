@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue May 21 15:34:30 UTC 2013 - vmoravec@suse.cz
+
+- fix typo in polkit rule 
+
+-------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.9
+
+-------------------------------------------------------------------
 Mon Feb 18 14:17:40 UTC 2013 - jreidinger@suse.com
 
 - fix crash if required parameter is not passed (BNC#789911)

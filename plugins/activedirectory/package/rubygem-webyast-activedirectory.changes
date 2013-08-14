@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.13
+
+-------------------------------------------------------------------
 Fri Feb 22 11:33:37 UTC 2013 - jreidinger@suse.com
 
 - return error if something wrong happen during update and not read

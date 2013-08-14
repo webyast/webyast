@@ -16,12 +16,14 @@
 
 In a nutshell:
 
+```ruby
   require 'polkit1'
 
   PolKit1::polkit1_check( "org.freedesktop.policykit.read", "root")
-  
-  return either :auth, :yes or :no
-  in all other cases (unknown DBus UID, etc.) an exception is raised
+```
+
+  returns either `:auth`, `:yes` or `:no` symbol,
+  in all other cases (unknown user, etc.) an exception is raised.
 
 
 == REQUIREMENTS:
@@ -32,14 +34,18 @@ In a nutshell:
 
 == INSTALL:
 
-* tar xzf ruby-polkit1-*.tar.gz
-* cd ruby-polkit1-*
-* make
-* make install (might need sudo privileges)
+* GIT clone
+  * `git clone git://github.com/webyast/webyast.git`
+  * `cd webyast/ruby-polkit1`
+* Or download as tarball
+  * download https://github.com/webyast/webyast/archive/master.tar.gz
+  * `tar xzf webyast-master.tar.gz`
+  * `cd webyast-master/ruby-polkit1`
+* `rake install` (needs *root* privileges)
 
 == LICENSE:
 
-  (c) 2011 Novell Inc.
+  (c) 2011-2013 Novell Inc.
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -55,4 +61,4 @@ In a nutshell:
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   
-  A full copy of the GNU license is provided in the file LICENSE.
+  A full copy of the GNU license is provided in the file COPYING.

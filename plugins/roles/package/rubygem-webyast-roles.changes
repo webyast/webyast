@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.15
+
+-------------------------------------------------------------------
 Mon Feb 25 13:08:00 UTC 2013 - vmoravec@suse.com
 
 - Fixed creating role with empty users

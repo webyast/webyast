@@ -1,0 +1,12 @@
+// default permissions for "webyast" and "root" users
+
+polkit.addRule(function(action, subject) {
+  if ((action.id == "org.opensuse.yast.modules.yapi.network.read"
+    || action.id == "org.opensuse.yast.modules.yapi.network.write"
+    ) && (subject.user == "webyast" || subject.user == "root"))
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript

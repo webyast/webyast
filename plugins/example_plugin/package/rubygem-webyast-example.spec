@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-example
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-example
 %define mod_full_name %{mod_name}-%{version}
@@ -37,6 +37,7 @@ Source2:        exampleService.rb
 Source3:        example.service.service
 Source4:        org.opensuse.yast.modules.yapi.example.policy
 Source5:        wicd-rpmlintrc
+Source6:        40-default-webyast-example.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -92,6 +93,10 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 #policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -102,11 +107,13 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 # granting all permissions for the webyast user and root
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
+%endif
 
 %restart_webyast
 
@@ -126,6 +133,9 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 
 %attr(744,root,root) /usr/sbin/exampleService.rb
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.example.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-example.rules
+%endif
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service
 

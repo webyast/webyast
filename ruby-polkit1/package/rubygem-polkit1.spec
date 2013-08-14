@@ -17,19 +17,19 @@
 
 # norootforbuild
 Name:           rubygem-polkit1
-Version:        0.0.3
+Version:        0.1.0
 Release:        0
 %define mod_name polkit1
 #
 Group:          Development/Languages/Ruby
 License:        GPL-2.0+
-Requires:       rubygem-inifile polkit
+# new polkit with JS rule files
+Requires:       polkit >= 0.107
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 BuildRequires:  gcc ruby-devel polkit-devel dbus-1-devel
 %rubygems_requires
-BuildRequires:  rubygem-inifile
 BuildRequires:  rubygem-rake-compiler
 BuildRequires:  rubygem-yard >= 0
 #
@@ -43,7 +43,6 @@ This extension provides polkit integration. The library provides a stable API fo
 %package doc
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
-License:        GPL-2.0+ or Ruby
 Requires:       %{name} = %{version}
 %description doc
 Documentation generated at gem installation time.

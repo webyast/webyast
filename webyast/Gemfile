@@ -2,6 +2,8 @@ group :development do
   source 'http://rubygems.org'
 end
 
+require 'yaml'
+
 gem 'rails', '~> 3.2.3'
 
 gem 'devise'

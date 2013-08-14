@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.12
+
+-------------------------------------------------------------------
 Tue Feb  5 09:07:41 UTC 2013 - lslezak@suse.cz
 
 - added openSUSE 12.3 license (removed 11.1)

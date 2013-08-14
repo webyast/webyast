@@ -17,12 +17,13 @@
 
 
 Name:           rubygem-webyast-users
-Version:        0.3.12
+Version:        0.3.13
 Release:        0
 %define mod_name webyast-users
 %define mod_full_name %{mod_name}-%{version}
 #
 #
+Requires:       yast2-users
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
@@ -43,6 +44,7 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.users.policy
+Source2:        40-default-webyast-users.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -87,6 +89,10 @@ needed at runtime.
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 %webyast_build_plugin_assets
 
@@ -94,12 +100,14 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 #
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null || :
 # and for webyast
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
+%endif
 
 %restart_webyast
 
@@ -119,6 +127,9 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.users.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-users.rules
+%endif
 
 %restart_script_name
 

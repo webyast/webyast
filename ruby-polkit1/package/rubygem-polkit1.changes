@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Tue Apr 16 14:23:44 UTC 2013 - lslezak@suse.cz
+
+- support for new polkit >= 0.107 (JavaScript rules files)
+  (bnc#816478)
+- 0.1.0
+
+-------------------------------------------------------------------
+Mon Sep 10 12:25:48 UTC 2012 - mrueckert@suse.de
+
+- remove the so file from the gem. you should not package binaries.
+  bnc#779453
+
+-------------------------------------------------------------------
+Mon Jun 11 05:20:43 UTC 2012 - coolo@suse.com
+
+- fix license of subpackage
+
+-------------------------------------------------------------------
 Fri Jun  8 12:35:41 UTC 2012 - lslezak@suse.cz
 
 - use Etc.getpwnam (ruby stdlib) for user_name -> UID conversion

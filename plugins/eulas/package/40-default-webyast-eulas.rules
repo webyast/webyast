@@ -1,0 +1,11 @@
+// default permissions for "root" user
+
+polkit.addRule(function(action, subject) {
+  if (action.id == "org.opensuse.yast.modules.yapi.licenses.accept"
+    && subject.user == "root")
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript

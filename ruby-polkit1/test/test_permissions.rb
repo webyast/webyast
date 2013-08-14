@@ -1,5 +1,4 @@
 require 'helper'
-require 'ruby-debug'
 
 
 class PolKitTest < Test::Unit::TestCase
@@ -10,7 +9,7 @@ class PolKitTest < Test::Unit::TestCase
   end
      
   def test_unknown_user
-    assert_raises RuntimeError do
+    assert_raises ArgumentError do
       PolKit1::polkit1_check( "org.freedesktop.policykit.read", "unknown")
     end
   end

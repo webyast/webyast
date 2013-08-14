@@ -1,0 +1,22 @@
+// default permissions for "webyast" and "root" users
+
+polkit.addRule(function(action, subject) {
+  if ((action.id == "org.opensuse.yast.modules.yapi.system.reboot"
+    || action.id == "org.opensuse.yast.modules.yapi.system.shutdown"
+    ) && subject.user == "root"))
+  {
+    return polkit.Result.YES;
+  }
+
+  // permissions for actions done by webyast
+  if ((action.id == "org.freedesktop.consolekit.system.stop"
+    || action.id == "org.freedesktop.consolekit.system.stop-multiple-users"
+    || action.id == "org.freedesktop.consolekit.system.restart"
+    || action.id == "org.freedesktop.consolekit.system.restart-multiple-users"
+    ) && subject.user == "webyast")
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript

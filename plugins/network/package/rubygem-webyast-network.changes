@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.16
+
+-------------------------------------------------------------------
 Wed Feb 27 16:01:03 UTC 2013 - lslezak@suse.cz
 
 - VLAN cannot be added to bond interface (bnc#790219#c22)

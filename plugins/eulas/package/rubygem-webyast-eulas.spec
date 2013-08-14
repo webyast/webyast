@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-eulas
-Version:        0.3.11
+Version:        0.3.12
 Release:        0
 %define mod_name webyast-eulas
 %define mod_full_name %{mod_name}-%{version}
@@ -43,6 +43,7 @@ Source:         %{mod_full_name}.gem
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.yapi.licenses.policy
 Source3:        eulas-opensuse12_3.yml
+Source4:        40-default-webyast-eulas.rules
 
 #
 %define plugin_name eulas
@@ -86,8 +87,10 @@ needed at runtime.
 %webyast_run_plugin_tests
 
 %post
+%if %suse_version < 1230
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%endif
 
 %restart_webyast
 
@@ -125,6 +128,10 @@ cp $SOURCE_CONFIG $RPM_BUILD_ROOT/etc/webyast/eulas.yml
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -153,6 +160,9 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/%{plugin_name}/accepted-licenses
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.licenses.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-eulas.rules
+%endif
 
 %restart_script_name
 

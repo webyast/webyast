@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu May 23 08:02:07 UTC 2013 - lslezak@suse.cz
+
+- Display current time config status (bnc#806516)
+  (by vmoravec@suse.com)
+- 0.3.14
+
+-------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+
+-------------------------------------------------------------------
 Wed Feb 27 14:01:17 UTC 2013 - vmoravec@suse.com
 
 - Fix wrong parameter key for ntp server config

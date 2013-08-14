@@ -188,7 +188,7 @@
               <legend>
                 <input id="ntp_sync" type="radio" name="systemtime[config]" value="ntp_sync"
                 <%=  "disabled=\"disabled\"" if disabled || !@system_time.ntp_available %>
-                <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol"), :class => "description" %>
+                <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>
               <%- if @system_time.config_ntp_sync? %>
                 <%= label_tag "ntp_sync", _("[ Active ]"), :class => "current_time_config description" %>
               <% end %>

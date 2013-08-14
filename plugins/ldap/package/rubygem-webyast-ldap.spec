@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-ldap
-Version:        0.3.10
+Version:        0.3.11
 Release:        0
 %define mod_name webyast-ldap
 %define mod_full_name %{mod_name}-%{version}
@@ -43,6 +43,7 @@ Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.ldap.policy
 Source2:        LDAP.pm
+Source3:        40-default-webyast-ldap.rules
 
 # LDAP.pm is using yast2-ldap-client API
 Requires:       nss_ldap
@@ -108,6 +109,10 @@ needed at runtime.
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 #YaPI
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
@@ -121,9 +126,11 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%endif
 
 %restart_webyast
 
@@ -149,6 +156,9 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.ldap.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-ldap.rules
+%endif
 
 %restart_script_name
 

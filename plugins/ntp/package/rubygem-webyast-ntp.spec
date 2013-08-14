@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-ntp
-Version:        0.3.7
+Version:        0.3.8
 Release:        0
 %define mod_name webyast-ntp
 %define mod_full_name %{mod_name}-%{version}
@@ -48,6 +48,7 @@ Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        NTP.pm
 Source2:        org.opensuse.yast.modules.yapi.ntp.policy
+Source3:        40-default-webyast-ntp.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -93,6 +94,10 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 #policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 %webyast_build_restdoc
 
@@ -103,9 +108,12 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 # granting all permissions for the webservice user and root
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%endif
+
 %restart_webyast
 
 %files 
@@ -121,6 +129,9 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %dir /usr/share/YaST2/modules/YaPI/
 %attr(644,root,root) /usr/share/YaST2/modules/YaPI/NTP.pm
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.ntp.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-ntp.rules
+%endif
 
 %restart_script_name
 

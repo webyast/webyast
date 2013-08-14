@@ -36,8 +36,8 @@ EOF
 class GetentPasswdTest < Test::Unit::TestCase
   def setup
     GetentPasswd.stubs(:system_minimum).returns(1000)
-    GetentPasswd.stubs(:pure_getent).returns(GETENT_OUTPUT)
-    GetentPasswd.stubs(:pure_wbinfo).returns(WBINFO_OUTPUT)
+    GetentPasswd.stubs(:getent_passwd).returns(GETENT_OUTPUT.split("\n"))
+    GetentPasswd.stubs(:wbinfo).returns(WBINFO_OUTPUT.split("\n"))
   end
 
   def test_find

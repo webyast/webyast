@@ -25,6 +25,11 @@ require "license_required_exception"
 class PatchesController < ApplicationController
   include ERB::Util
 
+  # just for marking the kind texts for translation, used in _patches.html.erb
+  # TRANSLATORS: patch severity
+  KIND_TRANSLATIONS = [ N_("Low"), N_("Enhancement"), N_("Normal"),
+    N_("Bugfix"), N_("Recommended"), N_("Security"), N_("Other") ]
+
 private
 
   def collect_done_patches
@@ -126,15 +131,12 @@ private
         @patch_updates = Patch.find(:all)
       rescue Exception => e
         Rails.logger.warn "Error while reading patches: #{e.inspect}"
-
-        if e.description.match /Repository (.*) needs to be signed/
+        if e.message.match /Repository (.*) needs to be signed/
           flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
-        elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+        elsif e.message.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
-        elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+        elsif e.message.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
           flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
-        else
-          flash[:error] = e.message
         end
         @patch_updates = []
         @error = true
@@ -198,13 +200,13 @@ private
       rescue Exception => error
         Rails.logger.warn "Caught exception: #{error.inspect}"
 
-        if error.description.match /Repository (.*) needs to be signed/
+        if error.message.match /Repository (.*) needs to be signed/
           error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % h($1)).html_safe
           error_type = :unsigned
-        elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+        elsif error.message.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
           error_type = :locked
-        elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+        elsif error.message.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
           error_string = _("Software management is locked by another application (PID %s).") % $1
           error_type = :locked
         else
@@ -252,8 +254,8 @@ private
     authorize! :read, Patch
     @patch_updates = Patch.find :all
     kind = params[:value]
-    search_map = { "green" => ["normal","low"], "security" => ["security"],
-                   "important" => "important", 'optional' => ["enhancement"] }
+    search_map = { "green" => ["normal","low","bugfix","recommended"], "security" => ["security"],
+                   "important" => "important", 'optional' => ["enhancement","other"] }
     unless kind == "all"
       search_list = search_map[kind] || [kind]
       @patch_updates = @patch_updates.find_all { |patch| search_list.include?(patch.kind) }

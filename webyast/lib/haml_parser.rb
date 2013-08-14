@@ -19,7 +19,7 @@
 # Haml gettext parser module
 #
 #  http://pastie.org/445297
-require 'gettext/tools/rgettext'
+require 'gettext/tools/xgettext'
 require 'gettext/tools/parser/ruby'
 require 'haml'
 
@@ -88,5 +88,5 @@ module HamlParser
 
 end
 
-GetText::RGetText.add_parser(HamlParser)
+GetText::Tools::XGetText.add_parser(HamlParser)
 

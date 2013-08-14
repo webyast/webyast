@@ -31,28 +31,34 @@ class Permission
 
   private
 
+  def self.mtime_list list
+    list.map do |f|
+      File.mtime(f) if File.exist?(f)
+    end
+  end
+
   def self.get_cache_timestamp
     lst = []
     if YaST::POLKIT1
-      lst = [
+      lst = mtime_list([
         # policies
-        File.mtime('/usr/share/polkit-1/'),
+        '/usr/share/polkit-1/',
         # default
-        File.mtime('/var/lib/polkit-1/'),
+        '/var/lib/polkit/',
         # explicit user authorizations
-        File.mtime('/etc/polkit-1'),
-      ]
+        '/etc/polkit-1'
+      ])
     else
-      lst = [
+      lst = mtime_list([
         # the global config file
-        File.mtime('/etc/PolicyKit/PolicyKit.conf'),
+        '/etc/PolicyKit/PolicyKit.conf',
         # policies
-        File.mtime('/usr/share/PolicyKit/policy/'),
+        '/usr/share/PolicyKit/policy/',
         # explicit user authorizations
-        File.mtime('/var/lib/PolicyKit/'),
+        '/var/lib/PolicyKit/',
         # default overrides
-        File.mtime('/var/lib/PolicyKit-public/'),
-      ]
+        '/var/lib/PolicyKit-public/'
+      ])
     end
 
     lst.compact!

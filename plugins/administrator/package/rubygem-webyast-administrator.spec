@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-administrator
-Version:        0.3.9
+Version:        0.3.10
 Release:        0
 %define mod_name webyast-administrator
 %define mod_full_name %{mod_name}-%{version}
@@ -41,6 +41,7 @@ Provides:	webyast-root-user-ui = %{version}
 Url:            http://en.opensuse.org/Portal:WebYaST
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.administrator.policy
+Source2:        40-default-webyast-administrator.rules
 #
 Summary:        Webyast module for configuring administrator settings
 License:        GPL-2.0
@@ -71,9 +72,11 @@ Test::Unit or RSpec files, useful for developers.
 %create_restart_script
 
 %post
+%if %suse_version < 1230
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%endif
 
 %restart_webyast
 
@@ -89,6 +92,10 @@ Test::Unit or RSpec files, useful for developers.
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 %webyast_build_restdoc
 
@@ -110,6 +117,9 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.administrator.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-administrator.rules
+%endif
 
 %restart_script_name
 

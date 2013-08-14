@@ -92,7 +92,6 @@ class WebyastPermissionsService < DBus::Object
 
 USER_REGEX=/\A[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?\Z/
 USER_WITH_DOMAIN_REGEX=/\A[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?\Z/
-POLKIT_SECTION = "55-webyast.d"
 
   def execute (command, permissions, user, sender)
     #TODO polkit check, user escaping, perm whitespacing
@@ -108,7 +107,7 @@ POLKIT_SECTION = "55-webyast.d"
           when :grant then
             begin
               if @polkit1
-                PolKit1::polkit1_write(POLKIT_SECTION, p, true, user)
+                PolKit1::polkit1_write(p, true, user)
                 result << "true"
               else
                 #whitespace check for valid permission string to avoid attack
@@ -124,7 +123,7 @@ POLKIT_SECTION = "55-webyast.d"
           when :revoke then
             begin
               if @polkit1
-                PolKit1::polkit1_write(POLKIT_SECTION, p, false, user)
+                PolKit1::polkit1_write(p, false, user)
                 result << "true"
               else
                 #whitespace check for valid permission string to avoid attack

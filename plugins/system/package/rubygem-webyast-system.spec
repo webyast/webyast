@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-system
-Version:        0.3.6
+Version:        0.3.7
 Release:        0
 %define mod_name webyast-system
 %define mod_full_name %{mod_name}-%{version}
@@ -41,6 +41,7 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.system.policy
+Source2:        40-default-webyast-system.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -80,6 +81,10 @@ Testsuite for webyast-reboot package.
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 %webyast_build_restdoc
 
@@ -90,6 +95,7 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 # granted even after upgrading from old package (before renaming) (bnc#645310)
 # (see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax )
 %posttrans
+%if %suse_version < 1230
 # granting all permissions for the web user
 #FIXME don't silently fail
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.stop >& /dev/null || true
@@ -102,10 +108,12 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
+%endif
 
 %restart_webyast
 
 %postun
+%if %suse_version < 1230
 # don't remove the rights during package update ($1 > 0)
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
 if [ $1 -eq 0 ] ; then
@@ -114,6 +122,7 @@ if [ $1 -eq 0 ] ; then
   /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
   /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 fi
+%endif
 
 %files 
 %defattr(-,root,root,-)
@@ -124,6 +133,9 @@ fi
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.system.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-system.rules
+%endif
 
 %restart_script_name
 

@@ -17,7 +17,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.44
+Version:        0.3.45
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -68,7 +68,7 @@ PreReq:         rubygem-bundler
 # 634404
 Recommends:     logrotate
 %if 0%{?suse_version} == 0 || %suse_version > 1110
-PreReq:         polkit, rubygem-polkit1
+PreReq:         polkit, rubygem-polkit1 >= 0.1.0
 PreReq:         rubygem-rake
 %else
 # <11.1 or SLES11
@@ -136,6 +136,7 @@ Source13:       control_panel.yml
 Source14:       config.yml
 Source15:       config.yml.new
 Source16:       update_webyast_service
+Source17:       40-default-webyast-base.rules
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  pkg-config
@@ -349,6 +350,10 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
+%if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+install -m 0644 %SOURCE17 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 # firewall service definition, bnc#545627
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
@@ -466,14 +471,19 @@ exit 0
 #---------------------------------------------------------------
 %post
 %fillup_and_insserv %{webyast_service}
+
+%if %suse_version < 1230
 #
 #granting permissions for webyast
 #
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.module-manager.import > /dev/null ||:
+
 #
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
+%endif
+
 #
 # create database
 #
@@ -615,6 +625,9 @@ mkdir -p /var/lib/webyast
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
+%if %suse_version >= 1230
+/etc/polkit-1/rules.d/40-default-webyast-base.rules
+%endif
 %config %{webyast_dir}/config/initializers/secret_token.rb
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles

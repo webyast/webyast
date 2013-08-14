@@ -46,8 +46,6 @@ end
 
 $debug = 0
 
-POLKIT_SECTION = "55-webyast.d"
-
 def usage why
   STDERR.puts why
   STDERR.puts ""
@@ -139,7 +137,7 @@ begin
     unless single_policy == nil
       STDOUT.puts "granting: #{single_policy}"
       if @polkit1
-        PolKit1::polkit1_write(POLKIT_SECTION, single_policy, true, user)
+        PolKit1::polkit1_write(single_policy, true, user)
       else
         out = `polkit-auth --user '#{user}' --grant '#{single_policy}'`
         #do NOT raise if an error happens here cause while the package installation this call can return an error for already existing 
@@ -152,7 +150,7 @@ begin
       non_granted.each do |policy|
         STDOUT.puts "granting: #{policy}"
         if @polkit1
-          PolKit1::polkit1_write(POLKIT_SECTION, policy, true, user)
+          PolKit1::polkit1_write(policy, true, user)
         else
           out = `polkit-auth --user '#{user}' --grant '#{policy}'`
           #do NOT raise if an error happens here cause while the package installation this call can return an error for already existing 
@@ -171,7 +169,7 @@ begin
     unless single_policy == nil
       STDOUT.puts "revoking: #{single_policy}"
       if @polkit1
-        PolKit1::polkit1_write(POLKIT_SECTION, single_policy, false, user)
+        PolKit1::polkit1_write(single_policy, false, user)
       else
         out = `polkit-auth --user '#{user}' --revoke '#{single_policy}'`
         raise "Revoking permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
@@ -181,7 +179,7 @@ begin
       granted.each do |policy|
         STDOUT.puts "revoking: #{policy}"
         if @polkit1
-          PolKit1::polkit1_write(POLKIT_SECTION, policy, false, user)
+          PolKit1::polkit1_write(policy, false, user)
         else
           out = `polkit-auth --user '#{user}' --revoke '#{policy}'`
           raise "Revoking permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?

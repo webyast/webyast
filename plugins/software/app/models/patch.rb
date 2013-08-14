@@ -226,19 +226,32 @@ class Patch < Resolvable
     end
   end
 
+  # needed for PackageKit 0.8+
+  def self.resolve_package_type kind_number
+    case kind_number
+      when  4 then "low"
+      when  5 then "enhancement"
+      when  6 then "normal"
+      when  7 then "bugfix"
+      when  8 then "recommended"
+      when  9 then "security"
+      else         "other"
+    end
+  end
+
   # find patches using PackageKit
   def self.do_find(what)
     bg_status = nil #not needed due caching
     patch_updates = Array.new
 
     DbusLock.synchronize do
-      PackageKit.transact("GetUpdates", "none", "Package", bg_status) do |line1,line2,line3|
+      PackageKit.transact("GetUpdates", (PackageKit.version_0_8 ? 0 : "none"), "Package", bg_status) do |line1,line2,line3|
         Rails.logger.debug "** Found patch : #{line2.inspect}"
         columns = line2.split ";"
         if what == :available || line2 == what
           update = Patch.new(:resolvable_id => line2,
             :version => columns[1],
-            :kind => line1,
+            :kind => ( PackageKit.version_0_8 ? resolve_package_type(line1) : line1 ),
             :name => columns[0],
             :arch => columns[2],
             :repo => columns[3],
@@ -410,12 +423,9 @@ class Patch < Resolvable
           dbusloop.quit
         end
 
-        if transaction_iface.methods["UpdatePackages"] && # catch mocking
-          transaction_iface.methods["UpdatePackages"].params.size == 2 &&
-            transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
-          #PackageKit of 11.2
-          transaction_iface.UpdatePackages(true,  #only_trusted
-            [patch_id])
+        if PackageKit.version_0_8
+          # only trusted packages
+          transaction_iface.UpdatePackages 2, [patch_id]
         else
           #PackageKit older versions like SLES11
           transaction_iface.UpdatePackages([patch_id])
