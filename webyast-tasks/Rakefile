@@ -21,7 +21,7 @@ require 'rdoc/task'
 
 # load the shared rake files from the package itself
 # skip 'package-local' task, it's redefined here
-require 'lib/tasks/webyast_tasks'
+require_relative 'lib/tasks/webyast_tasks'
 WebyastTasks.loadTasks(:exclude => ["package-local.rake"])
 
 
