@@ -22,7 +22,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require File.dirname(__FILE__) + '/../devise_helper'
 
-require 'mocha'
+require 'mocha/setup'
 
 class RestdocControllerTest < ActionController::TestCase
 

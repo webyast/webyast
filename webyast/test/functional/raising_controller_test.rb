@@ -55,9 +55,9 @@ class RaisingControllerTest < ActionController::TestCase
   end
 
   def setup
-    devise_sign_in(ControlpanelController) # authenticate user/account
+    # authenticate user/account
+    devise_sign_in(RaisingController)
     @controller = RaisingController.new
-    @routes = Rails.application.routes.dup
   end
 
   def test_catch_not_found

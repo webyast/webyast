@@ -27,6 +27,7 @@ Webyast::Application.routes.draw do
   resource :vendor_settings, :only => :show
   resources :restdoc, :only => [:index, :show]
   resources :resources, :only => [:index, :show], :constraints => { :id => /[-\w]+/ }
+  resources :controlpanel, :only => :index
 
   #mounting each plugin
   if defined? WebYaST
