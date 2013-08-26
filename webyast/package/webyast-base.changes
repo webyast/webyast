@@ -2,26 +2,19 @@
 Fri Aug  2 14:18:41 UTC 2013 - vmoravec@suse.com
 
 - fix migration for devise 3.0
-
--------------------------------------------------------------------
-Fri Jun  7 15:00:20 UTC 2013 - lslezak@suse.cz
-
 - updated tests to make it build again
-
--------------------------------------------------------------------
-Tue May 21 15:25:14 UTC 2013 - vmoravec@suse.cz
-
 - resolve issues with PolicyKit and PackageKit
   (bnc#809579, bnc#810336, bnc#809028)
 - redirect to root_path after login and remove templates for
   sessions.create
 - other minor fixes
+- support for the new polkit (bnc#808762, bnc#816478) (lslezak)
+- 0.3.45
 
 -------------------------------------------------------------------
-Mon Apr 22 13:35:07 UTC 2013 - lslezak@suse.cz
+Mon Jun 10 15:19:59 UTC 2013 - lslezak@suse.cz
 
-- support for the new polkit (bnc#808762, bnc#816478)
-- 0.3.45
+- updated testsuite to make webyast build in Factory again
 
 -------------------------------------------------------------------
 Fri Feb 22 14:34:06 UTC 2013 - locilka@suse.cz
