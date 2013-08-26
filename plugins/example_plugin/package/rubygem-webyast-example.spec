@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-example
-Version:        0.3.2
+Version:        0.3.3
 Release:        0
 %define mod_name webyast-example
 %define mod_full_name %{mod_name}-%{version}
@@ -119,6 +119,8 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 
 %postun
 %webyast_remove_assets
+
+%webyast_plugin_postun
 
 %files 
 %defattr(-,root,root)

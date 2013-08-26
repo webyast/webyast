@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-network
-Version:        0.3.16
+Version:        0.3.17
 Release:        0
 %define mod_name webyast-network
 %define mod_full_name %{mod_name}-%{version}
@@ -118,6 +118,7 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files
 %defattr(-,root,root,-)

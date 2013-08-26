@@ -97,6 +97,8 @@ needed at runtime.
 %postun
 %webyast_remove_assets
 
+%webyast_plugin_postun
+
 %install
 
 #

@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-terminal
-Version:        0.3.13
+Version:        0.3.14
 Release:        0
 %define mod_name webyast-terminal
 %define mod_full_name %{mod_name}-%{version}
@@ -88,6 +88,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files
 %defattr(-,root,root,-)

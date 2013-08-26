@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 26 08:19:43 UTC 2013 - lslezak@suse.cz
+
+- restart WebYast when the plugin is uninstalled
+- 0.3.10
+
+-------------------------------------------------------------------
 Tue May 21 15:34:30 UTC 2013 - vmoravec@suse.cz
 
 - fix typo in polkit rule 

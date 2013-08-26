@@ -105,6 +105,14 @@
 %restart_script_name \
     /var/adm/update-scripts/%name-%version-%release-update
 
+# generic plugin postun actions
+%webyast_plugin_postun \
+    # restart only on removal, restart on update is handled in %%post
+    if [ $1 -eq 0 ] ; then \
+      echo "Restarting WebYast..."; \
+      /etc/init.d/%{webyast_service} try-restart; \
+    fi
+
 # create a restart script (symlink the base script) (for build section)
 # make the symlink relative so it is valid even in chroot (/mnt) during initial installation
 %create_restart_script \

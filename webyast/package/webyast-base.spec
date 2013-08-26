@@ -62,7 +62,7 @@ Requires:       rubygem-ruby-dbus
 Requires:       syslog
 Requires:       yast2-dbus-server
 
-Requires:       rubygem-webyast-rake-tasks >= 0.3.5
+PreReq:         rubygem-webyast-rake-tasks >= 0.3.7
 Requires:       webyast-base-branding
 PreReq:         rubygem-bundler
 # 634404
@@ -148,7 +148,7 @@ BuildRequires:  dbus-1
 BuildRequires:  rubygem-rails-3_2
 BuildRequires:  rubygem-ruby-dbus
 BuildRequires:  rubygem-sqlite3 >= 1.3.6
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.7
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 BuildRequires:  polkit
 BuildRequires:  rubygem-polkit1

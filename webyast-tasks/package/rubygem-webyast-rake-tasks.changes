@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 26 07:56:10 UTC 2013 - lslezak@suse.cz
+
+- added %webyast_restart_on_removal RPM macro
+- 0.3.7
+
+-------------------------------------------------------------------
 Fri Jun  7 11:44:55 UTC 2013 - lslezak@suse.cz
 
 - use "bundle exec" for running rake tasks
