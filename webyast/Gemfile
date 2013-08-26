@@ -36,20 +36,22 @@ else
   gem 'polkit1'
 end
 
-plugin_path = File.expand_path("../../plugins",  __FILE__)
-gemspecs = Dir.glob(File.join(plugin_path, "**", "*.gemspec"))
+if ENV["WEBYAST_LOAD_GEMS"] != "false"
+  plugin_path = File.expand_path("../../plugins",  __FILE__)
+  gemspecs = Dir.glob(File.join(plugin_path, "**", "*.gemspec"))
 
-unless gemspecs.empty?
-  #We are in devel. mode. Loading all plugins
-  gemspecs.each do |gemspec|
-    plugin_name = gemspec.split("/").pop.split(".").first
-    gem plugin_name, :path => File.expand_path("../../plugins/#{gemspec.split("/").pop(2).first}", __FILE__)
-  end
-else
-  #Loading webyast gems from the gem path
-  Dir.glob(Gem.default_path.map{|p| File.join(p, "gems/webyast-*")}).each do |pth|
-    # get gem name from path: /usr/lib64/ruby/gems/1.8/gems/webyast-users-0.1 => webyast-users
-    gem File.basename(pth).split("-")[0..-2].join("-")
+  if !gemspecs.empty?
+    # Loading webyast gems from the gem path
+    Dir.glob(Gem.default_path.map{|p| File.join(p, "gems/webyast-*")}).each do |pth|
+      # get gem name from path: /usr/lib64/ruby/gems/1.8/gems/webyast-users-0.1 => webyast-users
+      gem File.basename(pth).split("-")[0..-2].join("-")
+    end
+  else
+    #We are in devel. mode. Loading all plugins
+    gemspecs.each do |gemspec|
+      plugin_name = gemspec.split("/").pop.split(".").first
+      gem plugin_name, :path => File.expand_path("../../plugins/#{gemspec.split("/").pop(2).first}", __FILE__)
+    end
   end
 end
 
