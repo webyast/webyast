@@ -160,7 +160,6 @@ install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 #var dir to store mail test status
-%dir %attr (-,%{webyast_user},root) %{webyast_vardir}
 %dir %attr (-,%{webyast_user},root) %{webyast_vardir}/mailsetting
 
 /usr/share/YaST2/modules/YaPI/MailSettings.pm
