@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-activedirectory
-Version:        0.3.13
+Version:        0.3.14
 Release:        0
 %define mod_name webyast-activedirectory
 %define mod_full_name %{mod_name}-%{version}
@@ -92,6 +92,7 @@ Test::Unit or RSpec files, useful for developers.
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %check
 

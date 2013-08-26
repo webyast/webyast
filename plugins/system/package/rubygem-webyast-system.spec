@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-system
-Version:        0.3.7
+Version:        0.3.8
 Release:        0
 %define mod_name webyast-system
 %define mod_full_name %{mod_name}-%{version}
@@ -123,6 +123,8 @@ if [ $1 -eq 0 ] ; then
   /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 fi
 %endif
+
+%webyast_plugin_postun
 
 %files 
 %defattr(-,root,root,-)

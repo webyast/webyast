@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-administrator
-Version:        0.3.10
+Version:        0.3.11
 Release:        0
 %define mod_name webyast-administrator
 %define mod_full_name %{mod_name}-%{version}
@@ -82,6 +82,7 @@ Test::Unit or RSpec files, useful for developers.
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %check
 %webyast_run_plugin_tests
