@@ -87,7 +87,7 @@
     export RAILS_PARENT=%{webyast_dir} \
     cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
     cp /srv/www/webyast/Gemfile.assets . \
-    BUNDLE_GEMFILE=Gemfile.assets bundle exec rake assets:precompile \
+    WEBYAST_LOAD_GEMS=false BUNDLE_GEMFILE=Gemfile.assets bundle exec rake assets:precompile \
     rm -f Gemfile.assets Gemfile.assets.lock \
     rm -rf tmp \
     mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/public/assets \
