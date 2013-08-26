@@ -152,7 +152,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{webyast_dir}/public/assets/*
 %dir /usr/share/%{webyast_user}
 %dir /usr/share/%{webyast_user}/%{plugin_name}
-%dir %{webyast_vardir}
 %dir %{webyast_vardir}/%{plugin_name}
 /usr/share/%{webyast_user}/%{plugin_name}/licenses
 %dir /etc/webyast/
