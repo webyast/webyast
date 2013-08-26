@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-ldap
-Version:        0.3.11
+Version:        0.3.12
 Release:        0
 %define mod_name webyast-ldap
 %define mod_full_name %{mod_name}-%{version}
@@ -136,6 +136,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files
 %defattr(-,root,root,-)

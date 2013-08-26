@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-roles
-Version:        0.3.15
+Version:        0.3.16
 Release:        0
 %define mod_name webyast-roles
 %define mod_full_name %{mod_name}-%{version}
@@ -116,6 +116,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files 
 

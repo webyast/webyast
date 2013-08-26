@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-software
-Version:        0.3.38
+Version:        0.3.39
 Release:        0
 %define mod_name webyast-software
 %define mod_full_name %{mod_name}-%{version}
@@ -137,6 +137,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files 
 

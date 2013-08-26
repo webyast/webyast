@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 26 08:19:43 UTC 2013 - lslezak@suse.cz
+
+- restart WebYast when the plugin is uninstalled
+- 0.3.19
+
+-------------------------------------------------------------------
 Tue May 21 15:35:57 UTC 2013 - vmoravec@suse.cz
 
 - improve PackageKit 0.8+ compatibility

@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-registration
-Version:        0.3.19
+Version:        0.3.20
 Release:        0
 %define mod_name webyast-registration
 %define mod_full_name %{mod_name}-%{version}
@@ -126,6 +126,7 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files
 %defattr(-,root,root,-)

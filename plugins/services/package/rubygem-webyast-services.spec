@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-services
-Version:        0.3.9
+Version:        0.3.10
 Release:        0
 %define mod_name webyast-services
 %define mod_full_name %{mod_name}-%{version}
@@ -131,6 +131,7 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files 
 %defattr(-,root,root,-)

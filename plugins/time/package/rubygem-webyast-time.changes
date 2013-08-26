@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 26 08:19:43 UTC 2013 - lslezak@suse.cz
+
+- restart WebYast when the plugin is uninstalled
+- 0.3.15
+
+-------------------------------------------------------------------
 Thu May 23 08:02:07 UTC 2013 - lslezak@suse.cz
 
 - Display current time config status (bnc#806516)

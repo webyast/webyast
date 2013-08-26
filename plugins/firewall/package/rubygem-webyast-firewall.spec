@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-firewall
-Version:        0.3.12
+Version:        0.3.13
 Release:        0
 %define mod_name webyast-firewall
 %define mod_full_name %{mod_name}-%{version}
@@ -123,6 +123,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files 
 %defattr(-,root,root)

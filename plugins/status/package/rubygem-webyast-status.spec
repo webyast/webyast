@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-status
-Version:        0.3.17
+Version:        0.3.18
 Release:        0
 %define mod_name webyast-status
 %define mod_full_name %{mod_name}-%{version}
@@ -177,6 +177,7 @@ rccollectd restart
 
 %postun
 %webyast_remove_assets
+%webyast_plugin_postun
 
 %files
 

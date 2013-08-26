@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-ntp
-Version:        0.3.8
+Version:        0.3.9
 Release:        0
 %define mod_name webyast-ntp
 %define mod_full_name %{mod_name}-%{version}
@@ -115,6 +115,10 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %endif
 
 %restart_webyast
+
+%postun
+%webyast_plugin_postun
+
 
 %files 
 %defattr(-,root,root,-)
