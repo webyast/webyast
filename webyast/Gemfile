@@ -25,8 +25,7 @@ gem "builder"
 #checking which policykit is used
 WEBYAST_CONFIG_FILE = "/etc/webyast/config.yml"
 if File.exist?(WEBYAST_CONFIG_FILE)
-  require 'yaml'
-  values = YAML::load(File.open(WEBYAST_CONFIG_FILE, 'r').read)
+  values = YAML::load_file WEBYAST_CONFIG_FILE
   ENV['WEBYAST_POLICYKIT']= 'true' if values["polkit1"] == false
 end
 
@@ -40,7 +39,7 @@ if ENV["WEBYAST_LOAD_GEMS"] != "false"
   plugin_path = File.expand_path("../../plugins",  __FILE__)
   gemspecs = Dir.glob(File.join(plugin_path, "**", "*.gemspec"))
 
-  if !gemspecs.empty?
+  if gemspecs.empty?
     # Loading webyast gems from the gem path
     Dir.glob(Gem.default_path.map{|p| File.join(p, "gems/webyast-*")}).each do |pth|
       # get gem name from path: /usr/lib64/ruby/gems/1.8/gems/webyast-users-0.1 => webyast-users
@@ -53,6 +52,15 @@ if ENV["WEBYAST_LOAD_GEMS"] != "false"
       gem plugin_name, :path => File.expand_path("../../plugins/#{gemspec.split("/").pop(2).first}", __FILE__)
     end
   end
+end
+
+# make sure the rake tasks are always loaded,
+# load the local tasks when running from Git
+local_tasks_path = File.expand_path("../../webyast-tasks",  __FILE__)
+if File.exist?(local_tasks_path)
+  gem "webyast-rake-tasks", :path => local_tasks_path
+else
+  gem "webyast-rake-tasks"
 end
 
 group :development do
