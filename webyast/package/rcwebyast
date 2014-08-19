@@ -178,40 +178,53 @@ umask 0066
 
 case "$1" in
     start)
-    echo -n "Starting WebYaST "
-    if [ ! -e  $COMBINEDCERTFILE ]
-    then
-        echo -e "\nNo WebYaST certificate found, creating one now..."
-        LOG_FILE="/var/log/webyast/check-create-certificate.log"
-        if ! /usr/sbin/check-create-certificate -c -C $CERTIFICATEFILE -K $CERTKEYFILE -B $COMBINEDCERTFILE -D webyast -O WebYaST -U WebYaST > $LOG_FILE 2>&1
+        echo -n "Starting WebYaST "
+        if [ ! -e  $COMBINEDCERTFILE ]
         then
-            echo -n "Can not create certificate. Please see $LOG_FILE for details."
-            rc_failed
-            rc_status -v
-            rc_exit
+            echo -e "\nNo WebYaST certificate found, creating one now..."
+            LOG_FILE="/var/log/webyast/check-create-certificate.log"
+            if ! /usr/sbin/check-create-certificate -c -C $CERTIFICATEFILE -K $CERTKEYFILE -B $COMBINEDCERTFILE -D webyast -O WebYaST -U WebYaST > $LOG_FILE 2>&1
+            then
+                echo -n "Can not create certificate. Please see $LOG_FILE for details."
+                rc_failed
+                rc_status -v
+                rc_exit
+            fi
+            chown nginx:nginx $CERTIFICATEFILE $CERTKEYFILE $COMBINEDCERTFILE
+            echo -n "WebYaST certificate: "
+            openssl x509 -in $CERTIFICATEFILE -fingerprint -noout
         fi
-        chown nginx:nginx $CERTIFICATEFILE $CERTKEYFILE $COMBINEDCERTFILE
-	echo -n "WebYaST certificate: "
-	openssl x509 -in $CERTIFICATEFILE -fingerprint -noout
-    fi
+
         # refresh the Gemfile.lock content before starting the server
         # (outdated file can cause problems after upgrading needed rubygems)
 	rm -f $GEMFILE_LOCK
-  #generate deployment specific secret key (bnc#591345)
-  SECRET=`cd /srv/www/webyast/ && rake -s secret`
 
-    # make the lock file readable for all
-    chmod a+r $GEMFILE_LOCK
-  if [ -z $SECRET ]; then
-    echo -n "Cannot generate secret for session. Run 'cd /srv/www/webyast/ && rake -s secret' for details."
-    rc_failed
-    rc_status -v
-    rc_exit
-  fi
-  sed -i 's/a25bdf1cfcaea649ced4549e9d2b2b6ad4cf077badc774ca034a7ba57ae17f6e1185ed07bcc4ac20fb2d062d2afa975024fca03ede7b4c5002ca68386caa27a0/'"$SECRET"/ /srv/www/webyast/config/initializers/secret_token.rb
+        # make the secret key readable only for webyast
+        TOKEN_FILE=/srv/www/webyast/config/initializers/secret_token.rb
+        chown webyast:root $TOKEN_FILE
+        chmod 0400 $TOKEN_FILE
+
+        # generate deployment specific secret key (bnc#591345)
+        DEFAULT_SECRET='a25bdf1cfcaea649ced4549e9d2b2b6ad4cf077badc774ca034a7ba57ae17f6e1185ed07bcc4ac20fb2d062d2afa975024fca03ede7b4c5002ca68386caa27a0'
+        if grep -q $DEFAULT_SECRET $TOKEN_FILE; then
+          echo "Creating unique session secret..."
+          SECRET=`dd if=/dev/urandom bs=256 count=1 2>/dev/null | sha512sum | cut -d\  -f 1`
+
+          if [ -z "$SECRET" ]; then
+            echo -n "Cannot generate unique session secret."
+            rc_failed
+            rc_status -v
+            rc_exit
+          fi
+
+          sed -i "s/$DEFAULT_SECRET/$SECRET/" $TOKEN_FILE
+        fi
 
 	# clear cache (drop possibly obsoleted values)
 	(cd /srv/www/webyast/ && rake -s tmp:cache:clear)
+
+        # make the lock file readable for all
+        chmod a+r $GEMFILE_LOCK
 
         # restart file present - do some additional update actions
         # (Webyast was probably installed/updated by plain RPM)
@@ -229,7 +242,7 @@ case "$1" in
 	# Remember status and be verbose
 	rc_status -v
 
-       # print the URL of the server
+        # print the URL of the server
         if test "$?" -eq 0; then
             IFC=`LC_ALL=C route | grep "^default" | tr -s " " | cut -d " " -f 8`
             IP=`LC_ALL=C ifconfig $IFC | grep "inet addr" | cut -d ":" -f 2 | cut -d " " -f 1`
