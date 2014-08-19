@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Nov 27 12:54:05 UTC 2013 - lslezak@suse.cz
+
+- fixed CVE-2013-3709: make the secret token file (secret_token.rb)
+  readable only for the webyast user to avoid forging the session
+  cookie (bnc#851116)
+- 0.3.12.1
+
+-------------------------------------------------------------------
 Wed Jul  4 09:27:30 UTC 2012 - lslezak@suse.cz
 
 - %post - reload DBus config only when the system bus socket is

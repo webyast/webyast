@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.12
+Version:        0.3.12.1
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -492,6 +492,7 @@ fi
 %{webyast_dir}/config/database.yml
 %{webyast_dir}/config/environments
 %{webyast_dir}/config/initializers
+%config %attr(400,webyast,root) %{webyast_dir}/config/initializers/secret_token.rb
 %{webyast_dir}/config/routes.rb
 %{webyast_dir}/config/application.rb
 #also users can run granting script, as permissions is handled by polkit right for granting permissions
