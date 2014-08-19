@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Nov 27 12:54:05 UTC 2013 - lslezak@suse.cz
+
+- fixed CVE-2013-3709: make the secret token file (secret_token.rb)
+  readable only for the webyast user to avoid forging the session
+  cookie (bnc#851116)
+- 0.3.44.1
+
+-------------------------------------------------------------------
 Fri Feb 22 14:34:06 UTC 2013 - locilka@suse.cz
 
 - Sorting restdoc documents alphabetically (bnc#805246)
