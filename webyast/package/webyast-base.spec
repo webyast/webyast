@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.43
+Version:        0.3.43.1
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -584,7 +584,7 @@ mkdir -p /var/lib/webyast
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
-%config %{webyast_dir}/config/initializers/secret_token.rb
+%config %attr(400,webyast,root) %{webyast_dir}/config/initializers/secret_token.rb
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config %{_sysconfdir}/init.d/%{webyast_service}
