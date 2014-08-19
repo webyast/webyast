@@ -17,7 +17,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.45
+Version:        0.3.45.1
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -628,7 +628,7 @@ mkdir -p /var/lib/webyast
 %if %suse_version >= 1230
 /etc/polkit-1/rules.d/40-default-webyast-base.rules
 %endif
-%config %{webyast_dir}/config/initializers/secret_token.rb
+%config %attr(400,webyast,root) %{webyast_dir}/config/initializers/secret_token.rb
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config %{_sysconfdir}/init.d/%{webyast_service}
