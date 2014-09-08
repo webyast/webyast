@@ -43,7 +43,7 @@ You may need to reload the page after applying the patch.") -%></p>
   <% @patch_updates.each do |patch_update| %>
     <% unless patch_update.installed %>
     <tr class="patch_kind_<%= patch_update.kind -%>">
-      <td class="checkbox"><input type="checkbox" id=<%= "patch_#{patch_update.resolvable_id}" %> name=<%="patch_#{patch_update.resolvable_id}" %> value=<%=patch_update.resolvable_id%> /></td>
+      <td class="checkbox"><input type="checkbox" id="patch_<%= h patch_update.resolvable_id -%>" name="patch_<%= h patch_update.resolvable_id -%>" value="<%= h patch_update.resolvable_id -%>" /></td>
 
       <% if patch_kinds.has_key?(patch_update.kind) %>
         <td class="icon kind" ><%= image_tag(patch_kinds[patch_update.kind]) %> </td>
