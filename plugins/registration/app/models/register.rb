@@ -97,6 +97,8 @@ public
     # read the configuration
     read_status
     # initialize context
+    Rails.logger.info "Initializing Register object with: #{hash.inspect}"
+
     init_context hash
   end
 
@@ -131,6 +133,7 @@ public
 
     # set proxy settings in context for suseRegister backend
     if proxy_config["PROXY_ENABLED"] && proxy_config["PROXY_ENABLED"].downcase == "yes"
+      Rails.logger.info "Proxy enabled"
       # check for NO_PROXY option
       if proxy_config["NO_PROXY"]
         # servers are comma separated
@@ -145,12 +148,16 @@ public
         end
       end
 
+      Rails.logger.info "proxy_config: #{proxy_config.inspect}"
       @context['proxy-http_proxy'] = proxy_config["HTTP_PROXY"] if proxy_config["HTTP_PROXY"]
       @context['proxy-https_proxy'] = proxy_config["HTTPS_PROXY"] if proxy_config["HTTPS_PROXY"]
+      Rails.logger.debug "Updated @context: #{@context.inspect}"
     end
 
     # last action: overwrite the context settings with the settings that were sent with the request
+    Rails.logger.debug "Context before merging: #{@context.inspect}"
     @context.merge! hash if hash.kind_of?(Hash)
+    Rails.logger.debug "Final context: #{@context.inspect}"
   end
 
   def is_registered?
@@ -161,6 +168,7 @@ public
     # don't know how to pass only one hash, so split it into two. TODO change later if possible!
     # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => ctx, 'arguments' => args } )
 
+    Rails.logger.info "Registering with @context: #{@context.inspect}"
     ctx = Hash.new
     args = Hash.new
     begin
