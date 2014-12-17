@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Dec 17 09:53:43 UTC 2014 - lslezak@suse.cz
+
+- fixed registration via a proxy server (bnc#908517)
+  (fixed merging the loaded config defaults (contains the proxy
+  config) with the user provided options - keep the unchanged
+  defaults, just rewrite the user provided values)
+
+-------------------------------------------------------------------
 Mon Aug 26 08:19:43 UTC 2013 - lslezak@suse.cz
 
 - restart WebYast when the plugin is uninstalled
