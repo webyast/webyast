@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jan  8 13:09:40 UTC 2015 - jsrain@suse.cz
+
+- require rubygem-webyast-users (bsc#762353)
+
+-------------------------------------------------------------------
 Mon Feb 25 13:08:00 UTC 2013 - vmoravec@suse.com
 
 - Fixed creating role with empty users

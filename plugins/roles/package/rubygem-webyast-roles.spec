@@ -31,6 +31,7 @@ BuildRequires:  webyast-base-testsuite
 BuildRequires:  rubygem-restility
 
 PreReq:         webyast-base >= 0.3.31
+Requires:       rubygem-webyast-users
 
 Obsoletes:      webyast-roles-ui < %{version}
 Obsoletes:      webyast-roles-ws < %{version}
