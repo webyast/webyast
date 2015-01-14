@@ -3,7 +3,7 @@
 polkit.addRule(function(action, subject) {
   if ((action.id == "org.opensuse.yast.modules.yapi.system.reboot"
     || action.id == "org.opensuse.yast.modules.yapi.system.shutdown"
-    ) && subject.user == "root"))
+    ) && subject.user == "root")
   {
     return polkit.Result.YES;
   }

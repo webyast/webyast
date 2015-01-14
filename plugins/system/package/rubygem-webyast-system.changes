@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 14 11:15:35 UTC 2015 - jsrain@suse.cz
+
+- fixed syntax in polkit rules (bsc#876643)
+- 0.3.9
+
+-------------------------------------------------------------------
 Mon Aug 26 08:19:43 UTC 2013 - lslezak@suse.cz
 
 - restart WebYast when the plugin is uninstalled
