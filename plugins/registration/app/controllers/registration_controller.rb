@@ -443,7 +443,7 @@ public
       context = params[:registration] ? params[:registration][:options] : {}
       logger.info "Context from parameters: #{context.inspect}"
       logger.debug "options: #{@options.inspect}"
-      @options.merge context if context.is_a?(Hash)
+      @options.merge(context) if context.is_a?(Hash)
       register.context.merge(@options)
       Rails.logger.debug "Registration context: #{register.context.inspect}"
       logger.info "Using Registration context: #{register.context.inspect}"
