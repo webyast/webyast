@@ -426,6 +426,7 @@ public
     Rails.logger.debug "Registration arguments: #{arguments.inspect}"
     register.arguments = arguments
 
+    logger.info "Using default registration context: #{register.context.inspect}"
     begin
       params.each do | key, value |
         if key.starts_with? "registration_arg_"
@@ -440,8 +441,12 @@ public
     success = false
     begin
       context = params[:registration] ? params[:registration][:options] : {}
-      register.context = @options.merge context if context.is_a?(Hash)
+      logger.info "Context from parameters: #{context.inspect}"
+      logger.debug "options: #{@options.inspect}"
+      @options.merge(context) if context.is_a?(Hash)
+      register.context.merge(@options)
       Rails.logger.debug "Registration context: #{register.context.inspect}"
+      logger.info "Using Registration context: #{register.context.inspect}"
       exitcode = register.register
       logger.debug "registration finished: #{register.to_xml}"
 
