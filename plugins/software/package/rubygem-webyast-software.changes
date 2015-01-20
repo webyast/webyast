@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jan 19 14:06:46 UTC 2015 - lslezak@suse.cz
+
+- Fixed installing patches with space in the name (bnc#891076)
+- 0.3.37.1
+
+-------------------------------------------------------------------
 Mon Feb 25 13:06:09 UTC 2013 - lslezak@suse.cz
 
 - updated REST API documentation (patch installation) (bnc#790159)
