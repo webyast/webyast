@@ -47,6 +47,7 @@ sub Read {
   SuSEFirewall->ResetReadFlag();
   SuSEFirewall->Read();
   my $status  = YaST::YCP::Boolean( SuSEFirewall->GetEnableService () );
+  my $running = YaST::YCP::Boolean( SuSEFirewall->IsStarted() );
   my $known_services = SuSEFirewallServices->GetSupportedServices();
   my @service_ids = keys %$known_services;
   my $service_zones = SuSEFirewall->GetServices(\@service_ids);
@@ -54,7 +55,8 @@ sub Read {
   my @services = map($mkService->($_),@service_ids);
   y2milestone "YaPI::FIREWALL::mkService -> '".($mkService->($service_ids[0]))."'";
   my %ret = ('use_firewall' => $status, 
-             'fw_services'  => \@services
+             'fw_services'  => \@services,
+             'running'      => $running
             );
   return \%ret;
 }
