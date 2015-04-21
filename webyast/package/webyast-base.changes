@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 21 08:12:37 UTC 2015 - lslezak@suse.cz
+
+- Explicitly load the YAML library before using it (bsc#926890)
+- 0.3.43.2
+
+-------------------------------------------------------------------
 Wed Nov 27 12:54:05 UTC 2013 - lslezak@suse.cz
 
 - fixed CVE-2013-3709: make the secret token file (secret_token.rb)
