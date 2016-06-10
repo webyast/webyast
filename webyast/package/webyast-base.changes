@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun 10 08:09:37 UTC 2016 - lslezak@suse.cz
+
+- Fixed possible Clickjacking vulnerability (bsc#981769)
+- 0.3.43.3
+
+-------------------------------------------------------------------
 Tue Apr 21 08:12:37 UTC 2015 - lslezak@suse.cz
 
 - Explicitly load the YAML library before using it (bsc#926890)

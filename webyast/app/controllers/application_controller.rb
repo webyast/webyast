@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_account!
   before_filter :set_gettext_locale
   before_filter :base_system
+  after_filter  :headers
 
   protect_from_forgery
 
@@ -234,6 +235,15 @@ private
         end
       end
     end
+  end
+
+  # add custom HTTP headers
+  def headers
+    # tell the browser that it must not allow embedding this page to another
+    # page via an IFRAME, prevent from Clickjacking attacks
+    # see https://en.wikipedia.org/wiki/Clickjacking#Content_Security_Policy
+    # see https://www.troyhunt.com/clickjack-attack-hidden-threat-right-in/
+    response.headers["Content-Security-Policy"] = "frame-ancestors 'self'"
   end
 
 end
